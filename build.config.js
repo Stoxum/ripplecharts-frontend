@@ -26,17 +26,17 @@ module.exports = {
       '!src/**/*.spec.js',
       '!src/assets/**/*.js',
       '!src/embed/**/*.js'
-      ],
-    jsunit: [ 'src/**/*.spec.js' ],
+    ],
+    jsunit: ['src/**/*.spec.js'],
 
-    coffee: [ 'src/**/*.coffee', '!src/**/*.spec.coffee' ],
-    coffeeunit: [ 'src/**/*.spec.coffee' ],
+    coffee: ['src/**/*.coffee', '!src/**/*.spec.coffee'],
+    coffeeunit: ['src/**/*.spec.coffee'],
 
-    atpl: [ 'src/app/**/*.tpl.html' ],
-    ctpl: [ 'src/common/**/*.tpl.html' ],
+    atpl: ['src/app/**/*.tpl.html'],
+    ctpl: ['src/common/**/*.tpl.html'],
 
-    html: [ 'src/index.html' ],
-    maintenance : 'src/maintenance.html',
+    html: ['src/index.html'],
+    maintenance: 'src/maintenance.html',
     less: 'src/less/main.less'
   },
 

@@ -4,53 +4,53 @@
   no-unused-vars: 0,
   no-use-before-define: 0
 } */
-/* global ripple, OffersExercisedListener, ApiHandler */
+/* global stoxum, OffersExercisedListener, ApiHandler */
 'use strict';
 
 var default_markets = [
   {
-    base: {currency: 'XRP'},
-    counter: {currency: 'CNY', issuer: 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y'}
+    base: { currency: 'STM' },
+    counter: { currency: 'CNY', issuer: 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y' }
   },
   {
-    base: {currency: 'XRP'},
-    counter: {currency: 'USD', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'}
+    base: { currency: 'STM' },
+    counter: { currency: 'USD', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B' }
   },
   {
-    base: {currency: 'BTC', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'},
-    counter: {currency: 'XRP'}
+    base: { currency: 'BTC', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B' },
+    counter: { currency: 'STM' }
   },
   {
-    base: {currency: 'XRP'},
-    counter: {currency: 'JPY', issuer: 'r94s8px6kSw1uZ1MV98dhSRTvc6VMPoPcN'}
+    base: { currency: 'STM' },
+    counter: { currency: 'JPY', issuer: 'r94s8px6kSw1uZ1MV98dhSRTvc6VMPoPcN' }
   },
   {
-    base: {currency: 'XRP'},
-    counter: {currency: 'USD', issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq'}
+    base: { currency: 'STM' },
+    counter: { currency: 'USD', issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq' }
   },
   {
-    base: {currency: 'XRP'},
-    counter: {currency: 'JPY', issuer: 'rB3gZey7VWHYRqJHLoHDEJXJ2pEPNieKiS'}
+    base: { currency: 'STM' },
+    counter: { currency: 'JPY', issuer: 'rB3gZey7VWHYRqJHLoHDEJXJ2pEPNieKiS' }
   },
   {
-    base: {currency: 'XRP'},
-    counter: {currency: 'EUR', issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq'}
+    base: { currency: 'STM' },
+    counter: { currency: 'EUR', issuer: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq' }
   }
 ];
 
 
 var itext = 'Each ticker represents the last traded price of each ' +
-            'currency and gateway pair. The arrow and precentage represent ' +
-            'the change in price since the start of the day (UTC). The ' +
-            'prices and precentages update live and refresh at the start of ' +
-            'each new day (UTC). The price flashing signifies that a ' +
-            'trade just went through. A red flash signifies it lowering the ' +
-            'price, whereas a green flash signifies that it raised the price.';
+  'currency and gateway pair. The arrow and precentage represent ' +
+  'the change in price since the start of the day (UTC). The ' +
+  'prices and precentages update live and refresh at the start of ' +
+  'each new day (UTC). The price flashing signifies that a ' +
+  'trade just went through. A red flash signifies it lowering the ' +
+  'price, whereas a green flash signifies that it raised the price.';
 
 var listener_list = [];
 
 if (!LOADER_PNG) {
-  var LOADER_PNG = 'assets/images/rippleThrobber.png';
+  var LOADER_PNG = 'assets/images/stoxumThrobber.png';
 }
 
 if (!ARROW_UP_PNG) {
@@ -67,17 +67,17 @@ if (!TICKER_CSS) {
 
 var BLANK_PNG = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
-// connect to the ripple network;
+// connect to the stoxum network;
 var remote = new ripple.RippleAPI({
-  server: 'wss://s1.ripple.com:443'
+  server: 'wss://s1.stoxum.com:51231'
 });
 remote.connect()
-.then(function() {
-  console.log('connected to the ripple network');
-})
-.catch(function(e) {
-  console.log(e.stack);
-});
+  .then(function () {
+    console.log('connected to the stoxum network');
+  })
+  .catch(function (e) {
+    console.log(e.stack);
+  });
 
 function addCommas(nStr) {
   var s = String(nStr);
@@ -139,21 +139,21 @@ function Ticker(base, counter, obj, callback) {
       self.direction = 'up';
       self.divPriceStatus
         .attr('src', ARROW_UP_PNG)
-        .style({'height': 5, 'width': 10});
+        .style({ 'height': 5, 'width': 10 });
       self.divPct.attr('class', null).attr('class', 'pct pctUp');
 
     } else if (self.difference < 0) {
       self.direction = 'down';
       self.divPriceStatus
         .attr('src', ARROW_DOWN_PNG)
-        .style({'height': 5, 'width': 10});
+        .style({ 'height': 5, 'width': 10 });
       self.divPct.attr('class', null).attr('class', 'pct pctDown');
 
     } else {
       self.direction = 'unch';
       self.divPriceStatus
         .attr('src', BLANK_PNG)
-        .style({'height': 0, 'width': 0});
+        .style({ 'height': 0, 'width': 0 });
       self.divPct.attr('class', null).attr('class', 'pct');
     }
   }
@@ -168,7 +168,7 @@ function Ticker(base, counter, obj, callback) {
       reduce: false,
       limit: 1,
       descending: true
-    }, function(oldPrice) {
+    }, function (oldPrice) {
       self.oldPrice = oldPrice[0].price;
       updateDiff();
       self.divPct.text(self.difference + '%');
@@ -177,7 +177,7 @@ function Ticker(base, counter, obj, callback) {
   }
 
   function setNext() {
-    self.timeout = setInterval(function() {
+    self.timeout = setInterval(function () {
       refreshTicker();
     }, 86400000);
   }
@@ -201,7 +201,7 @@ function Ticker(base, counter, obj, callback) {
         .transition().delay(1500).duration(500)
         .style('color', '#3C3C3C');
 
-    // price higher, flash green
+      // price higher, flash green
     } else if (prev < self.price) {
       self.div.select('.price')
         .style('color', '#483');
@@ -218,7 +218,7 @@ function Ticker(base, counter, obj, callback) {
     updatePct();
   }
 
-  // enable the live feed via ripple-lib
+  // enable the live feed via stoxum-lib
   function setLiveFeed(b, c) {
     var point = {
       startTime: moment.utc(),
@@ -247,7 +247,7 @@ function Ticker(base, counter, obj, callback) {
   }
 
   if (remainder > 0) {
-    self.timeout = setTimeout(function() {
+    self.timeout = setTimeout(function () {
       setNext();
       refreshTicker();
     }, remainder);
@@ -263,7 +263,7 @@ function Ticker(base, counter, obj, callback) {
     reduce: false,
     limit: 1,
     descending: true
-  }, function(oldPrice) {
+  }, function (oldPrice) {
 
     self.oldPrice = oldPrice[0] ? oldPrice[0].price : 0;
 
@@ -275,13 +275,13 @@ function Ticker(base, counter, obj, callback) {
       reduce: false,
       limit: 1,
       descending: true
-    }, function(lastPrice) {
+    }, function (lastPrice) {
 
 
       self.price = lastPrice[0] ? lastPrice[0].price : 0;
       updateDiff();
 
-      self.div.on('click', function() {
+      self.div.on('click', function () {
         var path = 'markets/' + base.currency +
           (base.issuer ? ':' + base.issuer : '') +
           '/' + counter.currency +
@@ -289,11 +289,11 @@ function Ticker(base, counter, obj, callback) {
         window.open('https://www.charts.ripple.com/#/' + path, '_blank');
       });
 
-      self.div.on('mouseover', function() {
+      self.div.on('mouseover', function () {
         self.div.style('opacity', 1);
       });
 
-      self.div.on('mouseout', function() {
+      self.div.on('mouseout', function () {
         self.div.style('opacity', 0.7);
       });
 
@@ -348,8 +348,8 @@ function addTicker(base, counter, obj, callback) {
 function addMarkets(obj, options) {
   // add markets async and once done, remove loader
   var count = 0;
-  obj.markets.forEach(function(market) {
-    addTicker(market.base, market.counter, obj, function() {
+  obj.markets.forEach(function (market) {
+    addTicker(market.base, market.counter, obj, function () {
       count += 1;
       if (count === obj.markets.length) {
         d3.selectAll('.tickerLoader').remove();
@@ -357,19 +357,19 @@ function addMarkets(obj, options) {
 
         if (options.closeable) {
           d3.select('#tickerWrapper')
-          .append('div')
-          .attr('class', 'closer')
-          .text('x')
-          .on('click', function() {
-            var liveFeed;
+            .append('div')
+            .attr('class', 'closer')
+            .text('x')
+            .on('click', function () {
+              var liveFeed;
 
-            for (var j = 0; j < listener_list.length; j++) {
-              liveFeed = listener_list[j];
-              liveFeed.stopListener();
-            }
+              for (var j = 0; j < listener_list.length; j++) {
+                liveFeed = listener_list[j];
+                liveFeed.stopListener();
+              }
 
-            d3.select('#tickerWrapper').remove();
-          });
+              d3.select('#tickerWrapper').remove();
+            });
         }
 
         if (options.info) {
@@ -382,7 +382,7 @@ function addMarkets(obj, options) {
             .html('&#9432');
 
 
-          info.on('click', function() {
+          info.on('click', function () {
             d3.event.stopPropagation();
             if (info.classed('closed')) {
               info
@@ -423,7 +423,7 @@ function addMarkets(obj, options) {
             }
           });
 
-          d3.select('body').on('click', function() {
+          d3.select('body').on('click', function () {
             info
               .classed('open', false)
               .classed('closed', true)
@@ -452,12 +452,12 @@ function addMarkets(obj, options) {
 
         $('#prices').smoothDivScroll('startAutoScrolling');
 
-        $('#prices').bind('mouseover', function() {
+        $('#prices').bind('mouseover', function () {
           $('#prices').smoothDivScroll('stopAutoScrolling');
         });
 
         // Mouse out
-        $('#prices').bind('mouseout', function() {
+        $('#prices').bind('mouseout', function () {
           $('#prices').smoothDivScroll('startAutoScrolling');
         });
       }
@@ -502,7 +502,7 @@ function TickerWidget(options) {
     .attr('class', 'tickerLoader')
     .attr('src', LOADER_PNG);
 
-  this.load = function(params) {
+  this.load = function (params) {
 
     if (!params.markets) {
       params.markets = default_markets;
@@ -512,7 +512,7 @@ function TickerWidget(options) {
     addMarkets(self.markets, options);
   };
 
-  this.loadFromQS = function() {
+  this.loadFromQS = function () {
     var params = getParams();
     if (!params.markets) {
       params.markets = default_markets;

@@ -1,56 +1,48 @@
 <div>
   <div class="main container landing">
     <div class="helpbox" ng-class="{showHelp : showHelp}">
-      <h3>Welcome to XRP Charts</h3>
+      <h3>Welcome to STM Charts</h3>
       <p>
-        This charting site was built by Ripple to provide live and historical data about
-        the Ripple Network. This site is open for anyone to use, alter and embed.  The source
-        code is available <a href="https://github.com/ripple/ripplecharts-frontend" target="_blank">here</a>.
+        This charting site was built by Stoxum to provide live and historical data about the Stoxum Network. This site is open for
+        anyone to use, alter and embed. The source code is available
+        <a href="https://github.com/stoxum/stoxumcharts-frontend"
+          target="_blank">here</a>.
       </p>
     </div>
     <div class="row stats">
       <div class="stat-group col-md-6">
         <h5>
           <b>Volume Stats (24 hours)</b>
-          <select class="valueCurrencySelect" ng-model="selectedCurrency"
-                  ng-options="currency for currency in currencies"></select>
+          <select class="valueCurrencySelect" ng-model="selectedCurrency" ng-options="currency for currency in currencies"></select>
           <span class="valueRateDisplay" ng-bind="valueRatePair"></span>
-          <span class="valueRateDisplay"
-                ng-show="selectedCurrency !== 'XRP'"
-                ng-bind="valueRate.live | number:4"></span>
+          <span class="valueRateDisplay" ng-show="selectedCurrency !== 'STM'" ng-bind="valueRate.live | number:4"></span>
         </h5>
         <ul class="volume-stats">
-          <li ng-class="{selected:selectedMetric === metrics.totalTradeVolume}"
-              ng-click="showMetricDetails('totalTradeVolume')">
+          <li ng-class="{selected:selectedMetric === metrics.totalTradeVolume}" ng-click="showMetricDetails('totalTradeVolume')">
             <div class="status"></div>
             <label ng-bind-html="metrics.totalTradeVolume.label | trust"></label>
             <div class="stat">
-              <sign ng-show="metrics.totalTradeVolume.converted"
-                    ng-bind="sign"></sign>
+              <sign ng-show="metrics.totalTradeVolume.converted" ng-bind="sign"></sign>
               <span ng-show="metrics.totalTradeVolume.converted" ng-bind="metrics.totalTradeVolume.converted | number:2"></span>
-              <img  ng-hide="metrics.totalTradeVolume.converted" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img ng-hide="metrics.totalTradeVolume.converted" src="assets/images/stoxumThrobber.png" class="loader" />
             </div>
           </li>
-          <li ng-class="{selected:selectedMetric === metrics.tradeVolumeRCL}"
-              ng-click="showMetricDetails('tradeVolumeRCL')">
+          <li ng-class="{selected:selectedMetric === metrics.tradeVolumeRCL}" ng-click="showMetricDetails('tradeVolumeRCL')">
             <div class="status"></div>
             <label ng-bind-html="metrics.tradeVolumeRCL.label | trust"></label>
             <div class="stat">
-              <sign ng-show="metrics.tradeVolumeRCL.converted"
-                    ng-bind="sign"></sign>
+              <sign ng-show="metrics.tradeVolumeRCL.converted" ng-bind="sign"></sign>
               <span ng-show="metrics.tradeVolumeRCL.converted" ng-bind="metrics.tradeVolumeRCL.converted | number:2"></span>
-              <img  ng-hide="metrics.tradeVolumeRCL.converted" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img ng-hide="metrics.tradeVolumeRCL.converted" src="assets/images/stoxumThrobber.png" class="loader" />
             </div>
           </li>
-          <li ng-class="{selected:selectedMetric === metrics.paymentVolumeRCL}"
-              ng-click="showMetricDetails('paymentVolumeRCL')">
+          <li ng-class="{selected:selectedMetric === metrics.paymentVolumeRCL}" ng-click="showMetricDetails('paymentVolumeRCL')">
             <div class="status"></div>
             <label ng-bind-html="metrics.paymentVolumeRCL.label | trust"></label>
             <div class="stat">
-              <sign ng-show="metrics.paymentVolumeRCL.converted"
-                    ng-bind="sign"></sign>
+              <sign ng-show="metrics.paymentVolumeRCL.converted" ng-bind="sign"></sign>
               <span ng-show="metrics.paymentVolumeRCL.converted" ng-bind="metrics.paymentVolumeRCL.converted | number:2"></span>
-              <img  ng-hide="metrics.paymentVolumeRCL.converted" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img ng-hide="metrics.paymentVolumeRCL.converted" src="assets/images/stoxumThrobber.png" class="loader" />
             </div>
           </li>
         </ul>
@@ -60,31 +52,29 @@
       </div>
       <div class="stat-group col-md-6">
         <h5>
-          XRP Ledger Stats
+          STM Ledger Stats
         </h5>
         <ul>
           <li>
-            <label>Total XRP</label>
+            <label>Total STM</label>
             <div class="stat">
-              <span ng-bind="totalXRP | number:2"></span>
-              <img ng-hide="totalXRP"
-                   src="assets/images/rippleThrobber.png" class="loader"/>
+              <span ng-bind="totalSTM | number:2"></span>
+              <img ng-hide="totalSTM" src="assets/images/stoxumThrobber.png" class="loader" />
             </div>
           </li>
           <li>
-            <label ng-bind-html="metrics.capitalizationXRP.label | trust"></label>
+            <label ng-bind-html="metrics.capitalizationSTM.label | trust"></label>
             <div class="stat">
-              <sign ng-show="metrics.capitalizationXRP.converted"
-                    ng-bind="sign"></sign>
-              <span ng-show="metrics.capitalizationXRP.converted" ng-bind="metrics.capitalizationXRP.converted | number:2"></span>
-              <img  ng-hide="metrics.capitalizationXRP.converted" src="assets/images/rippleThrobber.png" class="loader"/>
+              <sign ng-show="metrics.capitalizationSTM.converted" ng-bind="sign"></sign>
+              <span ng-show="metrics.capitalizationSTM.converted" ng-bind="metrics.capitalizationSTM.converted | number:2"></span>
+              <img ng-hide="metrics.capitalizationSTM.converted" src="assets/images/stoxumThrobber.png" class="loader" />
             </div>
           </li>
           <li>
             <label>Ledger Number</label>
             <div class="stat">
               <span ng-show="ledgerIndex" ng-bind="ledgerIndex | number:0"></span>
-              <img  ng-hide="ledgerIndex" src="assets/images/rippleThrobber.png" class="loader"/>
+              <img ng-hide="ledgerIndex" src="assets/images/stoxumThrobber.png" class="loader" />
             </div>
           </li>
         </ul>

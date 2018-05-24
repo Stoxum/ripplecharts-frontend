@@ -33,12 +33,12 @@ function ValueSummary(options) {
     .attr('height', radius * 2.3)
     .append('g')
     .attr('transform', 'translate(' +
-          (radius + margin.left) + ',' +
-          (radius + margin.top) + ')')
+      (radius + margin.left) + ',' +
+      (radius + margin.top) + ')')
 
   var currencyOrder = [
     'XAU', 'XAG', 'BTC',
-    'LTC', 'XRP', 'EUR',
+    'LTC', 'STM', 'EUR',
     'USD', 'GBP', 'AUD',
     'NZD', 'USD', 'CAD',
     'CHF', 'JPY', 'CNY'
@@ -49,7 +49,7 @@ function ValueSummary(options) {
   }
 
   var currencyColors = {
-    'XRP': '#346aa9',
+    'STM': '#346aa9',
     'USD': [20, 150, 30],
     'USDT': [20, 150, 30],
     'BTC': [240, 150, 50],
@@ -98,8 +98,8 @@ function ValueSummary(options) {
     var r
     var rgb
 
-    if (currency && currency === 'XRP') {
-      return currencyColors.XRP
+    if (currency && currency === 'STM') {
+      return currencyColors.STM
 
     } else if (!currency) {
       return rank ?
@@ -129,7 +129,7 @@ function ValueSummary(options) {
   function prepareTradeVolume(z) {
     var data = []
 
-    z.components.forEach(function(d, i) {
+    z.components.forEach(function (d, i) {
       data.push({
         key: sourceLabels[d.source] || capitalize(d.source),
         sub: d.base_currency ?
@@ -150,7 +150,7 @@ function ValueSummary(options) {
   function prepareData(z) {
     var data = []
 
-    z.components.forEach(function(d, i) {
+    z.components.forEach(function (d, i) {
       data.push({
         key: d.key,
         sub: d.sub,
@@ -160,7 +160,7 @@ function ValueSummary(options) {
       })
     })
 
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
       return b.key.localeCompare(a.key)
     })
 
@@ -175,7 +175,7 @@ function ValueSummary(options) {
     var data = []
     var keys = {}
 
-    z.components.forEach(function(d) {
+    z.components.forEach(function (d) {
       var row = {
         value: Number(d.converted_amount),
         row: d
@@ -195,30 +195,30 @@ function ValueSummary(options) {
         row.link = '#/markets/' +
           d.counter.currency +
           (d.counter.issuer ?
-           ':' + d.counter.issuer : '') + '/' +
+            ':' + d.counter.issuer : '') + '/' +
           d.base.currency +
           (d.base.issuer ?
-           ':' + d.base.issuer : '')
+            ':' + d.base.issuer : '')
       } else {
         row.link = '#/markets/' +
           d.base.currency +
           (d.base.issuer ?
-           ':' + d.base.issuer : '') + '/' +
+            ':' + d.base.issuer : '') + '/' +
           d.counter.currency +
           (d.counter.issuer ?
-           ':' + d.counter.issuer : '')
+            ':' + d.counter.issuer : '')
       }
 
       data.push(row)
     })
 
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
       var first = a.row.base.currency
       var second = b.row.base.currency
       return second.localeCompare(first)
     })
 
-    data.forEach(function(d) {
+    data.forEach(function (d) {
       var key = d.row.base.currency
       if (keys[key]) {
         keys[key]++
@@ -240,7 +240,7 @@ function ValueSummary(options) {
   function prepareRCLPaymentVolume(z) {
     var data = []
     var keys = {}
-    z.components.forEach(function(d) {
+    z.components.forEach(function (d) {
       data.push({
         key: d.currency,
         sub: gateways.getName(d.issuer, d.currency) || d.issuer,
@@ -250,11 +250,11 @@ function ValueSummary(options) {
       })
     })
 
-    data.sort(function(a, b) {
+    data.sort(function (a, b) {
       return b.key.localeCompare(a.key)
     })
 
-    data.forEach(function(d) {
+    data.forEach(function (d) {
       if (keys[d.key]) {
         keys[d.key]++
       } else {
@@ -270,11 +270,11 @@ function ValueSummary(options) {
 
   function resizePaths(d) {
     if (!transitioning) {
-      path.each(function(p) {
+      path.each(function (p) {
         var scale = p && p === d ? 1.05 : 1
         d3.select(this)
-        .transition()
-        .attr('transform', 'scale(' + scale + ')')
+          .transition()
+          .attr('transform', 'scale(' + scale + ')')
       })
     }
   }
@@ -286,17 +286,17 @@ function ValueSummary(options) {
   function showTooltip(d, init) {
 
     if (!init) {
-      path.classed('fade', function(row) {
+      path.classed('fade', function (row) {
         return row !== d
       })
 
-      label.classed('fade', function(row) {
+      label.classed('fade', function (row) {
         return row !== d
       })
     }
 
     var currency = d.data.row.base ?
-        d.data.row.base.currency : d.data.row.currency || 'XRP'
+      d.data.row.base.currency : d.data.row.currency || 'STM'
     var amount = d.data.row.amount || d.value
 
     tooltip.html('')
@@ -307,26 +307,26 @@ function ValueSummary(options) {
 
     if (d.data.sub) {
       head.append('small')
-      .html(d.data.sub)
-      .style('color', d.data.color)
+        .html(d.data.sub)
+        .style('color', d.data.color)
     }
 
     if (d.value) {
       tooltip.append('div')
         .attr('class', 'value')
         .html('<label>Value:</label> ' +
-              commas(d.value / exchange.rate, 2)
-              + ' <small>' + exchange.currency + '</small>')
+          commas(d.value / exchange.rate, 2)
+          + ' <small>' + exchange.currency + '</small>')
     }
 
     if (amount &&
-        currency &&
-        exchange.currency !== currency) {
+      currency &&
+      exchange.currency !== currency) {
       tooltip.append('div')
         .attr('class', 'amount')
         .html('<label>Amount:</label> '
-              + commas(amount, 2) +
-              ' <small>' + currency + '</small>')
+          + commas(amount, 2) +
+          ' <small>' + currency + '</small>')
     }
 
     if (d.data.row.count) {
@@ -361,7 +361,7 @@ function ValueSummary(options) {
 
     var i = d3.interpolate(c, b)
     this._current = i(0)
-    return function(t) {
+    return function (t) {
       return arc(i(t))
     }
   }
@@ -370,7 +370,7 @@ function ValueSummary(options) {
    * load
    */
 
-  this.load = function(z, ex, scale) {
+  this.load = function (z, ex, scale) {
     var data
     var center
 
@@ -413,8 +413,8 @@ function ValueSummary(options) {
       .innerRadius(radius * 0.6 * (scale || 1))
 
     labelArc = d3.svg.arc()
-    .outerRadius((radius + 20) * (scale || 1))
-    .innerRadius(radius * (scale || 1))
+      .outerRadius((radius + 20) * (scale || 1))
+      .innerRadius(radius * (scale || 1))
 
     chart.attr('transform', 'translate(' +
       (radius + margin.left) + ',' +
@@ -424,7 +424,7 @@ function ValueSummary(options) {
     transitioning = true
     exchange = ex
 
-    data.forEach(function(d) {
+    data.forEach(function (d) {
       d.percent = total ? d.value / total * 100 : 0.00
     })
 
@@ -432,98 +432,98 @@ function ValueSummary(options) {
       .sort(null)
       .startAngle(1.1 * Math.PI)
       .endAngle(3.1 * Math.PI)
-      .value(function(d) {
+      .value(function (d) {
         return d.value
       })
 
     // add arcs
     path = path.data(pie(data))
     path.enter().append('path')
-    .on('mouseover', function(d) {
-      showTooltip(d)
-      resizePaths(d)
-    })
-    .on('mouseout', function() {
-      path.classed('fade', false)
-      label.classed('fade', false)
-      resizePaths()
-    })
-    .on('click', function(d) {
-      if (d.data.link) {
-        window.location.hash = d.data.link
-      }
-    })
+      .on('mouseover', function (d) {
+        showTooltip(d)
+        resizePaths(d)
+      })
+      .on('mouseout', function () {
+        path.classed('fade', false)
+        label.classed('fade', false)
+        resizePaths()
+      })
+      .on('click', function (d) {
+        if (d.data.link) {
+          window.location.hash = d.data.link
+        }
+      })
 
-    path.classed('clickable', function(d) {
+    path.classed('clickable', function (d) {
       return Boolean(d.data.link)
     })
-    .style('fill', function(d) {
-      return d.data.color
-    })
-    .style('stroke', function(d) {
-      return d.data.color
-    })
-    .style('stroke-width', '.35px')
-    .transition().duration(750)
-    .attrTween('d', arcTween)
-    .attr('id', function(d, i) {
-      return 'arc_' + i
-    })
-    .each('end', function() {
-      transitioning = false
-    })
+      .style('fill', function (d) {
+        return d.data.color
+      })
+      .style('stroke', function (d) {
+        return d.data.color
+      })
+      .style('stroke-width', '.35px')
+      .transition().duration(750)
+      .attrTween('d', arcTween)
+      .attr('id', function (d, i) {
+        return 'arc_' + i
+      })
+      .each('end', function () {
+        transitioning = false
+      })
 
     path.exit()
-    .transition().duration(400)
-    .style('opacity', 0)
-    .each('end', function() {
-      d3.select(this).remove()
-    })
+      .transition().duration(400)
+      .style('opacity', 0)
+      .each('end', function () {
+        d3.select(this).remove()
+      })
 
     // add labels
     label = label.data(path.data())
 
     label.enter().append('label')
-    .on('mouseover', function(d) {
-      showTooltip(d)
-      resizePaths(d)
-    })
-    .on('mouseout', function() {
-      path.classed('fade', false)
-      label.classed('fade', false)
-      resizePaths()
-    })
+      .on('mouseover', function (d) {
+        showTooltip(d)
+        resizePaths(d)
+      })
+      .on('mouseout', function () {
+        path.classed('fade', false)
+        label.classed('fade', false)
+        resizePaths()
+      })
 
-    label.html(function(d) {
+    label.html(function (d) {
       return d.data.key +
         '<b>' + commas(d.data.percent, 0) + '%</b>'
     })
-    .classed('hidden', function(d) {
-      return d.data.percent < 4
-    })
-    .style('margin-top', function() {
-      var h = parseInt(d3.select(this).style('height'), 10)
-      return h ? ((0 - h) / 2) + 'px' : 0
-    })
-    .style('margin-left', function() {
-      var w = parseInt(d3.select(this).style('width'), 10)
-      return w ? ((0 - w) / 2) + 'px' : 0
-    })
-    .transition().duration(500)
-    .style('top', function(d) {
-      var y = radius * (scale || 1) + margin.top
-      return (labelArc.centroid(d)[1] + y) + 'px'
-    })
-    .style('left', function(d) {
-      var x = radius + margin.left
-      return (labelArc.centroid(d)[0] + x) + 'px'
-    })
+      .classed('hidden', function (d) {
+        return d.data.percent < 4
+      })
+      .style('margin-top', function () {
+        var h = parseInt(d3.select(this).style('height'), 10)
+        return h ? ((0 - h) / 2) + 'px' : 0
+      })
+      .style('margin-left', function () {
+        var w = parseInt(d3.select(this).style('width'), 10)
+        return w ? ((0 - w) / 2) + 'px' : 0
+      })
+      .transition().duration(500)
+      .style('top', function (d) {
+        var y = radius * (scale || 1) + margin.top
+        return (labelArc.centroid(d)[1] + y) + 'px'
+      })
+      .style('left', function (d) {
+        var x = radius + margin.left
+        return (labelArc.centroid(d)[0] + x) + 'px'
+      })
 
     label.exit().remove()
 
     // show data for the largest item
     var current
-    path.data().forEach(function(d) {
+    path.data().forEach(function (d) {
       if (!current || current.value < d.value) {
         current = d
       }

@@ -15,7 +15,7 @@ function getIEVersion() {
   if (Idx > 0) {
     return parseInt(sAgent.substring(Idx + 5, sAgent.indexOf('.', Idx)), 10)
 
-  // If IE 11 then look for Updated user agent string.
+    // If IE 11 then look for Updated user agent string.
   } else if (navigator.userAgent.match(/Trident\/7\./)) {
     return 11
   }
@@ -43,7 +43,7 @@ function TotalHistory(options) {
     CNY: 'rKiCet8SdvWxPXnAgYarFUXMh1zCPz432Y',
     EUR: 'rhub8VRN55s94qWKDv6jmDy1pUykJzF3wq',
     JPY: 'r94s8px6kSw1uZ1MV98dhSRTvc6VMPoPcN',
-    XRP: ''
+    STM: ''
   }
 
   var filters = []
@@ -73,7 +73,7 @@ function TotalHistory(options) {
     var byDate = {}
 
     for (key in data) {
-      data[key].forEach(function(d) {
+      data[key].forEach(function (d) {
         var date = moment(d.date).utc().format('YYYY-MM-DD')
         if (!byDate[date]) {
           byDate[date] = [date]
@@ -101,7 +101,7 @@ function TotalHistory(options) {
     interval = newInterval ?
       newInterval : a.text()
 
-    intervals.classed('clicked', function() {
+    intervals.classed('clicked', function () {
       return d3.select(this).text() === interval
     })
     self.load()
@@ -110,14 +110,14 @@ function TotalHistory(options) {
   function changeRange() {
     range = d3.select(this).text()
     intervals.classed('no-click', false)
-    ranges.classed('clicked', function() {
+    ranges.classed('clicked', function () {
       return d3.select(this).text() === range
     })
 
 
     if (range === 'custom') {
       d3.selectAll('#ranges .calendar')
-        .style('display', function() {
+        .style('display', function () {
           return d3.select(this).style('display') === 'none' ?
             'inline-block' : 'none'
         })
@@ -125,7 +125,7 @@ function TotalHistory(options) {
       return
 
     } else if (range === 'max') {
-      intervals.classed('no-click', function() {
+      intervals.classed('no-click', function () {
         return d3.select(this).text() === 'day'
       })
 
@@ -135,7 +135,7 @@ function TotalHistory(options) {
       }
 
     } else if (range === '1m') {
-      intervals.classed('no-click', function() {
+      intervals.classed('no-click', function () {
         return d3.select(this).text() === 'month'
       })
 
@@ -165,7 +165,7 @@ function TotalHistory(options) {
       var bi = gateways.getName(parts[1]) || parts[1]
       var ci = gateways.getName(parts[3]) || parts[3]
       return parts[0] + ' <span>' + bi + '</span> / ' +
-             parts[2] + ' <span> ' + ci + '</span>'
+        parts[2] + ' <span> ' + ci + '</span>'
     } else if (parts.length === 2) {
       var i = gateways.getName(parts[1]) || parts[1]
       return parts[0] + ' <span>' + i + '</span>'
@@ -186,7 +186,7 @@ function TotalHistory(options) {
       noclick = 'day'
     }
 
-    intervals.classed('no-click', function() {
+    intervals.classed('no-click', function () {
       return d3.select(this).text() === noclick
     })
 
@@ -211,7 +211,7 @@ function TotalHistory(options) {
       byDate: {}
     }
 
-    data[0].forEach(function(d) {
+    data[0].forEach(function (d) {
       var date = moment(d.start_time).format()
       if (!cache.byDate[date]) {
         cache.byDate[date] = {
@@ -222,7 +222,7 @@ function TotalHistory(options) {
       cache.byDate[date]['Exchange Volume'] = d
     })
 
-    data[1].forEach(function(d) {
+    data[1].forEach(function (d) {
       var date = moment(d.start_time).format()
       if (!cache.byDate[date]) {
         cache.byDate[date] = {
@@ -250,7 +250,7 @@ function TotalHistory(options) {
         continue
       }
 
-      source.components.forEach(function(c) {
+      source.components.forEach(function (c) {
 
         if (c.currency !== filters[1]) {
           return
@@ -274,7 +274,7 @@ function TotalHistory(options) {
         continue
       }
 
-      source.components.forEach(function(c) {
+      source.components.forEach(function (c) {
         key = c.currency + '.' + (c.issuer || '')
 
         list[key] = c.converted_amount
@@ -314,10 +314,10 @@ function TotalHistory(options) {
         continue
       }
 
-      source.components.forEach(function(c) {
+      source.components.forEach(function (c) {
 
         if (c.base.currency !== filters[1] &&
-            c.counter.currency !== filters[1]) {
+          c.counter.currency !== filters[1]) {
           return
         }
 
@@ -335,7 +335,7 @@ function TotalHistory(options) {
       list = {}
 
       source = cache.byDate[date]['Exchange Volume']
-      source.components.forEach(function(c) {
+      source.components.forEach(function (c) {
         var base = c.base.currency + '.' + (c.base.issuer || '')
         var counter = c.counter.currency + '.' + (c.counter.issuer || '')
 
@@ -377,7 +377,7 @@ function TotalHistory(options) {
         continue
       }
 
-      source.components.forEach(function(c) {
+      source.components.forEach(function (c) {
         if (c.base) {
           keys[c.base.currency] = {
             label: c.base.currency
@@ -407,7 +407,7 @@ function TotalHistory(options) {
         continue
       }
 
-      source.components.forEach(function(c) {
+      source.components.forEach(function (c) {
 
         if (c.base) {
           if (!list[c.base.currency]) {
@@ -421,7 +421,7 @@ function TotalHistory(options) {
           list[c.base.currency] += c.converted_amount
           list[c.counter.currency] += c.converted_amount
 
-        // handle payments
+          // handle payments
         } else {
           list[c.currency] = c.converted_amount
         }
@@ -495,7 +495,7 @@ function TotalHistory(options) {
 
 
     for (key in data.sets) {
-      data.sets[key].sort(function(a, b) {
+      data.sets[key].sort(function (a, b) {
         return a.date.diff(b.date)
       })
     }
@@ -513,7 +513,7 @@ function TotalHistory(options) {
     }
 
     var labels = legend.selectAll('.label')
-      .data(keys, function(d) {
+      .data(keys, function (d) {
         return d.label
       })
 
@@ -522,14 +522,14 @@ function TotalHistory(options) {
       .attr('class', 'label')
       .classed('market', Boolean(keys[0].base))
       .classed('no-click', filters.length > 1)
-      .style('color', function(d) {
+      .style('color', function (d) {
         return color(d.label)
       })
       .on('click', applyFilter)
 
     labelEnter.append('div')
       .attr('class', 'title')
-      .html(function(d) {
+      .html(function (d) {
         if (d.currency) {
           var name = gateways.getName(d.issuer) || ''
           return (name ? name + ' ' : '') + d.currency
@@ -537,9 +537,9 @@ function TotalHistory(options) {
           var baseIssuer = gateways.getName(d.base.issuer) || ''
           var counterIssuer = gateways.getName(d.counter.issuer) || ''
           var base = d.base.currency +
-              '<small>' + (baseIssuer || d.base.issuer || '') + '</small>'
+            '<small>' + (baseIssuer || d.base.issuer || '') + '</small>'
           var counter = d.counter.currency +
-              '<small>' + (counterIssuer || d.counter.issuer || '') + '</small>'
+            '<small>' + (counterIssuer || d.counter.issuer || '') + '</small>'
 
           return '<b>' + base + '</b><b>/</b><b>' + counter + '</b>'
         }
@@ -549,7 +549,7 @@ function TotalHistory(options) {
 
     labelEnter.append('div')
       .attr('class', 'subtitle')
-      .html(function(d) {
+      .html(function (d) {
         return d.issuer || ''
       })
 
@@ -566,15 +566,15 @@ function TotalHistory(options) {
     list.push.apply(list, filters)
 
     var crumb = crumbs.selectAll('li.crumb')
-      .data(list, function(d) {
+      .data(list, function (d) {
         return d
       })
 
     crumb.enter().append('li')
       .attr('class', 'crumb')
-      .text(function(d) {
+      .text(function (d) {
         return d
-      }).on('click', function(d, i) {
+      }).on('click', function (d, i) {
         var data
 
         if (i > 1) {
@@ -622,15 +622,15 @@ function TotalHistory(options) {
   currencySelect.on('change', changeCurrency)
   currencySelect.property('value', currency)
 
-  ranges.classed('clicked', function() {
+  ranges.classed('clicked', function () {
     return d3.select(this).text() === range
   }).on('click', changeRange)
 
-  intervals.classed('clicked', function() {
+  intervals.classed('clicked', function () {
     return d3.select(this).text() === interval
   }).on('click', changeInterval)
 
-  intervals.classed('no-click', function() {
+  intervals.classed('no-click', function () {
     return d3.select(this).text() === 'month'
   })
 
@@ -650,36 +650,36 @@ function TotalHistory(options) {
   })
 
   download
-  .style('visibility', getIEVersion() ? 'hidden' : '')
-  .on('click', function() {
-    var csv = toCSV(cache.current.sets)
-    var name = crumbs.select('li:last-child').text()
+    .style('visibility', getIEVersion() ? 'hidden' : '')
+    .on('click', function () {
+      var csv = toCSV(cache.current.sets)
+      var name = crumbs.select('li:last-child').text()
 
-    if (Modernizr.prefixed('requestFileSystem', window)) {
-      var blob = new Blob([csv], {'type': 'application/octet-stream'})
-      this.href = window.URL.createObjectURL(blob)
+      if (Modernizr.prefixed('requestFileSystem', window)) {
+        var blob = new Blob([csv], { 'type': 'application/octet-stream' })
+        this.href = window.URL.createObjectURL(blob)
 
-    } else {
-      this.href = 'data:text/csvcharset=utf-8,' + escape(csv)
-    }
+      } else {
+        this.href = 'data:text/csvcharset=utf-8,' + escape(csv)
+      }
 
-    this.download = name + '_' + interval + '_historical.csv'
-    this.target = '_blank'
-    return true
-  })
+      this.download = name + '_' + interval + '_historical.csv'
+      this.target = '_blank'
+      return true
+    })
 
   /**
    * load
    */
 
-  self.load = function() {
+  self.load = function () {
     filters = []
     chart.loading = true
     chart.fadeOut()
     showCrumbs()
 
     function loadData(metric) {
-      return new Promise(function(resolve, reject) {
+      return new Promise(function (resolve, reject) {
 
         var end = moment.utc()
         var start
@@ -701,7 +701,7 @@ function TotalHistory(options) {
           start: start,
           end: end,
           interval: interval
-        }, function(err, data) {
+        }, function (err, data) {
 
           if (err) {
             reject(err)
@@ -717,13 +717,13 @@ function TotalHistory(options) {
       loadData('getExchangeVolume'),
       loadData('getPaymentVolume')
     ])
-    .then(cacheResult)
-    .then(graphData)
-    .then(drawLegend)
-    .catch(function(e) {
-      console.log(e)
-      console.trace()
-      chart.loading = false
-    })
+      .then(cacheResult)
+      .then(graphData)
+      .then(drawLegend)
+      .catch(function (e) {
+        console.log(e)
+        console.trace()
+        chart.loading = false
+      })
   }
 }

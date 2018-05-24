@@ -1,55 +1,65 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>XRP Charts Embedded Chart</title>
 
-    <!-- D3 needs this -->
-    <meta charset="utf-8">
+<head>
+  <title>STM Charts Embedded Chart</title>
 
-    <script>
-      API = "<%= api %>";
-    </script>
+  <!-- D3 needs this -->
+  <meta charset="utf-8">
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300' rel='stylesheet' type='text/css'>
+  <script>
+    API = "<%= api %>";
+  </script>
 
-    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,300' rel='stylesheet' type='text/css'>
 
-    <!-- compiled JSON --><% json.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+  <!-- compiled CSS -->
+  <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
 
-    <!-- compiled common js --><% common.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+      <!-- compiled JSON -->
+      <% json.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script>
+        <% }); %>
 
-    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+          <!-- compiled common js -->
+          <% common.forEach( function ( file ) { %>
+            <script type="text/javascript" src="<%= file %>"></script>
+            <% }); %>
 
-    <style>
-      body {
-        font-family:'Open Sans', sans-serif;
-        text-align:center;
-        margin:0;
-        background:#fff;
-        height:100%;
-        position:absolute;
-        width:100%;
-      }
+              <!-- compiled JavaScript -->
+              <% scripts.forEach( function ( file ) { %>
+                <script type="text/javascript" src="<%= file %>"></script>
+                <% }); %>
 
-    </style>
-  </head>
-  <body>
-    <div id="liveTicker"></div>
-    <script>
+                  <style>
+                    body {
+                      font-family: 'Open Sans', sans-serif;
+                      text-align: center;
+                      margin: 0;
+                      background: #fff;
+                      height: 100%;
+                      position: absolute;
+                      width: 100%;
+                    }
+                  </style>
+</head>
+
+<body>
+  <div id="liveTicker"></div>
+  <script>
 
     var TW = new TickerWidget({
-      url : API,
-      id  : "liveTicker",
-      closeable : false,
-      info : true
+      url: API,
+      id: "liveTicker",
+      closeable: false,
+      info: true
     });
 
     TW.loadFromQS();
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>

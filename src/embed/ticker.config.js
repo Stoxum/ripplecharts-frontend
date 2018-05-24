@@ -9,7 +9,7 @@ module.exports = {
   files: {
 
     html: 'src/embed/ticker.html',
-    loader: 'src/assets/images/rippleThrobber.png',
+    loader: 'src/assets/images/stoxumThrobber.png',
 
     common: [
       'vendor/jquery/jquery.js',
@@ -25,7 +25,7 @@ module.exports = {
     ],
 
     json: [
-      {name: 'gateways', path: 'src/assets/gateways.json'}
+      { name: 'gateways', path: 'src/assets/gateways.json' }
     ],
 
     js: [

@@ -4,11 +4,11 @@
  * build process will exclude all `.spec.js` files from the build
  * automatically.
  */
-describe( 'main section', function() {
-  beforeEach( module( 'ripplecharts.landing' ) );
+describe('main section', function () {
+  beforeEach(module('stoxumcharts.landing'));
 
-  it( 'should have a dummy test', inject( function() {
-    expect( true ).toBeTruthy();
+  it('should have a dummy test', inject(function () {
+    expect(true).toBeTruthy();
   }));
 });
 

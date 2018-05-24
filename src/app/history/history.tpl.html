@@ -3,29 +3,34 @@
   <div class="helpbox" ng-class="{showHelp : showHelp}">
     <h4>Historical Metrics</h4>
     <p>
-      This chart shows trends for various currencies available on the Ripple Network. Each metric can be broken down into further detail by clicking on its entry in the legend below the graph. Once a currency has been chosen for an in depth view, the legend shows the name of the gateway, its issuing address and the counter currency if applicable. Gateways are grouped by currency for comparison. The time range and increment can be chosen from the top right. All values are normalized to the currency chosen in the dropdown menu on the top left, USD being the default.
+      This chart shows trends for various currencies available on the Stoxum Network. Each metric can be broken down into further
+      detail by clicking on its entry in the legend below the graph. Once a currency has been chosen for an in depth view,
+      the legend shows the name of the gateway, its issuing address and the counter currency if applicable. Gateways are
+      grouped by currency for comparison. The time range and increment can be chosen from the top right. All values are normalized
+      to the currency chosen in the dropdown menu on the top left, USD being the default.
     </p>
 
     <div class="table">
       <div class="cell">
-      <h5>Total Volume</h5>
-      <p>
-        The initial Total Volume chart shows the aggregate volume of both total transaction and trade volume. The legend at the bottom allows a deeper view into each of those metrics.
-      </p>
+        <h5>Total Volume</h5>
+        <p>
+          The initial Total Volume chart shows the aggregate volume of both total transaction and trade volume. The legend at the bottom
+          allows a deeper view into each of those metrics.
+        </p>
       </div>
       <div class="cell">
-      <h5>Payment Volume</h5>
-      <p>
-        The payment volume chart shows the amounts sent through payments and offers
-        exercised for each currency. The legend at the bottom allows a deeper view into how that volume breaks down into different gateways.
-      </p>
+        <h5>Payment Volume</h5>
+        <p>
+          The payment volume chart shows the amounts sent through payments and offers exercised for each currency. The legend at the
+          bottom allows a deeper view into how that volume breaks down into different gateways.
+        </p>
       </div>
       <div class="cell">
-      <h5>Exchange Volume</h5>
-      <p>
-        The trade volume chart shows the aggregate volume of exchanges between each currency
-        and XRP. The legend at the bottom allows a deeper view into how that volume breaks down into different gateways.
-      </p>
+        <h5>Exchange Volume</h5>
+        <p>
+          The trade volume chart shows the aggregate volume of exchanges between each currency and STM. The legend at the bottom allows
+          a deeper view into how that volume breaks down into different gateways.
+        </p>
       </div>
     </div>
 
@@ -36,13 +41,13 @@
       <ul class="crumbs">
       </ul>
       <a id="csv" disabled="true" title="Export to CSV">
-        <img class="downloadIcon toCSV" src="assets/images/download_icn.svg"/>
+        <img class="downloadIcon toCSV" src="assets/images/download_icn.svg" />
       </a>
       <div id="currency">
         <div class="tag">Valued in:</div>
         <select class="valueCurrencySelect">
           <option value="USD" checked=tr>USD</option>
-          <option value="XRP">XRP</option>
+          <option value="STM">STM</option>
           <option value="BTC">BTC</option>
           <option value="EUR">EUR</option>
           <option value="CNY">CNY</option>
@@ -70,10 +75,10 @@
       </div>
     </div>
   </div>
-  <div id="historical-chart"/>
+  <div id="historical-chart" />
 </div>
 <style>
   footer .footerInner {
-    width:90% !important;
+    width: 90% !important;
   }
 </style>

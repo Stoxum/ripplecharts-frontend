@@ -1,34 +1,33 @@
 <div class='validations'>
-  <h2><a ng-href='#/validators'>Validator Registry</a></h2>
+  <h2>
+    <a ng-href='#/validators'>Validator Registry</a>
+  </h2>
 
   <div class="helpbox" ng-class="{showHelp : showHelp}">
     <p>
-      Validators are rippled nodes running as a validating server - meaning they are configured to
-      participate in the
-      <a href="https://ripple.com/knowledge_center/the-ripple-ledger-consensus-process/">consensus process</a>
-      for validating transactions.  This
-      <a href="https://ripple.com/build/rippled-setup/#types-of-rippled-servers">guide</a>
-      is a helpful reference for understanding and operating rippled servers. Each validator is
-      identified by its public validation key, which is used to sign validations.
+      Validators are stoxumd nodes running as a validating server - meaning they are configured to participate in the
+      <a href="https://stoxum.com/knowledge_center/the-stoxum-ledger-consensus-process/">consensus process</a>
+      for validating transactions. This
+      <a href="https://stoxum.com/build/stoxumd-setup/#types-of-stoxumd-servers">guide</a>
+      is a helpful reference for understanding and operating stoxumd servers. Each validator is identified by its public validation
+      key, which is used to sign validations.
     </p>
     <p>
-      The 'Agreement' and 'Disagreement' columns represent how closely this validator's validations
-      match the validations of the ledgers by the recommended trusted validators set.
-      A value of 1 means the validator validated every ledger that was also validated by the trusted
-      validators on the day specified, while a value of 0 indicates the validator did not validate
-      any of the ledgers validated by the trusted group.  Disagreement is opposite, it indicates how
-      many ledgers were validated by this node but not validated by the trusted group.
-      'Total Validations' is the total number of ledgers validated by the specific node on that day.
+      The 'Agreement' and 'Disagreement' columns represent how closely this validator's validations match the validations of the
+      ledgers by the recommended trusted validators set. A value of 1 means the validator validated every ledger that was
+      also validated by the trusted validators on the day specified, while a value of 0 indicates the validator did not validate
+      any of the ledgers validated by the trusted group. Disagreement is opposite, it indicates how many ledgers were validated
+      by this node but not validated by the trusted group. 'Total Validations' is the total number of ledgers validated by
+      the specific node on that day.
     </p>
     <p>
-      Rippled software allows operators the ability to associate a node with a specific domain that
-      is under their control in order to encourage trust and transparency. For details and instructions on verifying the domain of a validating node, look
-      <a href="https://ripple.com/build/rippled-setup/#domain-verification">here</a>.
+      Stoxumd software allows operators the ability to associate a node with a specific domain that is under their control in order
+      to encourage trust and transparency. For details and instructions on verifying the domain of a validating node, look
+      <a href="https://stoxum.com/build/stoxumd-setup/#domain-verification">here</a>.
 
       <div class="warning">
-        * Successful Domain verification is independently done by rippled operators and does not imply any
-        endorsement of trust from Ripple, Inc. - it is only an indication that the operator of the node is
-        also in control of the domain.
+        * Successful Domain verification is independently done by stoxumd operators and does not imply any endorsement of trust from
+        Stoxum, Inc. - it is only an indication that the operator of the node is also in control of the domain.
       </div>
     </p>
   </div>
@@ -37,14 +36,14 @@
     <a ng-if="validator.domain" href='http://{{validator.domain}}' ng-class='validator.domain_state' target="_blank">
       {{validator.domain}}
       <span ng-if="validator.domain_state === 'verified'">&#10004</span>
-      <b ng-if="validator.domain_state !== 'verified' && validator.domain"
-        title="validator.domain_state">X</b>
+      <b ng-if="validator.domain_state !== 'verified' && validator.domain" title="validator.domain_state">X</b>
     </a>
-    <a class="unverified" ng-if="validator.domain_state !== 'verified'" target="_blank"  href='https://ripple.com/build/rippled-apis/rippled-setup/#domain-verification'>
+    <a class="unverified" ng-if="validator.domain_state !== 'verified'" target="_blank" href='https://stoxum.com/build/stoxumd-apis/stoxumd-setup/#domain-verification'>
       unverified
     </a>
     <span class="asterisk" ng-click="showHelp = true">*</span>
-    - <span class="pubkey">{{validator.pubkey}}</span>
+    -
+    <span class="pubkey">{{validator.pubkey}}</span>
   </h4>
   <h4>{{status}}</h4>
 
@@ -55,19 +54,13 @@
         <th>Date</th>
         <th>
           Agreement
-          <button type="button" class="tooltip-btn btn btn-default"
-            data-toggle="tooltip"
-            tooltip-placement="top"
-            data-container="row"
+          <button type="button" class="tooltip-btn btn btn-default" data-toggle="tooltip" tooltip-placement="top" data-container="row"
             tooltip="The percentage of ledgers that passed consensus that were validated by the validator">?
           </button>
         </th>
         <th>
           Disagreement
-          <button type="button" class="tooltip-btn btn btn-default"
-            data-toggle="tooltip"
-            tooltip-placement="top"
-            data-container="row"
+          <button type="button" class="tooltip-btn btn btn-default" data-toggle="tooltip" tooltip-placement="top" data-container="row"
             tooltip="The percentage of ledgers validated by the validator that did not pass consensus">?
           </button>
         </th>

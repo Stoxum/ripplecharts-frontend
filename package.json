@@ -1,8 +1,8 @@
 {
-  "author": "Ripple, Inc.",
-  "name": "ripplecharts",
-  "version": "2.4.2",
-  "homepage": "http://xrpcharts.ripple.com",
+  "author": "Stoxum, Org",
+  "name": "stoxumcharts",
+  "version": "1.0.0",
+  "homepage": "http://xrpcharts.stoxum.com",
   "licenses": {
     "type": "ISC",
     "url": ""
@@ -12,7 +12,7 @@
     "type": "git",
     "url": ""
   },
-  "scripts" : {
+  "scripts": {
     "lint": "if ! [ -f eslintrc ]; then curl -o eslintrc 'https://raw.githubusercontent.com/ripple/javascript-style-guide/es6/eslintrc' >> eslintrc; fi; eslint -c eslintrc --rule {no-var:0} $(git diff --name-only | grep '.js$' ; git diff --name-only --cached | grep '.js$' ; git clean --dry-run | awk '{print $3;}' | grep '.js$')"
   },
   "devDependencies": {

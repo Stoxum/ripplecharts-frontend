@@ -43,15 +43,15 @@ function MiniChart(base, counter, markets, gateways) {
   var priceScale = d3.scale.linear();
   var xAxis = d3.svg.axis().scale(xScale).ticks(6);
   var priceAxis = d3.svg.axis().scale(priceScale)
-  .orient('right').tickSize(2, 0, 0);
+    .orient('right').tickSize(2, 0, 0);
 
-  var margin = {top: 0, right: 40, bottom: 20, left: 0};
+  var margin = { top: 0, right: 40, bottom: 20, left: 0 };
   var width = parseInt(self.div.style('width'), 10) -
-      margin.left - margin.right;
+    margin.left - margin.right;
   var height = width / 2 > 150 ? width / 2 : 150;
 
-  var baseCurrency = base ? base.currency : 'XRP';
-  var counterCurrency = counter ? counter.currency : 'XRP';
+  var baseCurrency = base ? base.currency : 'STM';
+  var counterCurrency = counter ? counter.currency : 'STM';
 
   var commas = d3.format(',g');
 
@@ -62,7 +62,7 @@ function MiniChart(base, counter, markets, gateways) {
 
   // get issuer name
   function getName(address, currency) {
-    if (currency === 'XRP') {
+    if (currency === 'STM') {
       return '';
     }
 
@@ -77,10 +77,10 @@ function MiniChart(base, counter, markets, gateways) {
       details.selectAll('td').transition().style('opacity', 0);
       gEnter.transition().style('opacity', 0);
       pointer.transition()
-      .attr('transform', 'translate(' +
-        (width + margin.left) + ', ' +
-        height + ')')
-      .style({fill: '#aaa'});
+        .attr('transform', 'translate(' +
+          (width + margin.left) + ', ' +
+          height + ')')
+        .style({ fill: '#aaa' });
     }
   }
 
@@ -111,14 +111,14 @@ function MiniChart(base, counter, markets, gateways) {
     bg = svg.append('rect')
       .attr('width', width + margin.left + margin.right)
       .attr('height', height + margin.top + margin.bottom)
-      .style({opacity: 0});
+      .style({ opacity: 0 });
 
     pointer = svg.append('path')
       .attr('class', 'pointer')
       .attr('d', 'M 0 0 L 7 -7 L 40 -7 L 40 7 L 7 7 L 0 0')
       .attr('transform', 'translate(' +
-            (width + margin.left) + ',' +
-            (height + margin.top) + ')');
+        (width + margin.left) + ',' +
+        (height + margin.top) + ')');
 
     svg.append('rect').attr('width', width + margin.left + margin.right)
       .attr('class', 'timeBackground')
@@ -140,9 +140,9 @@ function MiniChart(base, counter, markets, gateways) {
       .attr('width', margin.right)
       .attr('height', margin.bottom)
       .attr('transform', 'translate(' +
-            (width + margin.left) + ',' +
-            (height + margin.top) + ')')
-      .on('click', function() {
+        (width + margin.left) + ',' +
+        (height + margin.top) + ')')
+      .on('click', function () {
         d3.event.stopPropagation();
         flipping = true;
 
@@ -177,21 +177,21 @@ function MiniChart(base, counter, markets, gateways) {
       });
 
     flip.append('rect')
-    .attr({
-      width: margin.right,
-      height: margin.bottom
-    });
+      .attr({
+        width: margin.right,
+        height: margin.bottom
+      });
 
     flip.append('text').text('Flip')
-    .attr({
-      'text-anchor': 'middle',
-      y: margin.bottom * 4 / 5,
-      x: margin.right / 2
-    });
+      .attr({
+        'text-anchor': 'middle',
+        y: margin.bottom * 4 / 5,
+        x: margin.right / 2
+      });
 
     horizontal = gEnter.append('line')
       .attr('class', 'horizontal')
-      .attr({x1: 0, x2: width})
+      .attr({ x1: 0, x2: width })
       .attr('transform', 'translate(0,' + height + ')');
     lastPrice = gEnter.append('text')
       .attr('class', 'lastPrice')
@@ -215,25 +215,25 @@ function MiniChart(base, counter, markets, gateways) {
     }
 
     var area = d3.svg.area()
-    .x(function(d) {
-      return xScale(d.startTime);
-    })
-    .y0(height)
-    .y1(function(d) {
-      return priceScale(d.close);
-    });
+      .x(function (d) {
+        return xScale(d.startTime);
+      })
+      .y0(height)
+      .y1(function (d) {
+        return priceScale(d.close);
+      });
 
     var open = self.lineData[0].close;
-    var high = d3.max(self.lineData, function(d) {
+    var high = d3.max(self.lineData, function (d) {
       return d.high;
     });
 
-    var low = d3.min(self.lineData, function(d) {
+    var low = d3.min(self.lineData, function (d) {
       return d.low;
     });
 
     var last = self.lineData[self.lineData.length - 1].close;
-    var vol = d3.sum(self.lineData, function(d) {
+    var vol = d3.sum(self.lineData, function (d) {
       return d.baseVolume;
     });
     var pct = Number((((last - open) / open) * 100).toFixed(2));
@@ -245,22 +245,22 @@ function MiniChart(base, counter, markets, gateways) {
 
 
     if (Math.abs(pct) < 0.5) { // unchanged (less than .5%)
-      pathStyle = {fill: 'rgba(160,160,160,0.45)', stroke: '#888'};
-      horizontalStyle = {stroke: '#777', 'stroke-width': 1.5};
-      pointerStyle = {fill: '#aaa'};
-      changeStyle = {color: '#777'};
+      pathStyle = { fill: 'rgba(160,160,160,0.45)', stroke: '#888' };
+      horizontalStyle = { stroke: '#777', 'stroke-width': 1.5 };
+      pointerStyle = { fill: '#aaa' };
+      changeStyle = { color: '#777' };
 
     } else if (last < open) {  // down
-      pathStyle = {fill: 'rgba(205,85,85,0.5)', stroke: '#a22'};
-      horizontalStyle = {stroke: '#d22', 'stroke-width': 1.5};
-      pointerStyle = {fill: '#c33'};
-      changeStyle = {color: '#c33'};
+      pathStyle = { fill: 'rgba(205,85,85,0.5)', stroke: '#a22' };
+      horizontalStyle = { stroke: '#d22', 'stroke-width': 1.5 };
+      pointerStyle = { fill: '#c33' };
+      changeStyle = { color: '#c33' };
 
     } else { // up
-      pathStyle = {fill: 'rgba(145,205,115,0.4)', stroke: '#483'};
-      horizontalStyle = {stroke: '#0a0', 'stroke-width': 1.5};
-      pointerStyle = {fill: '#2a2'};
-      changeStyle = {color: '#2a2'};
+      pathStyle = { fill: 'rgba(145,205,115,0.4)', stroke: '#483' };
+      horizontalStyle = { stroke: '#0a0', 'stroke-width': 1.5 };
+      pointerStyle = { fill: '#2a2' };
+      changeStyle = { color: '#2a2' };
     }
 
     svg.datum(self.lineData).transition().style('opacity', 1);
@@ -273,45 +273,45 @@ function MiniChart(base, counter, markets, gateways) {
 
     // Update the x-scale.
     xScale
-    .domain([start, getAlignedCandle()])
-    .range([0, width]);
+      .domain([start, getAlignedCandle()])
+      .range([0, width]);
 
 
     // Update the y-scale.
     priceScale
-    .domain([
-      d3.min(self.lineData, function(d) {
-        return d.close;
-      }) * 0.975,
-      d3.max(self.lineData, function(d) {
-        return d.close;
-      }) * 1.025
-    ])
-    .range([height, 0]).nice();
+      .domain([
+        d3.min(self.lineData, function (d) {
+          return d.close;
+        }) * 0.975,
+        d3.max(self.lineData, function (d) {
+          return d.close;
+        }) * 1.025
+      ])
+      .range([height, 0]).nice();
 
     gEnter.select('.grid')
-    .call(d3.svg.axis()
-      .scale(priceScale)
-      .orient('right')
-      .ticks(5)
-      .tickSize(width, 0, 0)
-      .tickFormat('')
-    );
+      .call(d3.svg.axis()
+        .scale(priceScale)
+        .orient('right')
+        .ticks(5)
+        .tickSize(width, 0, 0)
+        .tickFormat('')
+      );
 
     // add the price line
     if (update) {
       gEnter.select('.line')
-      .datum(self.lineData)
-      .transition()
-      .duration(300)
-      .attr('d', area)
-      .style(pathStyle);
+        .datum(self.lineData)
+        .transition()
+        .duration(300)
+        .attr('d', area)
+        .style(pathStyle);
 
     } else {
       gEnter.select('.line')
-      .datum(self.lineData)
-      .attr('d', area)
-      .style(pathStyle);
+        .datum(self.lineData)
+        .attr('d', area)
+        .style(pathStyle);
     }
 
     // Update the x-axis.
@@ -339,31 +339,31 @@ function MiniChart(base, counter, markets, gateways) {
         flash = '#888';
       }
 
-      horizontal.style({stroke: flash, 'stroke-width': 4})
+      horizontal.style({ stroke: flash, 'stroke-width': 4 })
         .transition().duration(600)
         .attr('transform', 'translate(0, ' + priceScale(last) + ')')
         .style(horizontalStyle);
-      pointer.style({fill: flash})
+      pointer.style({ fill: flash })
         .transition().duration(600)
         .attr('transform', 'translate(' +
-              (width + margin.left) + ', ' +
-              priceScale(last) + ')')
+          (width + margin.left) + ', ' +
+          priceScale(last) + ')')
         .style(pointerStyle);
       lastPrice.transition().duration(600)
         .attr('transform', 'translate(0, ' + lastY + ')')
         .text(showLast);
-      bg.style({fill: flash, opacity: 0.3})
+      bg.style({ fill: flash, opacity: 0.3 })
         .transition().duration(1000)
-        .style({opacity: 0});
+        .style({ opacity: 0 });
 
     } else {
       horizontal.style(horizontalStyle)
         .attr('transform', 'translate(0, ' +
-              priceScale(last) + ')');
+          priceScale(last) + ')');
       pointer.style(pointerStyle)
         .attr('transform', 'translate(' +
-              (width + margin.left) + ', ' +
-              priceScale(last) + ')');
+          (width + margin.left) + ', ' +
+          priceScale(last) + ')');
       lastPrice.text(showLast)
         .attr('transform', 'translate(0, ' + lastY + ')');
     }
@@ -374,7 +374,7 @@ function MiniChart(base, counter, markets, gateways) {
     change.html((pct > 0 ? ' + ' : '') + amountToHuman(pct) + '%')
       .style(changeStyle);
     volume.html('<label>V:</label> ' + vol +
-                '<small>' + baseCurrency + '</small>');
+      '<small>' + baseCurrency + '</small>');
 
     // show the chart and details
     details.selectAll('td').style('opacity', 1);
@@ -424,7 +424,7 @@ function MiniChart(base, counter, markets, gateways) {
       drawData();
       return;
 
-    // the close exceeds the interval, reload the chart
+      // the close exceeds the interval, reload the chart
     } else if (moment.utc(point.closeTime).unix() > end.unix()) {
       self.load(true);
       return;
@@ -452,7 +452,7 @@ function MiniChart(base, counter, markets, gateways) {
     }
   }
 
-  // enable the live feed via ripple-lib
+  // enable the live feed via stoxum-lib
   function setLiveFeed() {
     var point = {
       startTime: getAlignedCandle(),
@@ -491,7 +491,7 @@ function MiniChart(base, counter, markets, gateways) {
 
     if (!self.base || !self.counter ||
       (self.base.currency === self.counter.currency &&
-      self.counter.currency === 'XRP')) {
+        self.counter.currency === 'STM')) {
       setStatus('Select a currency pair.');
       return;
     }
@@ -521,22 +521,22 @@ function MiniChart(base, counter, markets, gateways) {
       base: self.base,
       counter: self.counter
     },
-    function(data) {
-      if (liveFeed) {
-        liveFeed.stopListener();
-      }
+      function (data) {
+        if (liveFeed) {
+          liveFeed.stopListener();
+        }
 
-      setLiveFeed();
-      self.lineData = data;
-      isLoading = false;
-      drawData(true);
+        setLiveFeed();
+        self.lineData = data;
+        isLoading = false;
+        drawData(true);
 
-    },
-    function(error) {
-      console.log(error);
-      isLoading = false;
-      setStatus(error.text ? error.text : 'Unable to load data');
-    });
+      },
+      function (error) {
+        console.log(error);
+        isLoading = false;
+        setStatus(error.text ? error.text : 'Unable to load data');
+      });
   }
 
   if (markets.options.fixed) {
@@ -544,16 +544,16 @@ function MiniChart(base, counter, markets, gateways) {
 
   } else {
     self.div.append('div')
-    .attr('class', 'closeButton')
-    .html('x')
-    .on('click', function() {
-      d3.event.stopPropagation();
-      if (liveFeed) {
-        liveFeed.stopListener();
-      }
+      .attr('class', 'closeButton')
+      .html('x')
+      .on('click', function () {
+        d3.event.stopPropagation();
+        if (liveFeed) {
+          liveFeed.stopListener();
+        }
 
-      self.remove(true);
-    });
+        self.remove(true);
+      });
   }
 
   loaded = false;
@@ -563,22 +563,22 @@ function MiniChart(base, counter, markets, gateways) {
 
   loader = self.div.append('img')
     .attr('class', 'loader')
-    .attr('src', 'assets/images/rippleThrobber.png');
+    .attr('src', 'assets/images/stoxumThrobber.png');
 
-  dropdownA = ripple.currencyDropdown(gateways, true, markets.options.fixed)
+  dropdownA = stoxum.currencyDropdown(gateways, true, markets.options.fixed)
     .selected(self.base);
 
-  dropdownA.on('change', function(d) {
+  dropdownA.on('change', function (d) {
     self.base = d;
     if (!flipping && loaded) {
       self.load();
     }
   });
 
-  dropdownB = ripple.currencyDropdown(gateways, true, markets.options.fixed)
+  dropdownB = stoxum.currencyDropdown(gateways, true, markets.options.fixed)
     .selected(self.counter);
 
-  dropdownB.on('change', function(d) {
+  dropdownB.on('change', function (d) {
     self.counter = d;
     if (loaded) {
       self.load();
@@ -613,10 +613,10 @@ function MiniChart(base, counter, markets, gateways) {
   status = self.div.append('h4').attr('class', 'status');
 
   if (markets.options.clickable) {
-    dropdowns.on('click', function() {
+    dropdowns.on('click', function () {
       d3.event.stopPropagation();
     });
-    self.div.classed('clickable', true).on('click', function() {
+    self.div.classed('clickable', true).on('click', function () {
       markets.chartClickHandler(self);
     });
   }
@@ -630,14 +630,14 @@ function MiniChart(base, counter, markets, gateways) {
   this.load = load;
 
   // suspend the live feed
-  this.suspend = function() {
+  this.suspend = function () {
     if (liveFeed) {
       liveFeed.stopListener();
     }
   };
 
   // properly remove the chart by removing the resize listener
-  this.remove = function(update) {
+  this.remove = function (update) {
     self.div.remove();
     markets.charts[self.index] = {};
     if (update) {
@@ -673,8 +673,8 @@ function MultiMarket(options) {
     add = self.el.append('div')
       .attr('class', 'add')
       .text('+')
-      .on('click', function() {
-        self.addChart({currency: 'XRP'}, {currency: 'XRP'});
+      .on('click', function () {
+        self.addChart({ currency: 'STM' }, { currency: 'STM' });
       });
 
     resizeButton();
@@ -682,12 +682,12 @@ function MultiMarket(options) {
   }
 
   // new chart from list initialization or add chart button click
-  this.addChart = function(base, counter) {
+  this.addChart = function (base, counter) {
     return new MiniChart(base, counter, self, options.gateways);
   };
 
   // remove chart from list initialization or remove button click
-  this.removeChart = function(index) {
+  this.removeChart = function (index) {
     if (!options.fixed) {
       self.charts[index].remove(true);
     }
@@ -695,14 +695,14 @@ function MultiMarket(options) {
 
   // function run whenever the list of charts changes to return
   // the complete list, if a callback is provided
-  this.updateListHandler = function() {
+  this.updateListHandler = function () {
     if (self.updateListCallback) {
       var data = [];
       for (var i = 0; i < self.charts.length; i++) {
         if (!self.charts[i].base) {
           continue;
-        } else if (self.charts[i].base.currency === 'XRP' &&
-          self.charts[i].counter.currency === 'XRP') {
+        } else if (self.charts[i].base.currency === 'STM' &&
+          self.charts[i].counter.currency === 'STM') {
           continue;
         }
 
@@ -717,7 +717,7 @@ function MultiMarket(options) {
 
   // function to return the chart on click if
   // a callback function is provided
-  this.chartClickHandler = function(chart) {
+  this.chartClickHandler = function (chart) {
     if (self.chartClickCallback) {
       self.chartClickCallback(chart);
     }
@@ -726,7 +726,7 @@ function MultiMarket(options) {
 
   // initialize charts with a list of currency pairs,
   // or remove them all with an empty array
-  this.list = function(data) {
+  this.list = function (data) {
 
     function update(charts) {
       for (var i = 0; i < self.charts.length; i++) {
@@ -744,7 +744,7 @@ function MultiMarket(options) {
     }
 
     if (Number.isInteger(data)) {
-      self.apiHandler.getTopMarkets(data, function(err, resp) {
+      self.apiHandler.getTopMarkets(data, function (err, resp) {
         if (err) {
           console.log(err);
         } else {
@@ -757,7 +757,7 @@ function MultiMarket(options) {
     }
   };
 
-  this.reload = function() {
+  this.reload = function () {
     for (var i = 0; i < self.charts.length; i++) {
       if (self.charts[i].load) {
         self.charts[i].load();
@@ -766,7 +766,7 @@ function MultiMarket(options) {
   };
 
   // function for initializing callbacks
-  this.on = function(type, callback) {
+  this.on = function (type, callback) {
     if (type === 'updateList') {
       self.updateListCallback = callback;
     } else if (type === 'chartClick') {

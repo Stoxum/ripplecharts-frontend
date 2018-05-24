@@ -1,8 +1,8 @@
 'use strict';
 
-(function() {
+(function () {
 
-  ripple.currencyDropdown = function(gateways, old, fixed) {
+  stoxum.currencyDropdown = function (gateways, old, fixed) {
     var event = d3.dispatch('change');
     var select;
     var loaded = false;
@@ -11,13 +11,13 @@
     function editList(id, suffix) {
       $('#' + id + '_' +
         suffix + ' ul.dd-options')
-      .append('<a onClick=ga("send", "event", "Manage", "Edit button"); ' +
-              'class="edit_list" href="#/manage-' +
-              suffix + '?' +
-              id + '"><li ui-route="/manage-' +
-              suffix + '" ng-class="{active:$uiRoute !== false}" ' +
-              'class="' + suffix + '"><span class="plus"> ' +
-              '+</span><label class="dd-option-text">Edit</label></li></a>');
+        .append('<a onClick=ga("send", "event", "Manage", "Edit button"); ' +
+          'class="edit_list" href="#/manage-' +
+          suffix + '?' +
+          id + '"><li ui-route="/manage-' +
+          suffix + '" ng-class="{active:$uiRoute !== false}" ' +
+          'class="' + suffix + '"><span class="plus"> ' +
+          '+</span><label class="dd-option-text">Edit</label></li></a>');
     }
 
     function loadDropdowns(selection) {
@@ -62,8 +62,8 @@
           currency: currency,
           issuer: issuer
         } : {
-          currency: currency
-        };
+            currency: currency
+          };
         event.change(select);
       }
 
@@ -78,7 +78,7 @@
         var isFound = false;
 
         issuers = gateways.getIssuers(selected);
-        if (selected === 'XRP' || issuers.length === 0) {
+        if (selected === 'STM' || issuers.length === 0) {
           issuers = [{}];
           disable = true;
         }
@@ -106,8 +106,8 @@
 
         // issuer is not in the list for this currency
         if (selected === select.currency &&
-            selected !== 'XRP' &&
-            !isFound) {
+          selected !== 'STM' &&
+          !isFound) {
           disable = false;
           issuers.push({
             text: gateways.getName(select.issuer) || select.issuer,
@@ -129,7 +129,7 @@
         $('#' + selectionId + '_gateway').ddslick({
           data: issuers,
           imagePosition: 'left',
-          onSelected: function(data) {
+          onSelected: function (data) {
             var different_issuer = data.selectedData.account !== select.issuer;
             var different_currency = selected !== select.currency;
             if (different_currency || different_issuer) {
@@ -185,7 +185,7 @@
         data: currencies,
         imagePosition: 'left',
         width: '120px',
-        onSelected: function(data) {
+        onSelected: function (data) {
           if (!loaded) {
             changeCurrency(data.selectedData.currency);
           } else if (data.selectedData.currency !== select.currency) {
@@ -209,9 +209,9 @@
         var name = gatewaySelect.node().value;
         var currency = currencySelect.node().value;
         var list = gatewaySelect.selectAll('option')
-        .data();
+          .data();
 
-        var gateway = list.filter(function(d) {
+        var gateway = list.filter(function (d) {
           return d.name === name;
         })[0];
 
@@ -219,8 +219,8 @@
           currency: currency,
           issuer: gateway.account
         } : {
-          currency: currency
-        });
+            currency: currency
+          });
       }
 
       // change currency
@@ -228,10 +228,10 @@
         var currency = currencySelect.node().value;
         var list = [];
 
-        if (currency !== 'XRP') {
+        if (currency !== 'STM') {
           list = gateways.getIssuers(currency, isFixed);
 
-          if (list.every(function(d) {
+          if (list.every(function (d) {
             return select.issuer !== d.account;
           })) {
             list.unshift({
@@ -242,23 +242,23 @@
         }
 
         var options = gatewaySelect.selectAll('option')
-        .data(list);
+          .data(list);
 
         options.enter().append('option')
-          .text(function(d) {
+          .text(function (d) {
             return d.name;
           });
 
         options.exit().remove();
 
-        if (currency === 'XRP') {
+        if (currency === 'STM') {
           gatewaySelect.attr('disabled', 'true');
         } else {
           gatewaySelect.attr('disabled', null);
         }
 
         if (select) {
-          options.property('selected', function(d) {
+          options.property('selected', function (d) {
             return d.account === select.issuer;
           });
         }
@@ -275,7 +275,7 @@
         .attr('class', 'gateway')
         .on('change', changeGateway);
 
-      var notFound = currencies.every(function(c) {
+      var notFound = currencies.every(function (c) {
         if (c.currency === selectedCurrency) {
           return false;
         }
@@ -295,13 +295,13 @@
       currencySelect.selectAll('option')
         .data(currencies)
         .enter().append('option')
-        .attr('class', function(d) {
+        .attr('class', function (d) {
           return d.currency;
         })
-        .property('selected', function(d) {
+        .property('selected', function (d) {
           return selectedCurrency && d.currency === selectedCurrency;
         })
-        .text(function(d) {
+        .text(function (d) {
           return d.currency;
         });
 
@@ -316,7 +316,7 @@
       }
     }
 
-    dropdown.selected = function(d) {
+    dropdown.selected = function (d) {
       if (d) {
         select = d;
         return dropdown;

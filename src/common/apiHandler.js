@@ -37,7 +37,7 @@ function ApiHandler(baseURL) {
       '&live=' + params.period : ''
 
     url += start + end + interval + limit + currency + issuer + period
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -45,11 +45,11 @@ function ApiHandler(baseURL) {
         })
 
       } else {
-        resp.rows.forEach(function(row) {
+        resp.rows.forEach(function (row) {
           row.total = Number(row.total)
           row.exchange_rate = Number(row.exchange_rate)
 
-          row.components.forEach(function(c) {
+          row.components.forEach(function (c) {
             c.rate = Number(c.rate)
             c.amount = Number(c.amount)
             c.converted_amount = Number(c.converted_amount || '0')
@@ -60,10 +60,10 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getXRPstats = function(callback) {
-    var url = self.url + '/network/xrp_distribution?descending=true&limit=1'
+  this.getSTMstats = function (callback) {
+    var url = self.url + '/network/stm_distribution?descending=true&limit=1'
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -76,10 +76,10 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getTx = function(hash, callback) {
+  this.getTx = function (hash, callback) {
     var url = self.url + '/transactions/' + hash
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -92,7 +92,7 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getAccountTx = function(params, callback) {
+  this.getAccountTx = function (params, callback) {
     var url = self.url + '/accounts/' + params.account + '/transactions'
     var limit = params.limit ? '&limit=' + params.limit : ''
     var marker = params.marker ?
@@ -101,7 +101,7 @@ function ApiHandler(baseURL) {
       '&descending=true' : ''
 
     url += '?' + limit + marker + descending
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -114,16 +114,16 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getTopMarkets = function(limit, callback) {
+  this.getTopMarkets = function (limit, callback) {
     var order = [
       'XAU', 'XAG', 'BTC', 'ETH', 'LTC',
-      'XRP', 'EUR', 'USD', 'GBP', 'AUD',
+      'STM', 'EUR', 'USD', 'GBP', 'AUD',
       'NZD', 'USD', 'CAD', 'CHF', 'JPY', 'CNY']
 
     var url = self.url + '/network/top_markets' +
       (limit ? '?limit=' + limit : '')
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -132,7 +132,7 @@ function ApiHandler(baseURL) {
 
       } else {
         var markets = []
-        resp.markets.forEach(function(m, i) {
+        resp.markets.forEach(function (m, i) {
 
           if (limit && i >= limit) {
             return
@@ -169,7 +169,7 @@ function ApiHandler(baseURL) {
   }
 
 
-  this.offersExercised = function(params, load, error) {
+  this.offersExercised = function (params, load, error) {
 
     var url = self.url + '/exchanges/'
     var base = params.base.currency +
@@ -177,7 +177,7 @@ function ApiHandler(baseURL) {
     var counter = params.counter.currency +
       (params.counter.issuer ? '+' + params.counter.issuer : '')
     var limit = params.timeIncrement === 'all' ?
-        '' : 'limit=' + (params.limit || 1000)
+      '' : 'limit=' + (params.limit || 1000)
     var interval = params.timeIncrement && params.timeIncrement !== 'all' ?
       '&interval=' + (params.timeMultiple || 1) + params.timeIncrement : ''
     var start = params.startTime ?
@@ -191,7 +191,7 @@ function ApiHandler(baseURL) {
     url += base + '/' + counter + '?' + limit +
       interval + start + end + descending + reduce
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         error({
           status: err.status,
@@ -199,7 +199,7 @@ function ApiHandler(baseURL) {
         })
 
       } else if (params.reduce === false) {
-        load(resp.exchanges.map(function(d) {
+        load(resp.exchanges.map(function (d) {
           return {
             time: moment.utc(d.executed_time),
             price: Number(d.rate),
@@ -211,7 +211,7 @@ function ApiHandler(baseURL) {
         }))
 
       } else {
-        load(resp.exchanges.map(function(d) {
+        load(resp.exchanges.map(function (d) {
           return {
             startTime: moment.utc(d.start),
             baseVolume: Number(d.base_volume),
@@ -231,7 +231,7 @@ function ApiHandler(baseURL) {
   }
 
 
-  this.paymentVolume = function(params, load, error) {
+  this.paymentVolume = function (params, load, error) {
     var url = self.url + '/payments/'
 
     var currency = params.currency ?
@@ -249,7 +249,7 @@ function ApiHandler(baseURL) {
     url += currency + '?limit=' + limit + interval +
       start + end + descending
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         error({
           status: err.status,
@@ -262,10 +262,10 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.issuerCapitalization = function(params, load, error) {
+  this.issuerCapitalization = function (params, load, error) {
 
     var url = self.url + '/capitalization/' + params.currency +
-     '+' + params.issuer
+      '+' + params.issuer
     var limit = params.limit || 1000
     var interval = params.interval ?
       '&interval=' + params.interval : ''
@@ -279,7 +279,7 @@ function ApiHandler(baseURL) {
     url += '?limit=' + limit + interval +
       start + end + descending + adjusted
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         error({
           status: err.status,
@@ -293,14 +293,14 @@ function ApiHandler(baseURL) {
   }
 
 
-  this.getTotalAccounts = function(time, callback) {
+  this.getTotalAccounts = function (time, callback) {
     var url = self.url + '/accounts?reduce=true&start=2013-01-01'
 
     if (time) {
       url += '&end=' + formatTime(time)
     }
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -314,7 +314,7 @@ function ApiHandler(baseURL) {
   }
 
 
-  this.accountsCreated = function(params, callback) {
+  this.accountsCreated = function (params, callback) {
     var url = self.url + '/accounts?'
     var start = params.startTime ?
       '&start=' + formatTime(params.startTime) : ''
@@ -326,7 +326,7 @@ function ApiHandler(baseURL) {
 
     url += start + end + interval + limit
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -339,28 +339,28 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getExchangeVolume = function(params, callback) {
+  this.getExchangeVolume = function (params, callback) {
     params.type = 'exchange_volume'
     getMetric(params, callback)
   }
 
-  this.getPaymentVolume = function(params, callback) {
+  this.getPaymentVolume = function (params, callback) {
     params.type = 'payment_volume'
     getMetric(params, callback)
   }
 
-  this.getIssuedValue = function(params, callback) {
+  this.getIssuedValue = function (params, callback) {
     params.type = 'issued_value'
     getMetric(params, callback)
   }
 
-  this.getExternalMarkets = function(params, callback) {
+  this.getExternalMarkets = function (params, callback) {
     var url = self.url + '/network/external_markets?'
     var period = params.period ?
       '&period=' + params.period : ''
 
     url += period
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -373,7 +373,7 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.exchangeRate = function(params, callback) {
+  this.exchangeRate = function (params, callback) {
     var url = self.url + '/exchange_rates'
     var base = '/' + params.base.currency +
       (params.base.issuer ? '+' + params.base.issuer : '')
@@ -392,7 +392,7 @@ function ApiHandler(baseURL) {
 
     url += base + counter + (qs.length ? '?' + qs.join('&') : '')
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -405,7 +405,7 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.activeAccounts = function(params, callback) {
+  this.activeAccounts = function (params, callback) {
     var url = self.url + '/active_accounts/'
     var base = params.base.currency +
       (params.base.issuer ? '+' + params.base.issuer : '')
@@ -417,7 +417,7 @@ function ApiHandler(baseURL) {
       '&include_exchanges=true' : ''
     url += base + '/' + counter + '?' + period + tx
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -425,10 +425,10 @@ function ApiHandler(baseURL) {
         })
 
       } else {
-        resp.accounts.forEach(function(a) {
+        resp.accounts.forEach(function (a) {
           a.base_volume = Number(a.base_volume)
           a.counter_volume = Number(a.counter_volume)
-          a.exchanges.forEach(function(ex) {
+          a.exchanges.forEach(function (ex) {
             ex.base_amount = Number(ex.base_amount)
             ex.counter_amount = Number(ex.counter_amount)
           })
@@ -438,10 +438,10 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getValidators = function(callback) {
+  this.getValidators = function (callback) {
     var url = self.url + '/network/validator_reports'
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -454,10 +454,10 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getValidator = function(pubkey, callback) {
+  this.getValidator = function (pubkey, callback) {
     var url = self.url + '/network/validators/' + pubkey
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -470,11 +470,11 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getValidatorReports = function(options, callback) {
+  this.getValidatorReports = function (options, callback) {
     var url = self.url + '/network/validators/' +
-        options.pubkey + '/reports?descending=true'
+      options.pubkey + '/reports?descending=true'
 
-    return d3.json(url, function(err, resp) {
+    return d3.json(url, function (err, resp) {
       if (err) {
         callback({
           status: err.status,
@@ -487,10 +487,10 @@ function ApiHandler(baseURL) {
     })
   }
 
-  this.getMaintenanceStatus = function(callback) {
-    var url = self.url + '/maintenance/ripplecharts'
+  this.getMaintenanceStatus = function (callback) {
+    var url = self.url + '/maintenance/stoxumcharts'
     var xhr
-    var timeout = setTimeout(function() {
+    var timeout = setTimeout(function () {
       xhr.abort()
       callback({
         status: 500,
@@ -498,7 +498,7 @@ function ApiHandler(baseURL) {
       })
     }, 15000)
 
-    xhr = d3.json(url, function(err, resp) {
+    xhr = d3.json(url, function (err, resp) {
       clearTimeout(timeout)
 
       if (err) {

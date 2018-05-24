@@ -21,18 +21,18 @@ var StackedChart = function (options) {
   var color = options.color || d3.scale.category20();
 
   var area = d3.svg.area()
-  .interpolate('monotone')
-  .x(function(d) {
-    return xScale(d.date);
-  })
-  .y0(function(d) {
-    return yScale(d.y0);
-  })
-  .y1(function(d) {
-    return yScale(d.y0 + d.y);
-  });
+    .interpolate('monotone')
+    .x(function (d) {
+      return xScale(d.date);
+    })
+    .y0(function (d) {
+      return yScale(d.y0);
+    })
+    .y1(function (d) {
+      return yScale(d.y0 + d.y);
+    });
 
-  var stack = d3.layout.stack().values(function(d) {
+  var stack = d3.layout.stack().values(function (d) {
     return d.values;
   });
 
@@ -40,17 +40,17 @@ var StackedChart = function (options) {
     wrap = d3.select('body').append('div');
   }
 
-  div = wrap.append('div').attr('class','stackedChart');
+  div = wrap.append('div').attr('class', 'stackedChart');
 
-  if (!options.margin) options.margin = {top: 10, right: 60, bottom: 20, left: 60};
-  if (!options.width)  options.width  = parseInt(div.style('width'), 10) - options.margin.left - options.margin.right;
-  if (!options.height) options.height = options.width/2.25>400 ? options.width/2.25 : 400;
+  if (!options.margin) options.margin = { top: 10, right: 60, bottom: 20, left: 60 };
+  if (!options.width) options.width = parseInt(div.style('width'), 10) - options.margin.left - options.margin.right;
+  if (!options.height) options.height = options.width / 2.25 > 400 ? options.width / 2.25 : 400;
 
   self.lineData = [];
   self.interval = null;
-  self.loading  = false;
+  self.loading = false;
 
-  function drawChart () {
+  function drawChart() {
 
     div.html('');
     svg = div.append('svg')
@@ -58,12 +58,12 @@ var StackedChart = function (options) {
       .attr('height', options.height + options.margin.top + options.margin.bottom);
 
     g = svg.append('g')
-    .attr("transform", "translate(" +
-          options.margin.left +
-          "," + options.margin.top +
-          ")");
+      .attr("transform", "translate(" +
+        options.margin.left +
+        "," + options.margin.top +
+        ")");
 
-    status  = div.append('h4')
+    status = div.append('h4')
       .attr('class', 'status')
       .style('opacity', 0);
 
@@ -90,40 +90,40 @@ var StackedChart = function (options) {
 
     loader = div.append('img')
       .attr('class', 'loader')
-      .attr('src', 'assets/images/rippleThrobber.png');
+      .attr('src', 'assets/images/stoxumThrobber.png');
 
     axisX = svg.append("g").attr("class", "x axis");
     axisY = svg.append("g").attr("class", "y axis");
 
-    axisX.attr("transform", "translate("+ options.margin.left +
-               "," + (options.height + options.margin.top) +
-               ")");
+    axisX.attr("transform", "translate(" + options.margin.left +
+      "," + (options.height + options.margin.top) +
+      ")");
 
     axisY.attr("transform", "translate(" +
-               (options.width + options.margin.left) +
-               "," + options.margin.top +
-               ")");
+      (options.width + options.margin.left) +
+      "," + options.margin.top +
+      ")");
 
     xScale.range([0, options.width])
     yScale.range([options.height, 0]);
 
     label = axisY.append("text")
-    .attr("class", "title")
-    .text(options.title)
-    .attr("transform", "rotate(-90)")
-    .attr("y", -5)
-    .attr("x", -5)
-    .attr('text-anchor', 'end')
+      .attr("class", "title")
+      .text(options.title)
+      .attr("transform", "rotate(-90)")
+      .attr("y", -5)
+      .attr("x", -5)
+      .attr('text-anchor', 'end')
 
     if (!self.loading) {
       loader.style('opacity', 0);
     }
   }
 
-  function setStatus (string) {
+  function setStatus(string) {
     status.html(string);
     if (string) {
-      self.loading  = false;
+      self.loading = false;
       loader.transition().style('opacity', 0);
       svg.transition().style('opacity', 0.3);
     } else {
@@ -148,7 +148,7 @@ var StackedChart = function (options) {
     loader.transition().style('opacity', 0);
     color.domain(Object.keys(self.data));
 
-    data = stack(color.domain().map(function(name) {
+    data = stack(color.domain().map(function (name) {
       return {
         name: name,
         values: self.data[name]
@@ -156,52 +156,52 @@ var StackedChart = function (options) {
     }));
 
     sections = stack(data);
-    xExtent = d3.extent(data[0].values, function(d) {
+    xExtent = d3.extent(data[0].values, function (d) {
       return d.date;
     });
 
-    yExtent = [0, d3.max(data, function(d) {
-        return d3.max(d.values, function(v) {
-          return v.y + v.y0;
-        }) * 1.1;
-      })
+    yExtent = [0, d3.max(data, function (d) {
+      return d3.max(d.values, function (v) {
+        return v.y + v.y0;
+      }) * 1.1;
+    })
     ];
 
     xScale.domain(xExtent);
     yScale.domain(yExtent);
 
     var section = g.selectAll('g.section')
-    .data(sections);
+      .data(sections);
 
     section.enter().append('g')
-    .attr('class','section');
+      .attr('class', 'section');
 
     section.exit().remove();
 
     var path = section.selectAll('path')
-    .data(function(d) {
-      return[d];
-    });
+      .data(function (d) {
+        return [d];
+      });
 
     path.enter().append('path')
-    .style('fill', function(d) {
-      return color(d.name);
-    })
-    .style('stroke', function(d) {
-      return color(d.name);
-    });
+      .style('fill', function (d) {
+        return color(d.name);
+      })
+      .style('stroke', function (d) {
+        return color(d.name);
+      });
 
     path.transition()
-    .attr({
-      class: 'area',
-      d: function(d) {
-        return area(d.values);
-      }
-    });
+      .attr({
+        class: 'area',
+        d: function (d) {
+          return area(d.values);
+        }
+      });
 
     path.exit().remove();
 
-    var ticks = options.width / 60 - (options.width / 60 ) % 2;
+    var ticks = options.width / 60 - (options.width / 60) % 2;
 
     axisX.transition().call(xAxis.ticks(ticks).scale(xScale));
     axisY.transition().call(yAxis.scale(yScale));
@@ -211,8 +211,8 @@ var StackedChart = function (options) {
 
       var mouse = d3.mouse(this);
       var date = xScale.invert(mouse[0] - options.margin.left);
-      var i = d3.bisect(self.byDate.map(function(d) {return moment(d.date)}), date);
-      var d0 = i > 0 ? self.byDate[i-1] : null;
+      var i = d3.bisect(self.byDate.map(function (d) { return moment(d.date) }), date);
+      var d0 = i > 0 ? self.byDate[i - 1] : null;
       var d = self.byDate[i];
 
       // determine which is closest
@@ -224,7 +224,7 @@ var StackedChart = function (options) {
         var check = moment.utc(date);
 
         if (first.unix() - check.unix() >
-            check.unix() - second.unix()) {
+          check.unix() - second.unix()) {
           d = d0;
         }
       }
@@ -233,14 +233,14 @@ var StackedChart = function (options) {
       var data;
 
       if (tx < options.margin.left ||
-         tx > options.margin.left + options.width ||
-         mouse[1] < options.margin.top ||
-         mouse[1] > options.margin.top + options.height) {
+        tx > options.margin.left + options.width ||
+        mouse[1] < options.margin.top ||
+        mouse[1] > options.margin.top + options.height) {
         hover.style('opacity', 0);
         details.style('opacity', 0);
 
       } else {
-        data = Object.keys(d.data).map(function(key) {
+        data = Object.keys(d.data).map(function (key) {
           return {
             key: key,
             value: d.data[key]
@@ -248,32 +248,32 @@ var StackedChart = function (options) {
         });
 
         hover.style('opacity', 1)
-        .attr('transform', 'translate(' + tx + ')');
+          .attr('transform', 'translate(' + tx + ')');
 
 
         details.html('')
-        .append('h5')
-        .html(moment.utc(d.date).format(options.dateFormat || 'YYYY-MM-DD'));
+          .append('h5')
+          .html(moment.utc(d.date).format(options.dateFormat || 'YYYY-MM-DD'));
 
         var rows = details.selectAll('tr')
-        .data(data).enter().append('tr')
-        .style('display', function(d) {
-          return d.value ? 'table-row' : 'none';
-        });
+          .data(data).enter().append('tr')
+          .style('display', function (d) {
+            return d.value ? 'table-row' : 'none';
+          });
 
         rows.append('th')
-        .append('div')
-        .attr('class', 'box')
-        .style('background-color', function(d) {
-          return color(d.key);
-        })
+          .append('div')
+          .attr('class', 'box')
+          .style('background-color', function (d) {
+            return color(d.key);
+          })
 
-        rows.append('th').html(function(d) {
+        rows.append('th').html(function (d) {
           return options.formatLabel ?
             options.formatLabel(d.key) : d.key;
         });
 
-        rows.append('td').html(function(d) {
+        rows.append('td').html(function (d) {
           return options.formatValue ?
             options.formatValue(d.value) : commas(d.value);
         });
@@ -288,8 +288,8 @@ var StackedChart = function (options) {
   }
 
   this.setStatus = function (string) {
-    status.html(string).style('opacity',1);
-    loader.transition().style('opacity',0);
+    status.html(string).style('opacity', 1);
+    loader.transition().style('opacity', 0);
   }
 
   this.fadeOut = function () {
@@ -298,8 +298,8 @@ var StackedChart = function (options) {
     details.style('opacity', 0);
     status.style('opacity', 0);
     div.selectAll('.hover').style('opacity', 0);
-    div.selectAll('.details').style('opacity',0);
-    if (self.loading) loader.style('opacity',1);
+    div.selectAll('.details').style('opacity', 0);
+    if (self.loading) loader.style('opacity', 1);
   }
 
 
@@ -308,7 +308,7 @@ var StackedChart = function (options) {
     self.byDate = {};
 
     for (var key in data) {
-      data[key].forEach(function(d) {
+      data[key].forEach(function (d) {
         var date = d.date.format();
         if (!self.byDate[date]) {
           self.byDate[date] = {};
@@ -318,7 +318,7 @@ var StackedChart = function (options) {
       });
     }
 
-    self.byDate = Object.keys(self.byDate).map(function(date) {
+    self.byDate = Object.keys(self.byDate).map(function (date) {
       return {
         date: date,
         data: self.byDate[date]
@@ -328,16 +328,16 @@ var StackedChart = function (options) {
     drawData();
   }
 
-  this.suspend = function() {}
+  this.suspend = function () { }
 
-  function resizeChart () {
+  function resizeChart() {
     old = options.width;
-    w   = parseInt(div.style('width'), 10);
+    w = parseInt(div.style('width'), 10);
 
     if (!w) return;
 
-    options.width  = w-options.margin.left - options.margin.right;
-    options.height = options.width/2.25>400 ? options.width/2.25 : 400;
+    options.width = w - options.margin.left - options.margin.right;
+    options.height = options.width / 2.25 > 400 ? options.width / 2.25 : 400;
 
     if (old != options.width) {
       drawChart();

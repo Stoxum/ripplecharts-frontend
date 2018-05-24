@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>XRP Charts Embedded Chart</title>
 
-    <!-- D3 needs this -->
-    <meta charset="utf-8">
+<head>
+  <title>STM Charts Embedded Chart</title>
 
-    <script>
-      API = "<%= api %>";
-    </script>
+  <!-- D3 needs this -->
+  <meta charset="utf-8">
 
-    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+  <script>
+    API = "<%= api %>";
+  </script>
 
-    <!-- compiled common js --><% common.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+  <!-- compiled CSS -->
+  <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
 
-    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+      <!-- compiled common js -->
+      <% common.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script>
+        <% }); %>
 
-    <style>
-      body {
-        font-family:Arial, Helvetica, sans-serif;
-        text-align:center;
-        margin:0;
-        background:#fff;
-        height:100%;
-        position:absolute;
-        width:100%;
-        overflow: hidden;
-      }
+          <!-- compiled JavaScript -->
+          <% scripts.forEach( function ( file ) { %>
+            <script type="text/javascript" src="<%= file %>"></script>
+            <% }); %>
 
-      #priceChart {
-        height:100%;
-      }
+              <style>
+                body {
+                  font-family: Arial, Helvetica, sans-serif;
+                  text-align: center;
+                  margin: 0;
+                  background: #fff;
+                  height: 100%;
+                  position: absolute;
+                  width: 100%;
+                  overflow: hidden;
+                }
 
-    </style>
-  </head>
-  <body>
-    <div id="priceChart"></div>
-    <script>
-      var margin = {top: 30, right: 60, bottom: 50, left: 60};
+                #priceChart {
+                  height: 100%;
+                }
+              </style>
+</head>
 
-      PriceChartWidget({
-        id        : "priceChart",
-        bodyTheme : true,
-        margin    : margin,
-        resize    : true
-      }).loadFromQS();
+<body>
+  <div id="priceChart"></div>
+  <script>
+    var margin = { top: 30, right: 60, bottom: 50, left: 60 };
 
-    </script>
-  </body>
+    PriceChartWidget({
+      id: "priceChart",
+      bodyTheme: true,
+      margin: margin,
+      resize: true
+    }).loadFromQS();
+
+  </script>
+</body>
+
 </html>

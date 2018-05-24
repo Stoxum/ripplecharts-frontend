@@ -6,7 +6,7 @@ module.exports = {
   files: {
 
     html: "src/embed/pricechart.html",
-    loader: 'src/assets/images/rippleThrobber.png',
+    loader: 'src/assets/images/stoxumThrobber.png',
 
     common: [
       'vendor/lodash/lodash.js',
@@ -21,7 +21,7 @@ module.exports = {
       'deps/offersExercisedListener.js',
       'src/common/priceChart.js',
       'src/embed/pricechart-script.js'
-      ],
+    ],
 
     less: [
       'src/less/priceChart.less',

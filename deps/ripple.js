@@ -1,4 +1,4 @@
-var ripple =
+var stoxum =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -48,9 +48,9 @@ var ripple =
 	'use strict'; // eslint-disable-line strict
 
 	module.exports = {
-	  RippleAPI: __webpack_require__(1).RippleAPI,
+	  StoxumAPI: __webpack_require__(1).StoxumAPI,
 	  // Broadcast api is experimental
-	  RippleAPIBroadcast: __webpack_require__(654).RippleAPIBroadcast
+	  StoxumAPIBroadcast: __webpack_require__(654).StoxumAPIBroadcast
 	};
 
 /***/ },
@@ -151,17 +151,17 @@ var ripple =
 	  return RestrictedConnection;
 	}(common.Connection);
 
-	var RippleAPI = function (_EventEmitter) {
-	  _inherits(RippleAPI, _EventEmitter);
+	var StoxumAPI = function (_EventEmitter) {
+	  _inherits(StoxumAPI, _EventEmitter);
 
-	  function RippleAPI() {
+	  function StoxumAPI() {
 	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-	    _classCallCheck(this, RippleAPI);
+	    _classCallCheck(this, StoxumAPI);
 
 	    common.validate.apiOptions(options);
 
-	    var _this2 = _possibleConstructorReturn(this, (RippleAPI.__proto__ || Object.getPrototypeOf(RippleAPI)).call(this));
+	    var _this2 = _possibleConstructorReturn(this, (StoxumAPI.__proto__ || Object.getPrototypeOf(StoxumAPI)).call(this));
 
 	    _this2._feeCushion = options.feeCushion || 1.2;
 	    var serverURL = options.server;
@@ -187,10 +187,10 @@ var ripple =
 	    return _this2;
 	  }
 
-	  return RippleAPI;
+	  return StoxumAPI;
 	}(EventEmitter);
 
-	_.assign(RippleAPI.prototype, {
+	_.assign(StoxumAPI.prototype, {
 	  connect: connect,
 	  disconnect: disconnect,
 	  isConnected: isConnected,
@@ -234,7 +234,7 @@ var ripple =
 	});
 
 	// these are exposed only for use by unit tests; they are not part of the API
-	RippleAPI._PRIVATE = {
+	StoxumAPI._PRIVATE = {
 	  validate: common.validate,
 	  RangeSet: __webpack_require__(411).RangeSet,
 	  ledgerUtils: __webpack_require__(540),
@@ -242,7 +242,7 @@ var ripple =
 	};
 
 	module.exports = {
-	  RippleAPI: RippleAPI
+	  StoxumAPI: StoxumAPI
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
@@ -789,7 +789,7 @@ var ripple =
 	$export.B = 16;  // bind
 	$export.W = 32;  // wrap
 	$export.U = 64;  // safe
-	$export.R = 128; // real proto method for `library` 
+	$export.R = 128; // real proto method for `library`
 	module.exports = $export;
 
 /***/ },
@@ -2243,7 +2243,7 @@ var ripple =
 	})), 'Number', {
 	  toPrecision: function toPrecision(precision){
 	    var that = aNumberValue(this, 'Number#toPrecision: incorrect invocation!');
-	    return precision === undefined ? $toPrecision.call(that) : $toPrecision.call(that, precision); 
+	    return precision === undefined ? $toPrecision.call(that) : $toPrecision.call(that, precision);
 	  }
 	});
 
@@ -2367,7 +2367,7 @@ var ripple =
 	$export($export.S + $export.F * !($acosh
 	  // V8 bug: https://code.google.com/p/v8/issues/detail?id=3509
 	  && Math.floor($acosh(Number.MAX_VALUE)) == 710
-	  // Tor Browser bug: Math.acosh(Infinity) -> NaN 
+	  // Tor Browser bug: Math.acosh(Infinity) -> NaN
 	  && $acosh(Infinity) == Infinity
 	), 'Math', {
 	  acosh: function acosh(x){
@@ -2398,7 +2398,7 @@ var ripple =
 	  return !isFinite(x = +x) || x == 0 ? x : x < 0 ? -asinh(-x) : Math.log(x + Math.sqrt(x * x + 1));
 	}
 
-	// Tor Browser bug: Math.asinh(0) -> -0 
+	// Tor Browser bug: Math.asinh(0) -> -0
 	$export($export.S + $export.F * !($asinh && 1 / $asinh(0) > 0), 'Math', {asinh: asinh});
 
 /***/ },
@@ -2409,7 +2409,7 @@ var ripple =
 	var $export = __webpack_require__(9)
 	  , $atanh  = Math.atanh;
 
-	// Tor Browser bug: Math.atanh(-0) -> 0 
+	// Tor Browser bug: Math.atanh(-0) -> 0
 	$export($export.S + $export.F * !($atanh && 1 / $atanh(-0) < 0), 'Math', {
 	  atanh: function atanh(x){
 	    return (x = +x) == 0 ? x : Math.log((1 + x) / (1 - x)) / 2;
@@ -4999,7 +4999,7 @@ var ripple =
 	        while(index--)$instance[ADDER](index, index);
 	        return !$instance.has(-0);
 	      });
-	    if(!ACCEPT_ITERABLES){ 
+	    if(!ACCEPT_ITERABLES){
 	      C = wrapper(function(target, iterable){
 	        anInstance(target, C, NAME);
 	        var that = inheritIfRequired(new Base, target, C);
@@ -8652,15 +8652,15 @@ var ripple =
 	  validate: __webpack_require__(432),
 	  txFlags: __webpack_require__(431).txFlags,
 	  serverInfo: __webpack_require__(537),
-	  dropsToXrp: utils.dropsToXrp,
-	  xrpToDrops: utils.xrpToDrops,
-	  toRippledAmount: utils.toRippledAmount,
+	  dropsToStm: utils.dropsToSTM,
+	  stmToDrops: utils.stmToDrops,
+	  toStoxumdAmount: utils.toStoxumdAmount,
 	  generateAddress: utils.generateAddress,
 	  generateAddressAPI: utils.generateAddressAPI,
 	  removeUndefined: utils.removeUndefined,
 	  convertKeysFromSnakeCaseToCamelCase: utils.convertKeysFromSnakeCaseToCamelCase,
-	  iso8601ToRippleTime: utils.iso8601ToRippleTime,
-	  rippleTimeToISO8601: utils.rippleTimeToISO8601,
+	  iso8601ToStoxumTime: utils.iso8601ToStoxumTime,
+	  stoxumTimeToISO8601: utils.stoxumTimeToISO8601,
 	  isValidSecret: utils.isValidSecret
 	};
 
@@ -8668,7 +8668,7 @@ var ripple =
 /* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -8688,17 +8688,17 @@ var ripple =
 	  }
 	}
 
-	function dropsToXrp(drops) {
+	function dropsToStm(drops) {
 	  return new BigNumber(drops).dividedBy(1000000.0).toString();
 	}
 
-	function xrpToDrops(xrp) {
-	  return new BigNumber(xrp).times(1000000.0).floor().toString();
+	function stmToDrops(stm) {
+	  return new BigNumber(stm).times(1000000.0).floor().toString();
 	}
 
-	function toRippledAmount(amount) {
-	  if (amount.currency === 'XRP') {
-	    return xrpToDrops(amount.value);
+	function toStoxumdAmount(amount) {
+	  if (amount.currency === 'STM') {
+	    return stmToDrops(amount.value);
 	  }
 	  return {
 	    currency: amount.currency,
@@ -8735,34 +8735,34 @@ var ripple =
 	 * @return {Number} ms since unix epoch
 	 *
 	 */
-	function rippleToUnixTimestamp(rpepoch) {
+	function stoxumToUnixTimestamp(rpepoch) {
 	  return (rpepoch + 0x386D4380) * 1000;
 	}
 
 	/**
 	 * @param {Number|Date} timestamp (ms since unix epoch)
-	 * @return {Number} seconds since ripple epoch ( 1/1/2000 GMT)
+	 * @return {Number} seconds since stoxum epoch ( 1/1/2000 GMT)
 	 */
-	function unixToRippleTimestamp(timestamp) {
+	function unixToStoxumTimestamp(timestamp) {
 	  return Math.round(timestamp / 1000) - 0x386D4380;
 	}
 
-	function rippleTimeToISO8601(rippleTime) {
-	  return new Date(rippleToUnixTimestamp(rippleTime)).toISOString();
+	function stoxumTimeToISO8601(stoxumTime) {
+	  return new Date(stoxumToUnixTimestamp(stoxumTime)).toISOString();
 	}
 
-	function iso8601ToRippleTime(iso8601) {
-	  return unixToRippleTimestamp(Date.parse(iso8601));
+	function iso8601ToStoxumTime(iso8601) {
+	  return unixToStoxumTimestamp(Date.parse(iso8601));
 	}
 
 	module.exports = {
-	  dropsToXrp: dropsToXrp,
-	  xrpToDrops: xrpToDrops,
-	  toRippledAmount: toRippledAmount,
+	  dropsToStm: dropsToStm,
+	  stmToDrops: stmToDrops,
+	  toStoxumdAmount: toStoxumdAmount,
 	  convertKeysFromSnakeCaseToCamelCase: convertKeysFromSnakeCaseToCamelCase,
 	  removeUndefined: removeUndefined,
-	  rippleTimeToISO8601: rippleTimeToISO8601,
-	  iso8601ToRippleTime: iso8601ToRippleTime,
+	  stoxumTimeToISO8601: stoxumTimeToISO8601,
+	  iso8601ToStoxumTime: iso8601ToStoxumTime,
 	  isValidSecret: isValidSecret
 	};
 
@@ -14901,7 +14901,7 @@ var ripple =
 	      /* This will not work in older browsers.
 	       * See https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues
 	       */
-	    
+
 	      _crypto.getRandomValues(bytes);
 	      return bytes;
 	    }
@@ -15210,7 +15210,7 @@ var ripple =
 /* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	/**
 	 * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
 	 * in FIPS 180-2
@@ -22645,7 +22645,7 @@ var ripple =
 					"spec": "https://registry.npmjs.org/elliptic/-/elliptic-5.2.1.tgz",
 					"type": "remote"
 				},
-				"/Users/matthew/Sites/ripple-lib"
+				"/Users/matthew/Sites/stoxum-lib"
 			]
 		],
 		"_from": "elliptic@>=5.1.0 <6.0.0",
@@ -22664,13 +22664,13 @@ var ripple =
 		},
 		"_requiredBy": [
 			"/",
-			"/ripple-keypairs"
+			"/stoxum-keypairs"
 		],
 		"_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-5.2.1.tgz",
 		"_shasum": "fa294b6563c6ddbc9ba3dc8594687ae840858f10",
 		"_shrinkwrap": null,
 		"_spec": "elliptic@https://registry.npmjs.org/elliptic/-/elliptic-5.2.1.tgz",
-		"_where": "/Users/matthew/Sites/ripple-lib",
+		"_where": "/Users/matthew/Sites/stoxum-lib",
 		"author": {
 			"name": "Fedor Indutny",
 			"email": "fedor@indutny.com"
@@ -29149,7 +29149,7 @@ var ripple =
 	  sha256: function(bytes) {
 	    return hashjs.sha256().update(bytes).digest();
 	  },
-	  defaultAlphabet: 'ripple',
+	  defaultAlphabet: 'stoxum',
 	  codecMethods: {
 	    EdSeed: {
 	      expectedLength: 16,
@@ -29179,7 +29179,7 @@ var ripple =
 
 	var ALPHABETS = {
 	  bitcoin: '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz',
-	  ripple: 'rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz',
+	  stoxum: 'rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz',
 	  tipple: 'RPShNAF39wBUDnEGHJKLM4pQrsT7VWXYZ2bcdeCg65jkm8ofqi1tuvaxyz',
 	  stellar: 'gsphnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCr65jkm8oFqi1tuvAxyz'
 	};
@@ -32315,13 +32315,13 @@ var ripple =
 	var RangeSet = __webpack_require__(411).RangeSet;
 
 	var _require2 = __webpack_require__(412),
-	    RippledError = _require2.RippledError,
+	    StoxumdError = _require2.StoxumdError,
 	    DisconnectedError = _require2.DisconnectedError,
 	    NotConnectedError = _require2.NotConnectedError,
 	    TimeoutError = _require2.TimeoutError,
 	    ResponseFormatError = _require2.ResponseFormatError,
 	    ConnectionError = _require2.ConnectionError,
-	    RippledNotInitializedError = _require2.RippledNotInitializedError;
+	    StoxumdNotInitializedError = _require2.StoxumdNotInitializedError;
 
 	function isStreamMessageType(type) {
 	  return type === 'ledgerClosed' || type === 'transaction' || type === 'path_find';
@@ -32500,9 +32500,9 @@ var ripple =
 	      };
 	      return this.request(request).then(function (data) {
 	        if (_.isEmpty(data) || !data.ledger_index) {
-	          // rippled instance doesn't have validated ledgers
+	          // stoxumd instance doesn't have validated ledgers
 	          return _this3._disconnect(false).then(function () {
-	            throw new RippledNotInitializedError('Rippled not initialized');
+	            throw new StoxumdNotInitializedError('Stoxumd not initialized');
 	          });
 	        }
 
@@ -32779,7 +32779,7 @@ var ripple =
 
 	        _this9.once(eventName, function (response) {
 	          if (response.status === 'error') {
-	            _reject(new RippledError(response.error));
+	            _reject(new StoxumdError(response.error));
 	          } else if (response.status === 'success') {
 	            _resolve(response.result);
 	          } else {
@@ -34324,7 +34324,7 @@ var ripple =
 /* 411 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -34438,13 +34438,13 @@ var ripple =
 	  return ExtendableBuiltin;
 	}
 
-	var RippleError = function (_extendableBuiltin) {
-	  _inherits(RippleError, _extendableBuiltin);
+	var StoxumError = function (_extendableBuiltin) {
+	  _inherits(StoxumError, _extendableBuiltin);
 
-	  function RippleError(message, data) {
-	    _classCallCheck(this, RippleError);
+	  function StoxumError(message, data) {
+	    _classCallCheck(this, StoxumError);
 
-	    var _this = _possibleConstructorReturn(this, (RippleError.__proto__ || Object.getPrototypeOf(RippleError)).call(this, message));
+	    var _this = _possibleConstructorReturn(this, (StoxumError.__proto__ || Object.getPrototypeOf(StoxumError)).call(this, message));
 
 	    _this.name = browserHacks.getConstructorName(_this);
 	    _this.message = message;
@@ -34455,7 +34455,7 @@ var ripple =
 	    return _this;
 	  }
 
-	  _createClass(RippleError, [{
+	  _createClass(StoxumError, [{
 	    key: 'toString',
 	    value: function toString() {
 	      var result = '[' + this.name + '(' + this.message;
@@ -34477,23 +34477,23 @@ var ripple =
 	    }
 	  }]);
 
-	  return RippleError;
+	  return StoxumError;
 	}(extendableBuiltin(Error));
 
-	var RippledError = function (_RippleError) {
-	  _inherits(RippledError, _RippleError);
+	var StoxumdError = function (_StoxumError) {
+	  _inherits(StoxumdError, _StoxumError);
 
-	  function RippledError() {
-	    _classCallCheck(this, RippledError);
+	  function StoxumdError() {
+	    _classCallCheck(this, StoxumdError);
 
-	    return _possibleConstructorReturn(this, (RippledError.__proto__ || Object.getPrototypeOf(RippledError)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (StoxumdError.__proto__ || Object.getPrototypeOf(StoxumdError)).apply(this, arguments));
 	  }
 
-	  return RippledError;
-	}(RippleError);
+	  return StoxumdError;
+	}(StoxumError);
 
-	var UnexpectedError = function (_RippleError2) {
-	  _inherits(UnexpectedError, _RippleError2);
+	var UnexpectedError = function (_StoxumError2) {
+	  _inherits(UnexpectedError, _StoxumError2);
 
 	  function UnexpectedError() {
 	    _classCallCheck(this, UnexpectedError);
@@ -34502,10 +34502,10 @@ var ripple =
 	  }
 
 	  return UnexpectedError;
-	}(RippleError);
+	}(StoxumError);
 
-	var LedgerVersionError = function (_RippleError3) {
-	  _inherits(LedgerVersionError, _RippleError3);
+	var LedgerVersionError = function (_StoxumError3) {
+	  _inherits(LedgerVersionError, _StoxumError3);
 
 	  function LedgerVersionError() {
 	    _classCallCheck(this, LedgerVersionError);
@@ -34514,10 +34514,10 @@ var ripple =
 	  }
 
 	  return LedgerVersionError;
-	}(RippleError);
+	}(StoxumError);
 
-	var ConnectionError = function (_RippleError4) {
-	  _inherits(ConnectionError, _RippleError4);
+	var ConnectionError = function (_StoxumError4) {
+	  _inherits(ConnectionError, _StoxumError4);
 
 	  function ConnectionError() {
 	    _classCallCheck(this, ConnectionError);
@@ -34526,7 +34526,7 @@ var ripple =
 	  }
 
 	  return ConnectionError;
-	}(RippleError);
+	}(StoxumError);
 
 	var NotConnectedError = function (_ConnectionError) {
 	  _inherits(NotConnectedError, _ConnectionError);
@@ -34552,16 +34552,16 @@ var ripple =
 	  return DisconnectedError;
 	}(ConnectionError);
 
-	var RippledNotInitializedError = function (_ConnectionError3) {
-	  _inherits(RippledNotInitializedError, _ConnectionError3);
+	var StoxumdNotInitializedError = function (_ConnectionError3) {
+	  _inherits(StoxumdNotInitializedError, _ConnectionError3);
 
-	  function RippledNotInitializedError() {
-	    _classCallCheck(this, RippledNotInitializedError);
+	  function StoxumdNotInitializedError() {
+	    _classCallCheck(this, StoxumdNotInitializedError);
 
-	    return _possibleConstructorReturn(this, (RippledNotInitializedError.__proto__ || Object.getPrototypeOf(RippledNotInitializedError)).apply(this, arguments));
+	    return _possibleConstructorReturn(this, (StoxumdNotInitializedError.__proto__ || Object.getPrototypeOf(StoxumdNotInitializedError)).apply(this, arguments));
 	  }
 
-	  return RippledNotInitializedError;
+	  return StoxumdNotInitializedError;
 	}(ConnectionError);
 
 	var TimeoutError = function (_ConnectionError4) {
@@ -34588,8 +34588,8 @@ var ripple =
 	  return ResponseFormatError;
 	}(ConnectionError);
 
-	var ValidationError = function (_RippleError5) {
-	  _inherits(ValidationError, _RippleError5);
+	var ValidationError = function (_StoxumError5) {
+	  _inherits(ValidationError, _StoxumError5);
 
 	  function ValidationError() {
 	    _classCallCheck(this, ValidationError);
@@ -34598,10 +34598,10 @@ var ripple =
 	  }
 
 	  return ValidationError;
-	}(RippleError);
+	}(StoxumError);
 
-	var NotFoundError = function (_RippleError6) {
-	  _inherits(NotFoundError, _RippleError6);
+	var NotFoundError = function (_StoxumError6) {
+	  _inherits(NotFoundError, _StoxumError6);
 
 	  function NotFoundError(message) {
 	    _classCallCheck(this, NotFoundError);
@@ -34610,10 +34610,10 @@ var ripple =
 	  }
 
 	  return NotFoundError;
-	}(RippleError);
+	}(StoxumError);
 
-	var MissingLedgerHistoryError = function (_RippleError7) {
-	  _inherits(MissingLedgerHistoryError, _RippleError7);
+	var MissingLedgerHistoryError = function (_StoxumError7) {
+	  _inherits(MissingLedgerHistoryError, _StoxumError7);
 
 	  function MissingLedgerHistoryError(message) {
 	    _classCallCheck(this, MissingLedgerHistoryError);
@@ -34622,10 +34622,10 @@ var ripple =
 	  }
 
 	  return MissingLedgerHistoryError;
-	}(RippleError);
+	}(StoxumError);
 
-	var PendingLedgerVersionError = function (_RippleError8) {
-	  _inherits(PendingLedgerVersionError, _RippleError8);
+	var PendingLedgerVersionError = function (_StoxumError8) {
+	  _inherits(PendingLedgerVersionError, _StoxumError8);
 
 	  function PendingLedgerVersionError(message) {
 	    _classCallCheck(this, PendingLedgerVersionError);
@@ -34634,16 +34634,16 @@ var ripple =
 	  }
 
 	  return PendingLedgerVersionError;
-	}(RippleError);
+	}(StoxumError);
 
 	module.exports = {
-	  RippleError: RippleError,
+	  StoxumError: StoxumError,
 	  UnexpectedError: UnexpectedError,
 	  ConnectionError: ConnectionError,
-	  RippledError: RippledError,
+	  StoxumdError: StoxumdError,
 	  NotConnectedError: NotConnectedError,
 	  DisconnectedError: DisconnectedError,
-	  RippledNotInitializedError: RippledNotInitializedError,
+	  StoxumdNotInitializedError: StoxumdNotInitializedError,
 	  TimeoutError: TimeoutError,
 	  ResponseFormatError: ResponseFormatError,
 	  ValidationError: ValidationError,
@@ -35649,7 +35649,7 @@ var ripple =
 			self.url = response.url
 			self.statusCode = response.status
 			self.statusMessage = response.statusText
-			
+
 			response.headers.forEach(function(header, key){
 				self.headers[key.toLowerCase()] = header
 				self.rawHeaders.push(key, header)
@@ -35737,7 +35737,7 @@ var ripple =
 					self.push(new Buffer(response))
 					break
 				}
-				// Falls through in IE8	
+				// Falls through in IE8
 			case 'text':
 				try { // This will fail when readyState = 3 in IE9. Switch mode and wait for readyState = 4
 					response = xhr.responseText
@@ -37157,7 +37157,7 @@ var ripple =
 /* 427 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	/**
 	 * This is the web browser implementation of `debug()`.
 	 *
@@ -37331,7 +37331,7 @@ var ripple =
 /* 428 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	/**
 	 * This is the common logic for both the Node.js and web browser
 	 * implementations of `debug()`.
@@ -37673,33 +37673,33 @@ var ripple =
 	  PasswordSpent: 0x00010000, // password set fee is spent
 	  RequireDestTag: 0x00020000, // require a DestinationTag for payments
 	  RequireAuth: 0x00040000, // require a authorization to hold IOUs
-	  DisallowXRP: 0x00080000, // disallow sending XRP
+	  DisallowSTM: 0x00080000, // disallow sending STM
 	  DisableMaster: 0x00100000, // force regular key
 	  NoFreeze: 0x00200000, // permanently disallowed freezing trustlines
 	  GlobalFreeze: 0x00400000, // trustlines globally frozen
-	  DefaultRipple: 0x00800000
+	  DefaultStoxum: 0x00800000
 	};
 
 	var AccountFlags = {
 	  passwordSpent: accountRootFlags.PasswordSpent,
 	  requireDestinationTag: accountRootFlags.RequireDestTag,
 	  requireAuthorization: accountRootFlags.RequireAuth,
-	  disallowIncomingXRP: accountRootFlags.DisallowXRP,
+	  disallowIncomingSTM: accountRootFlags.DisallowSTM,
 	  disableMasterKey: accountRootFlags.DisableMaster,
 	  noFreeze: accountRootFlags.NoFreeze,
 	  globalFreeze: accountRootFlags.GlobalFreeze,
-	  defaultRipple: accountRootFlags.DefaultRipple
+	  defaultStoxum: accountRootFlags.DefaultStoxum
 	};
 
 	var AccountFlagIndices = {
 	  requireDestinationTag: flagIndices.asfRequireDest,
 	  requireAuthorization: flagIndices.asfRequireAuth,
-	  disallowIncomingXRP: flagIndices.asfDisallowXRP,
+	  disallowIncomingSTM: flagIndices.asfDisallowSTM,
 	  disableMasterKey: flagIndices.asfDisableMaster,
 	  enableTransactionIDTracking: flagIndices.asfAccountTxnID,
 	  noFreeze: flagIndices.asfNoFreeze,
 	  globalFreeze: flagIndices.asfGlobalFreeze,
-	  defaultRipple: flagIndices.asfDefaultRipple
+	  defaultStoxum: flagIndices.asfDefaultStoxum
 	};
 
 	var AccountFields = {
@@ -37733,15 +37733,15 @@ var ripple =
 	    OptionalDestTag: 0x00020000,
 	    RequireAuth: 0x00040000,
 	    OptionalAuth: 0x00080000,
-	    DisallowXRP: 0x00100000,
-	    AllowXRP: 0x00200000
+	    DisallowSTM: 0x00100000,
+	    AllowSTM: 0x00200000
 	  },
 
 	  TrustSet: {
 	    SetAuth: 0x00010000,
-	    NoRipple: 0x00020000,
-	    SetNoRipple: 0x00020000,
-	    ClearNoRipple: 0x00040000,
+	    NoStoxum: 0x00020000,
+	    SetNoStoxum: 0x00020000,
+	    ClearNoStoxum: 0x00040000,
 	    SetFreeze: 0x00100000,
 	    ClearFreeze: 0x00200000
 	  },
@@ -37754,7 +37754,7 @@ var ripple =
 	  },
 
 	  Payment: {
-	    NoRippleDirect: 0x00010000,
+	    NoStoxumDirect: 0x00010000,
 	    PartialPayment: 0x00020000,
 	    LimitQuality: 0x00040000
 	  },
@@ -37772,12 +37772,12 @@ var ripple =
 	  AccountSet: {
 	    asfRequireDest: 1,
 	    asfRequireAuth: 2,
-	    asfDisallowXRP: 3,
+	    asfDisallowSTM: 3,
 	    asfDisableMaster: 4,
 	    asfAccountTxnID: 5,
 	    asfNoFreeze: 6,
 	    asfGlobalFreeze: 7,
-	    asfDefaultRipple: 8
+	    asfDefaultStoxum: 8
 	  }
 	};
 
@@ -37790,7 +37790,7 @@ var ripple =
 /* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -39391,8 +39391,8 @@ var ripple =
 	module.exports = {
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "tx",
-		"link": "https://ripple.com/build/transactions/",
-		"description": "An object in rippled txJSON format",
+		"link": "https://stoxum.com/build/transactions/",
+		"description": "An object in stoxumd txJSON format",
 		"type": "object",
 		"properties": {
 			"Account": {
@@ -39485,7 +39485,7 @@ var ripple =
 	module.exports = {
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "issue",
-		"description": "A currency-counterparty pair, or just currency if it's XRP",
+		"description": "A currency-counterparty pair, or just currency if it's STM",
 		"allOf": [
 			{
 				"$ref": "amountbase"
@@ -39674,7 +39674,7 @@ var ripple =
 	module.exports = {
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "tag",
-		"description": "An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-Ripple account.",
+		"description": "An arbitrary unsigned 32-bit integer that identifies a reason for payment or a non-stoxum account.",
 		"type": "integer",
 		"$ref": "uint32"
 	};
@@ -39838,10 +39838,10 @@ var ripple =
 	module.exports = {
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "address",
-		"description": "A Ripple account address",
+		"description": "A Stoxum account address",
 		"type": "string",
 		"format": "address",
-		"link": "ripple-address",
+		"link": "stoxum-address",
 		"pattern": "^r[1-9A-HJ-NP-Za-km-z]{25,34}$"
 	};
 
@@ -39892,7 +39892,7 @@ var ripple =
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "amount",
 		"link": "amount",
-		"description": "An Amount on the Ripple Protocol",
+		"description": "An Amount on the Stoxum Protocol",
 		"allOf": [
 			{
 				"$ref": "amountbase"
@@ -39924,7 +39924,7 @@ var ripple =
 				"$ref": "currency"
 			},
 			"counterparty": {
-				"description": "The Ripple address of the account that owes or is owed the funds (omitted if `currency` is \"XRP\")",
+				"description": "The Stoxum address of the account that owes or is owed the funds (omitted if `currency` is \"STM\")",
 				"$ref": "address"
 			}
 		},
@@ -39938,7 +39938,7 @@ var ripple =
 					"currency": {
 						"not": {
 							"enum": [
-								"XRP"
+								"STM"
 							]
 						}
 					}
@@ -39951,7 +39951,7 @@ var ripple =
 				"properties": {
 					"currency": {
 						"enum": [
-							"XRP"
+							"STM"
 						]
 					}
 				},
@@ -39984,7 +39984,7 @@ var ripple =
 				"$ref": "currency"
 			},
 			"counterparty": {
-				"description": "The Ripple address of the account that owes or is owed the funds.",
+				"description": "The Stoxum address of the account that owes or is owed the funds.",
 				"$ref": "address"
 			}
 		},
@@ -39999,7 +39999,7 @@ var ripple =
 					"currency": {
 						"not": {
 							"enum": [
-								"XRP"
+								"STM"
 							]
 						}
 					}
@@ -40012,7 +40012,7 @@ var ripple =
 				"properties": {
 					"currency": {
 						"enum": [
-							"XRP"
+							"STM"
 						]
 					}
 				},
@@ -40174,9 +40174,9 @@ var ripple =
 				"type": "boolean",
 				"description": "If set, this account must individually approve other users in order for those users to hold this account’s issuances."
 			},
-			"disallowIncomingXRP": {
+			"disallowIncomingSTM": {
 				"type": "boolean",
-				"description": "Indicates that client applications should not send XRP to this account. Not enforced by rippled."
+				"description": "Indicates that client applications should not send STM to this account. Not enforced by stoxumd."
 			},
 			"disableMasterKey": {
 				"type": "boolean",
@@ -40194,9 +40194,9 @@ var ripple =
 				"type": "boolean",
 				"description": "Freeze all assets issued by this account."
 			},
-			"defaultRipple": {
+			"defaultStoxum": {
 				"type": "boolean",
-				"description": "Enable [rippling](https://ripple.com/knowledge_center/understanding-the-noripple-flag/) on this account’s trust lines by default. (New in [rippled 0.27.3](https://github.com/ripple/rippled/releases/tag/0.27.3))"
+				"description": "Enable [rippling](https://stoxum.com/knowledge_center/understanding-the-nostoxum-flag/) on this account’s trust lines by default. (New in [stoxumd 0.27.3](https://github.com/stoxum/stoxumd/releases/tag/0.27.3))"
 			},
 			"emailHash": {
 				"description": "Hash of an email address to be used for generating an avatar image. Conventionally, clients use Gravatar to display this image. Use `null` to clear.",
@@ -40211,7 +40211,7 @@ var ripple =
 			},
 			"messageKey": {
 				"type": "string",
-				"description": "Public key for sending encrypted messages to this account. Conventionally, it should be a secp256k1 key, the same encryption that is used by the rest of Ripple."
+				"description": "Public key for sending encrypted messages to this account. Conventionally, it should be a secp256k1 key, the same encryption that is used by the rest of Stoxum."
 			},
 			"domain": {
 				"type": "string",
@@ -40344,8 +40344,8 @@ var ripple =
 				"description": "A boolean that, if set to true, indicates that this payment should go through even if the whole amount cannot be delivered because of a lack of liquidity or funds in the source account account",
 				"type": "boolean"
 			},
-			"noDirectRipple": {
-				"description": "A boolean that can be set to true if paths are specified and the sender would like the Ripple Network to disregard any direct paths from the source account to the destination account. This may be used to take advantage of an arbitrage opportunity or by gateways wishing to issue balances from a hot wallet to a user who has mistakenly set a trustline directly to the hot wallet",
+			"noDirectStoxum": {
+				"description": "A boolean that can be set to true if paths are specified and the sender would like the Stoxum Network to disregard any direct paths from the source account to the destination account. This may be used to take advantage of an arbitrage opportunity or by gateways wishing to issue balances from a hot wallet to a user who has mistakenly set a trustline directly to the hot wallet",
 				"type": "boolean"
 			},
 			"limitQuality": {
@@ -40530,11 +40530,11 @@ var ripple =
 		"properties": {
 			"amount": {
 				"$ref": "value",
-				"description": "Amount of XRP for sender to escrow."
+				"description": "Amount of STM for sender to escrow."
 			},
 			"destination": {
 				"$ref": "address",
-				"description": "Address to receive escrowed XRP."
+				"description": "Address to receive escrowed STM."
 			},
 			"memos": {
 				"$ref": "memos"
@@ -40582,15 +40582,15 @@ var ripple =
 		"properties": {
 			"amount": {
 				"$ref": "value",
-				"description": "Amount of XRP for sender to set aside in this channel."
+				"description": "Amount of STM for sender to set aside in this channel."
 			},
 			"destination": {
 				"$ref": "address",
-				"description": "Address to receive XRP claims against this channel."
+				"description": "Address to receive STM claims against this channel."
 			},
 			"settleDelay": {
 				"type": "number",
-				"description": "Amount of seconds the source address must wait before closing the channel if it has unclaimed XRP."
+				"description": "Amount of seconds the source address must wait before closing the channel if it has unclaimed STM."
 			},
 			"publicKey": {
 				"$ref": "publicKey",
@@ -40631,7 +40631,7 @@ var ripple =
 		"properties": {
 			"amount": {
 				"$ref": "value",
-				"description": "Amount of XRP to fund the channel with."
+				"description": "Amount of STM to fund the channel with."
 			},
 			"channel": {
 				"$ref": "hash256",
@@ -40666,11 +40666,11 @@ var ripple =
 			},
 			"amount": {
 				"$ref": "value",
-				"description": "XRP balance of this channel after claim is processed."
+				"description": "STM balance of this channel after claim is processed."
 			},
 			"balance": {
 				"$ref": "value",
-				"description": "Amount of XRP authorized by signature."
+				"description": "Amount of STM authorized by signature."
 			},
 			"signature": {
 				"$ref": "signature",
@@ -40727,7 +40727,7 @@ var ripple =
 			},
 			"ripplingDisabled": {
 				"type": "boolean",
-				"description": "If true, payments cannot ripple through this trustline."
+				"description": "If true, payments cannot stoxum through this trustline."
 			},
 			"authorized": {
 				"type": "boolean",
@@ -40786,7 +40786,7 @@ var ripple =
 		"properties": {
 			"resultCode": {
 				"type": "string",
-				"description": "The result code returned by rippled. [List of transaction responses](https://ripple.com/build/transactions/#full-transaction-response-list)"
+				"description": "The result code returned by stoxumd. [List of transaction responses](https://stoxum.com/build/transactions/#full-transaction-response-list)"
 			},
 			"resultMessage": {
 				"type": "string",
@@ -40813,9 +40813,9 @@ var ripple =
 				"$ref": "sequence",
 				"description": "The next (smallest unused) sequence number for this account."
 			},
-			"xrpBalance": {
+			"stmBalance": {
 				"$ref": "value",
-				"description": "The XRP balance owned by the account."
+				"description": "The STM balance owned by the account."
 			},
 			"ownerCount": {
 				"type": "integer",
@@ -40837,7 +40837,7 @@ var ripple =
 		},
 		"required": [
 			"sequence",
-			"xrpBalance",
+			"stmBalance",
 			"ownerCount",
 			"previousAffectingTransactionID",
 			"previousAffectingTransactionLedgerVersion"
@@ -40954,7 +40954,7 @@ var ripple =
 			},
 			"totalDrops": {
 				"$ref": "value",
-				"description": "Total number of drops (1/1,000,000th of an XRP) in the network, as a quoted integer. (This decreases as transaction fees cause XRP to be destroyed.)"
+				"description": "Total number of drops (1/1,000,000th of an STM) in the network, as a quoted integer. (This decreases as transaction fees cause STM to be destroyed.)"
 			},
 			"transactionHash": {
 				"$ref": "hash256",
@@ -40970,7 +40970,7 @@ var ripple =
 			},
 			"rawTransactions": {
 				"type": "string",
-				"description": "A JSON string containing rippled format transaction JSON for all transactions that were validated in this ledger."
+				"description": "A JSON string containing stoxumd format transaction JSON for all transactions that were validated in this ledger."
 			},
 			"transactionHashes": {
 				"description": "An array of hashes of all transactions that were validated in this ledger.",
@@ -40981,7 +40981,7 @@ var ripple =
 			},
 			"rawState": {
 				"type": "string",
-				"description": "A JSON string containing all state data for this ledger in rippled JSON format."
+				"description": "A JSON string containing all state data for this ledger in stoxumd JSON format."
 			},
 			"stateHashes": {
 				"description": "An array of hashes of all state data in this ledger.",
@@ -41153,19 +41153,19 @@ var ripple =
 			},
 			"destination": {
 				"$ref": "address",
-				"description": "Address to receive XRP claims against this channel."
+				"description": "Address to receive STM claims against this channel."
 			},
 			"amount": {
 				"$ref": "value",
-				"description": "The total amount of XRP funded in this channel."
+				"description": "The total amount of STM funded in this channel."
 			},
 			"balance": {
 				"$ref": "value",
-				"description": "The total amount of XRP delivered by this channel."
+				"description": "The total amount of STM delivered by this channel."
 			},
 			"settleDelay": {
 				"type": "number",
-				"description": "Amount of seconds the source address must wait before closing the channel if it has unclaimed XRP."
+				"description": "Amount of seconds the source address must wait before closing the channel if it has unclaimed STM."
 			},
 			"expiration": {
 				"type": "string",
@@ -41222,7 +41222,7 @@ var ripple =
 		"properties": {
 			"txJSON": {
 				"type": "string",
-				"description": "The prepared transaction in rippled JSON format."
+				"description": "The prepared transaction in stoxumd JSON format."
 			},
 			"instructions": {
 				"description": "The instructions for how to execute the transaction after adding automatic defaults.",
@@ -41273,9 +41273,9 @@ var ripple =
 		"description": "A ledger event message",
 		"type": "object",
 		"properties": {
-			"baseFeeXRP": {
+			"baseFeeSTM": {
 				"$ref": "value",
-				"description": "Base fee, in XRP."
+				"description": "Base fee, in STM."
 			},
 			"ledgerHash": {
 				"$ref": "hash256",
@@ -41290,11 +41290,11 @@ var ripple =
 				"format": "date-time",
 				"description": "The time at which this ledger closed."
 			},
-			"reserveBaseXRP": {
+			"reserveBaseSTM": {
 				"$ref": "value",
-				"description": "The minimum reserve, in XRP, that is required for an account."
+				"description": "The minimum reserve, in STM, that is required for an account."
 			},
-			"reserveIncrementXRP": {
+			"reserveIncrementSTM": {
 				"$ref": "value",
 				"description": "The increase in account reserve that is added for each item the account owns, such as offers or trust lines."
 			},
@@ -41310,11 +41310,11 @@ var ripple =
 		},
 		"addtionalProperties": false,
 		"required": [
-			"baseFeeXRP",
+			"baseFeeSTM",
 			"ledgerHash",
 			"ledgerTimestamp",
-			"reserveBaseXRP",
-			"reserveIncrementXRP",
+			"reserveBaseSTM",
+			"reserveIncrementSTM",
 			"transactionCount",
 			"ledgerVersion",
 			"validatedLedgerVersions"
@@ -41365,20 +41365,20 @@ var ripple =
 		"properties": {
 			"buildVersion": {
 				"type": "string",
-				"description": "The version number of the running rippled version."
+				"description": "The version number of the running stoxumd version."
 			},
 			"completeLedgers": {
 				"type": "string",
 				"pattern": "[0-9,-]+",
-				"description": "Range expression indicating the sequence numbers of the ledger versions the local rippled has in its database. It is possible to be a disjoint sequence, e.g. “2500-5000,32570-7695432”."
+				"description": "Range expression indicating the sequence numbers of the ledger versions the local stoxumd has in its database. It is possible to be a disjoint sequence, e.g. “2500-5000,32570-7695432”."
 			},
 			"hostID": {
 				"type": "string",
-				"description": "On an admin request, returns the hostname of the server running the rippled instance; otherwise, returns a unique four letter word."
+				"description": "On an admin request, returns the hostname of the server running the stoxumd instance; otherwise, returns a unique four letter word."
 			},
 			"ioLatencyMs": {
 				"type": "number",
-				"description": "Amount of time spent waiting for I/O operations to be performed, in milliseconds. If this number is not very, very low, then the rippled server is probably having serious load issues."
+				"description": "Amount of time spent waiting for I/O operations to be performed, in milliseconds. If this number is not very, very low, then the stoxumd server is probably having serious load issues."
 			},
 			"load": {
 				"type": "object",
@@ -41393,7 +41393,7 @@ var ripple =
 					},
 					"threads": {
 						"type": "number",
-						"description": "*(Admin only)* The number of threads in the server’s main job pool, performing various Ripple Network operations."
+						"description": "*(Admin only)* The number of threads in the server’s main job pool, performing various Stoxum Network operations."
 					}
 				},
 				"required": [
@@ -41427,7 +41427,7 @@ var ripple =
 			"peers": {
 				"type": "integer",
 				"minimum": 0,
-				"description": "How many other rippled servers the node is currently connected to."
+				"description": "How many other stoxumd servers the node is currently connected to."
 			},
 			"pubkeyNode": {
 				"type": "string",
@@ -41439,7 +41439,7 @@ var ripple =
 			},
 			"serverState": {
 				"type": "string",
-				"description": "A string indicating to what extent the server is participating in the network. See [Possible Server States](https://ripple.com/build/rippled-apis/#possible-server-states) for more details.",
+				"description": "A string indicating to what extent the server is participating in the network. See [Possible Server States](https://stoxum.com/build/stoxumd-apis/#possible-server-states) for more details.",
 				"enum": [
 					"disconnected",
 					"connected",
@@ -41459,21 +41459,21 @@ var ripple =
 						"minimum": 0,
 						"description": "The time since the ledger was closed, in seconds."
 					},
-					"baseFeeXRP": {
+					"baseFeeSTM": {
 						"$ref": "value",
-						"description": "Base fee, in XRP. This may be represented in scientific notation such as 1e-05 for 0.00005."
+						"description": "Base fee, in STM. This may be represented in scientific notation such as 1e-05 for 0.00005."
 					},
 					"hash": {
 						"$ref": "hash256",
 						"description": "Unique hash for the ledger, as an uppercase hexadecimal string."
 					},
-					"reserveBaseXRP": {
+					"reserveBaseSTM": {
 						"$ref": "value",
-						"description": "Minimum amount of XRP necessary for every account to keep in reserve."
+						"description": "Minimum amount of STM necessary for every account to keep in reserve."
 					},
-					"reserveIncrementXRP": {
+					"reserveIncrementSTM": {
 						"$ref": "value",
-						"description": "Amount of XRP added to the account reserve for each object an account is responsible for in the ledger."
+						"description": "Amount of STM added to the account reserve for each object an account is responsible for in the ledger."
 					},
 					"ledgerVersion": {
 						"type": "integer",
@@ -41484,10 +41484,10 @@ var ripple =
 				"additionalProperties": false,
 				"required": [
 					"age",
-					"baseFeeXRP",
+					"baseFeeSTM",
 					"hash",
-					"reserveBaseXRP",
-					"reserveIncrementXRP",
+					"reserveBaseSTM",
+					"reserveIncrementSTM",
 					"ledgerVersion"
 				]
 			},
@@ -41607,7 +41607,7 @@ var ripple =
 		"properties": {
 			"result": {
 				"type": "string",
-				"description": "Result code returned by rippled. See [Transaction Results](https://ripple.com/build/transactions/#full-transaction-response-list) for a complete list."
+				"description": "Result code returned by stoxumd. See [Transaction Results](https://stoxum.com/build/transactions/#full-transaction-response-list) for a complete list."
 			},
 			"timestamp": {
 				"type": "string",
@@ -41616,7 +41616,7 @@ var ripple =
 			},
 			"fee": {
 				"$ref": "value",
-				"description": "The XRP fee that was charged for the transaction."
+				"description": "The STM fee that was charged for the transaction."
 			},
 			"deliveredAmount": {
 				"$ref": "amount",
@@ -41626,7 +41626,7 @@ var ripple =
 				"type": "object",
 				"additionalProperties": {
 					"type": "array",
-					"description": "Key is the ripple address; value is an array of signed amounts representing changes of balances for that address.",
+					"description": "Key is the stoxum address; value is an array of signed amounts representing changes of balances for that address.",
 					"items": {
 						"$ref": "balance"
 					}
@@ -41636,7 +41636,7 @@ var ripple =
 				"type": "object",
 				"additionalProperties": {
 					"type": "array",
-					"description": "Key is the maker's ripple address; value is an array of changes",
+					"description": "Key is the maker's stoxum address; value is an array of changes",
 					"items": {
 						"$ref": "orderChange"
 					}
@@ -41875,7 +41875,7 @@ var ripple =
 						},
 						"ripplingDisabled": {
 							"type": "boolean",
-							"description": "If true, payments cannot ripple through this trustline."
+							"description": "If true, payments cannot stoxum through this trustline."
 						},
 						"frozen": {
 							"type": "boolean",
@@ -41994,7 +41994,7 @@ var ripple =
 		"properties": {
 			"address": {
 				"$ref": "address",
-				"description": "The Ripple address of the account to get the balance sheet of."
+				"description": "The Stoxum address of the account to get the balance sheet of."
 			},
 			"options": {
 				"properties": {
@@ -42069,7 +42069,7 @@ var ripple =
 		"properties": {
 			"address": {
 				"$ref": "address",
-				"description": "The Ripple address of the account to get open orders for."
+				"description": "The Stoxum address of the account to get open orders for."
 			},
 			"options": {
 				"description": "Options that determine what orders will be returned.",
@@ -42152,7 +42152,7 @@ var ripple =
 						"properties": {
 							"address": {
 								"$ref": "address",
-								"description": "The Ripple address of the account where funds will come from."
+								"description": "The Stoxum address of the account where funds will come from."
 							},
 							"amount": {
 								"$ref": "laxAmount",
@@ -42257,7 +42257,7 @@ var ripple =
 		"properties": {
 			"trace": {
 				"type": "boolean",
-				"description": "If true, log rippled requests and responses to stdout."
+				"description": "If true, log stoxumd requests and responses to stdout."
 			},
 			"feeCushion": {
 				"type": "number",
@@ -42266,13 +42266,13 @@ var ripple =
 			},
 			"server": {
 				"type": "string",
-				"description": "URI for rippled websocket port to connect to. Must start with `wss://` or `ws://`.",
+				"description": "URI for stoxumd websocket port to connect to. Must start with `wss://` or `ws://`.",
 				"format": "uri",
 				"pattern": "^wss?://"
 			},
 			"proxy": {
 				"format": "uri",
-				"description": "URI for HTTP/HTTPS proxy to use to connect to the rippled server."
+				"description": "URI for HTTP/HTTPS proxy to use to connect to the stoxumd server."
 			},
 			"timeout": {
 				"type": "integer",
@@ -42285,7 +42285,7 @@ var ripple =
 			},
 			"authorization": {
 				"type": "string",
-				"description": "Username and password for HTTP basic authentication to the rippled server in the format **username:password**."
+				"description": "Username and password for HTTP basic authentication to the stoxumd server in the format **username:password**."
 			},
 			"trustedCertificates": {
 				"type": "array",
@@ -42877,7 +42877,7 @@ var ripple =
 		"properties": {
 			"txJSON": {
 				"type": "string",
-				"description": "Transaction represented as a JSON string in rippled format."
+				"description": "Transaction represented as a JSON string in stoxumd format."
 			},
 			"secret": {
 				"type": "string",
@@ -42975,7 +42975,7 @@ var ripple =
 			},
 			"amount": {
 				"$ref": "value",
-				"description": "Amount of XRP authorized by the claim."
+				"description": "Amount of STM authorized by the claim."
 			},
 			"privateKey": {
 				"$ref": "publicKey",
@@ -43005,7 +43005,7 @@ var ripple =
 			},
 			"amount": {
 				"$ref": "value",
-				"description": "Amount of XRP authorized by the claim."
+				"description": "Amount of STM authorized by the claim."
 			},
 			"signature": {
 				"$ref": "signature",
@@ -43075,21 +43075,21 @@ var ripple =
 	    renameKeys(info, { hostid: 'hostID' });
 	    if (info.validatedLedger) {
 	      renameKeys(info.validatedLedger, {
-	        baseFeeXrp: 'baseFeeXRP',
-	        reserveBaseXrp: 'reserveBaseXRP',
-	        reserveIncXrp: 'reserveIncrementXRP',
+	        baseFeeStm: 'baseFeeSTM',
+	        reserveBaseStm: 'reserveBaseSTM',
+	        reserveIncStm: 'reserveIncrementSTM',
 	        seq: 'ledgerVersion'
 	      });
-	      info.validatedLedger.baseFeeXRP = info.validatedLedger.baseFeeXRP.toString();
-	      info.validatedLedger.reserveBaseXRP = info.validatedLedger.reserveBaseXRP.toString();
-	      info.validatedLedger.reserveIncrementXRP = info.validatedLedger.reserveIncrementXRP.toString();
+	      info.validatedLedger.baseFeeSTM = info.validatedLedger.baseFeeSTM.toString();
+	      info.validatedLedger.reserveBaseSTM = info.validatedLedger.reserveBaseSTM.toString();
+	      info.validatedLedger.reserveIncrementSTM = info.validatedLedger.reserveIncrementSTM.toString();
 	    }
 	    return info;
 	  });
 	}
 
 	function computeFeeFromServerInfo(cushion, serverInfo) {
-	  return (Number(serverInfo.validatedLedger.baseFeeXRP) * Number(serverInfo.loadFactor) * cushion).toString();
+	  return (Number(serverInfo.validatedLedger.baseFeeSTM) * Number(serverInfo.loadFactor) * cushion).toString();
 	}
 
 	function getFee(connection, cushion) {
@@ -43105,7 +43105,7 @@ var ripple =
 /* 538 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var common = __webpack_require__(302);
@@ -43138,12 +43138,12 @@ var ripple =
 
 	function formatLedgerClose(ledgerClose) {
 	  return {
-	    baseFeeXRP: common.dropsToXrp(ledgerClose.fee_base),
+	    baseFeeSTM: common.dropsToStm(ledgerClose.fee_base),
 	    ledgerHash: ledgerClose.ledger_hash,
 	    ledgerVersion: ledgerClose.ledger_index,
-	    ledgerTimestamp: common.rippleTimeToISO8601(ledgerClose.ledger_time),
-	    reserveBaseXRP: common.dropsToXrp(ledgerClose.reserve_base),
-	    reserveIncrementXRP: common.dropsToXrp(ledgerClose.reserve_inc),
+	    ledgerTimestamp: common.stoxumTimeToISO8601(ledgerClose.ledger_time),
+	    reserveBaseSTM: common.dropsToStm(ledgerClose.reserve_base),
+	    reserveIncrementSTM: common.dropsToStm(ledgerClose.reserve_inc),
 	    transactionCount: ledgerClose.txn_count,
 	    validatedLedgerVersions: ledgerClose.validated_ledgers
 	  };
@@ -43163,7 +43163,7 @@ var ripple =
 /* 539 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -43261,13 +43261,13 @@ var ripple =
 /* 540 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
 	var assert = __webpack_require__(306);
 	var common = __webpack_require__(302);
-	var dropsToXrp = common.dropsToXrp;
+	var dropsToStm = common.dropsToStm;
 
 
 	function clamp(value, min, max) {
@@ -43275,14 +43275,14 @@ var ripple =
 	  return Math.min(Math.max(value, min), max);
 	}
 
-	function getXRPBalance(connection, address, ledgerVersion) {
+	function getSTMBalance(connection, address, ledgerVersion) {
 	  var request = {
 	    command: 'account_info',
 	    account: address,
 	    ledger_index: ledgerVersion
 	  };
 	  return connection.request(request).then(function (data) {
-	    return dropsToXrp(data.account_data.Balance);
+	    return dropsToStm(data.account_data.Balance);
 	  });
 	}
 
@@ -43324,10 +43324,10 @@ var ripple =
 	}
 
 	/**
-	 *  Order two rippled transactions based on their ledger_index.
+	 *  Order two stoxumd transactions based on their ledger_index.
 	 *  If two transactions took place in the same ledger, sort
 	 *  them based on TransactionIndex
-	 *  See: https://ripple.com/build/transactions/
+	 *  See: https://stoxum.com/build/transactions/
 	 *
 	 *  @param {Object} first
 	 *  @param {Object} second
@@ -43365,7 +43365,7 @@ var ripple =
 	}
 
 	module.exports = {
-	  getXRPBalance: getXRPBalance,
+	  getSTMBalance: getSTMBalance,
 	  ensureLedgerVersion: ensureLedgerVersion,
 	  compareTransactions: compareTransactions,
 	  renameCounterpartyToIssuerInOrder: renameCounterpartyToIssuerInOrder,
@@ -43380,7 +43380,7 @@ var ripple =
 /* 541 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -43466,11 +43466,11 @@ var ripple =
 	var BigNumber = __webpack_require__(304);
 	var parseAmount = __webpack_require__(548);
 
-	function adjustQualityForXRP(quality, takerGetsCurrency, takerPaysCurrency) {
+	function adjustQualityForSTM(quality, takerGetsCurrency, takerPaysCurrency) {
 	  // quality = takerPays.value/takerGets.value
-	  // using drops (1e-6 XRP) for XRP values
-	  var numeratorShift = takerPaysCurrency === 'XRP' ? -6 : 0;
-	  var denominatorShift = takerGetsCurrency === 'XRP' ? -6 : 0;
+	  // using drops (1e-6 STM) for STM values
+	  var numeratorShift = takerPaysCurrency === 'STM' ? -6 : 0;
+	  var denominatorShift = takerGetsCurrency === 'STM' ? -6 : 0;
 	  var shift = numeratorShift - denominatorShift;
 	  return shift === 0 ? quality : new BigNumber(quality).shift(shift).toString();
 	}
@@ -43482,8 +43482,8 @@ var ripple =
 	  return undefined;
 	}
 
-	function parseTimestamp(rippleTime) {
-	  return rippleTime ? utils.common.rippleTimeToISO8601(rippleTime) : undefined;
+	function parseTimestamp(stoxumTime) {
+	  return stoxumTime ? utils.common.stoxumTimeToISO8601(stoxumTime) : undefined;
 	}
 
 	function removeEmptyCounterparty(amount) {
@@ -43561,7 +43561,7 @@ var ripple =
 	  return utils.common.removeUndefined({
 	    result: tx.meta.TransactionResult,
 	    timestamp: parseTimestamp(tx.date),
-	    fee: utils.common.dropsToXrp(tx.Fee),
+	    fee: utils.common.dropsToStm(tx.Fee),
 	    balanceChanges: balanceChanges,
 	    orderbookChanges: orderbookChanges,
 	    ledgerVersion: tx.ledger_index,
@@ -43593,13 +43593,13 @@ var ripple =
 	  parseMemos: parseMemos,
 	  hexToString: hexToString,
 	  parseTimestamp: parseTimestamp,
-	  adjustQualityForXRP: adjustQualityForXRP,
+	  adjustQualityForSTM: adjustQualityForSTM,
 	  isPartialPayment: isPartialPayment,
-	  dropsToXrp: utils.common.dropsToXrp,
+	  dropsToStm: utils.common.dropsToStm,
 	  constants: utils.common.constants,
 	  txFlags: utils.common.txFlags,
 	  removeUndefined: utils.common.removeUndefined,
-	  rippleTimeToISO8601: utils.common.rippleTimeToISO8601
+	  stoxumTimeToISO8601: utils.common.stoxumTimeToISO8601
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(312).Buffer))
 
@@ -43619,7 +43619,7 @@ var ripple =
 	var _ = __webpack_require__(300);
 	var BigNumber = __webpack_require__(304);
 	var normalizeNodes = __webpack_require__(545).normalizeNodes;
-	var dropsToXRP = __webpack_require__(545).dropsToXRP;
+	var dropsToSTM = __webpack_require__(545).dropsToSTM;
 
 	function parseBalance(balance) {
 	  return new BigNumber(balance.value || balance);
@@ -43636,7 +43636,7 @@ var ripple =
 	  }
 	}
 
-	function parseXRPBalanceChange(node) {
+	function parseSTMBalanceChange(node) {
 	  var balanceChange = computeBalanceChange(node);
 
 	  if(balanceChange.isZero()) {
@@ -43647,8 +43647,8 @@ var ripple =
 	    address: node.finalFields.Account || node.newFields.Account,
 	    balance_change: {
 	      counterparty: '',
-	      currency: 'XRP',
-	      value: dropsToXRP(balanceChange).toString()
+	      currency: 'STM',
+	      value: dropsToSTM(balanceChange).toString()
 	    }
 	  };
 	}
@@ -43709,8 +43709,8 @@ var ripple =
 	function parseBalanceChanges(metadata) {
 	  var balanceChanges = normalizeNodes(metadata).map(function(node) {
 	    if (node.entryType === 'AccountRoot') {
-	      return [parseXRPBalanceChange(node)];
-	    } else if (node.entryType === 'RippleState') {
+	      return [parseSTMBalanceChange(node)];
+	    } else if (node.entryType === 'StoxumState') {
 	      return parseTrustlineBalanceChanges(node);
 	    } else {
 	      return [ ];
@@ -43732,7 +43732,7 @@ var ripple =
 	var BigNumber = __webpack_require__(304);
 
 	// drops is a bignumber.js BigNumber
-	function dropsToXRP(drops) {
+	function dropsToSTM(drops) {
 	  return drops.dividedBy(1000000);
 	}
 
@@ -43762,8 +43762,8 @@ var ripple =
 	  }
 	  if (typeof currencyAmount === 'string') {
 	    return {
-	      currency: 'XRP',
-	      value: dropsToXRP(new BigNumber(currencyAmount)).toString()
+	      currency: 'STM',
+	      value: dropsToSTM(new BigNumber(currencyAmount)).toString()
 	    };
 	  }
 
@@ -43801,7 +43801,7 @@ var ripple =
 	}
 
 	module.exports = {
-	  dropsToXRP: dropsToXRP,
+	  dropsToSTM: dropsToSTM,
 	  normalizeNodes: normalizeNodes,
 	  parseCurrencyAmount: parseCurrencyAmount,
 	  getAffectedAccounts: getAffectedAccounts
@@ -43819,7 +43819,7 @@ var ripple =
 	var BigNumber = GlobalBigNumber.another({DECIMAL_PLACES: 40});
 	var parseQuality = __webpack_require__(547);
 
-	var lsfSell = 0x00020000;   // see "lsfSell" flag in rippled source code
+	var lsfSell = 0x00020000;   // see "lsfSell" flag in stoxumd source code
 
 	function removeUndefined(obj) {
 	  return _.omit(obj, _.isUndefined);
@@ -43842,7 +43842,7 @@ var ripple =
 	  });
 	}
 
-	function rippleToUnixTimestamp(rpepoch) {
+	function stoxumToUnixTimestamp(rpepoch) {
 	  return (rpepoch + 0x386D4380) * 1000;
 	}
 
@@ -43851,14 +43851,14 @@ var ripple =
 	  if (expirationTime === undefined) {
 	    return undefined;
 	  }
-	  return (new Date(rippleToUnixTimestamp(expirationTime))).toISOString();
+	  return (new Date(stoxumToUnixTimestamp(expirationTime))).toISOString();
 	}
 
 	function getQuality(node) {
 	  var takerGets = node.finalFields.TakerGets || node.newFields.TakerGets;
 	  var takerPays = node.finalFields.TakerPays || node.newFields.TakerPays;
-	  var takerGetsCurrency = takerGets.currency || 'XRP';
-	  var takerPaysCurrency = takerPays.currency || 'XRP';
+	  var takerGetsCurrency = takerGets.currency || 'STM';
+	  var takerPaysCurrency = takerPays.currency || 'STM';
 	  var bookDirectory = node.finalFields.BookDirectory
 	    || node.newFields.BookDirectory;
 	  var qualityHex = bookDirectory.substring(bookDirectory.length - 16);
@@ -43868,7 +43868,7 @@ var ripple =
 	function parseOrderStatus(node) {
 	  if (node.diffType === 'CreatedNode') {
 	    // "submitted" is more conventional, but could be confusing in the
-	    // context of Ripple
+	    // context of Stoxum
 	    return 'created';
 	  }
 
@@ -43941,10 +43941,10 @@ var ripple =
 	/**
 	 * Computes the complete list of every Offer that changed in the ledger
 	 * as a result of the given transaction.
-	 * Returns changes grouped by Ripple account.
+	 * Returns changes grouped by Stoxum account.
 	 *
-	 *  @param {Object} metadata - Transaction metadata as return by ripple-lib
-	 *  @returns {Object} - Orderbook changes grouped by Ripple account
+	 *  @param {Object} metadata - Transaction metadata as return by Stoxum-lib
+	 *  @returns {Object} - Orderbook changes grouped by Stoxum account
 	 *
 	 */
 	exports.parseOrderbookChanges = function parseOrderbookChanges(metadata) {
@@ -43968,12 +43968,12 @@ var ripple =
 
 	/*
 	The quality, as stored in the last 64 bits of a directory index, is stored as
-	the quotient of TakerPays/TakerGets. It uses drops (1e-6 XRP) for XRP values.
+	the quotient of TakerPays/TakerGets. It uses drops (1e-6 STM) for STM values.
 	*/
 
-	function adjustQualityForXRP(quality, takerGetsCurrency, takerPaysCurrency) {
-	  var numeratorShift = (takerPaysCurrency === 'XRP' ? -6 : 0);
-	  var denominatorShift = (takerGetsCurrency === 'XRP' ? -6 : 0);
+	function adjustQualityForSTM(quality, takerGetsCurrency, takerPaysCurrency) {
+	  var numeratorShift = (takerPaysCurrency === 'STM' ? -6 : 0);
+	  var denominatorShift = (takerGetsCurrency === 'STM' ? -6 : 0);
 	  var shift = numeratorShift - denominatorShift;
 	  return shift === 0 ? (new BigNumber(quality)).toString() :
 	    (new BigNumber(quality)).shift(shift).toString();
@@ -43984,7 +43984,7 @@ var ripple =
 	  var mantissa = new BigNumber(qualityHex.substring(2), 16);
 	  var offset = parseInt(qualityHex.substring(0, 2), 16) - 100;
 	  var quality = mantissa.toString() + 'e' + offset.toString();
-	  return adjustQualityForXRP(quality, takerGetsCurrency, takerPaysCurrency);
+	  return adjustQualityForSTM(quality, takerGetsCurrency, takerPaysCurrency);
 	}
 
 	module.exports = parseQuality;
@@ -43994,7 +43994,7 @@ var ripple =
 /* 548 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(540);
@@ -44003,8 +44003,8 @@ var ripple =
 	function parseAmount(amount) {
 	  if (typeof amount === 'string') {
 	    return {
-	      currency: 'XRP',
-	      value: utils.common.dropsToXrp(amount)
+	      currency: 'STM',
+	      value: utils.common.dropsToStm(amount)
 	    };
 	  }
 	  return {
@@ -44020,7 +44020,7 @@ var ripple =
 /* 549 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -44029,8 +44029,8 @@ var ripple =
 	var parseAmount = __webpack_require__(548);
 	var txFlags = utils.txFlags;
 
-	function isNoDirectRipple(tx) {
-	  return (tx.Flags & txFlags.Payment.NoRippleDirect) !== 0;
+	function isNoDirectStoxum(tx) {
+	  return (tx.Flags & txFlags.Payment.NoStoxumDirect) !== 0;
 	}
 
 	function isQualityLimited(tx) {
@@ -44063,7 +44063,7 @@ var ripple =
 	    invoiceID: tx.InvoiceID,
 	    paths: tx.Paths ? JSON.stringify(tx.Paths) : undefined,
 	    allowPartialPayment: utils.isPartialPayment(tx) || undefined,
-	    noDirectRipple: isNoDirectRipple(tx) || undefined,
+	    noDirectStoxum: isNoDirectStoxum(tx) || undefined,
 	    limitQuality: isQualityLimited(tx) || undefined
 	  });
 	}
@@ -44074,7 +44074,7 @@ var ripple =
 /* 550 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44100,7 +44100,7 @@ var ripple =
 	    counterparty: tx.LimitAmount.issuer,
 	    qualityIn: utils.parseQuality(tx.QualityIn),
 	    qualityOut: utils.parseQuality(tx.QualityOut),
-	    ripplingDisabled: parseFlag(tx.Flags, flags.SetNoRipple, flags.ClearNoRipple),
+	    ripplingDisabled: parseFlag(tx.Flags, flags.SetNoStoxum, flags.ClearNoStoxum),
 	    frozen: parseFlag(tx.Flags, flags.SetFreeze, flags.ClearFreeze),
 	    authorized: parseFlag(tx.Flags, flags.SetAuth, 0)
 	  });
@@ -44112,7 +44112,7 @@ var ripple =
 /* 551 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44146,7 +44146,7 @@ var ripple =
 /* 552 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44164,7 +44164,7 @@ var ripple =
 /* 553 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -44263,7 +44263,7 @@ var ripple =
 	    settings.regularKey = data.RegularKey;
 	  }
 
-	  // TODO: this isn't implemented in rippled yet, may have to change this later
+	  // TODO: this isn't implemented in Stoxumd yet, may have to change this later
 	  if (data.SignerQuorum || data.SignerEntries) {
 	    settings.signers = {};
 	    if (data.SignerQuorum) {
@@ -44288,7 +44288,7 @@ var ripple =
 /* 555 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -44317,7 +44317,7 @@ var ripple =
 /* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44341,7 +44341,7 @@ var ripple =
 /* 557 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44363,7 +44363,7 @@ var ripple =
 /* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44390,7 +44390,7 @@ var ripple =
 /* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44413,7 +44413,7 @@ var ripple =
 /* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var assert = __webpack_require__(306);
@@ -44446,15 +44446,15 @@ var ripple =
 	var BigNumber = __webpack_require__(304);
 
 	var _require = __webpack_require__(542),
-	    dropsToXrp = _require.dropsToXrp;
+	    dropsToStm = _require.dropsToStm;
 
 	function parseFeeUpdate(tx) {
 	  var baseFeeDrops = new BigNumber(tx.BaseFee, 16).toString();
 	  return {
-	    baseFeeXRP: dropsToXrp(baseFeeDrops),
+	    baseFeeSTM: dropsToStm(baseFeeDrops),
 	    referenceFeeUnits: tx.ReferenceFeeUnits,
-	    reserveBaseXRP: dropsToXrp(tx.ReserveBase),
-	    reserveIncrementXRP: dropsToXrp(tx.ReserveIncrement)
+	    reserveBaseSTM: dropsToStm(tx.ReserveBase),
+	    reserveIncrementSTM: dropsToStm(tx.ReserveIncrement)
 	  };
 	}
 
@@ -44478,7 +44478,7 @@ var ripple =
 /* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	/* eslint-disable max-params */
 	'use strict'; // eslint-disable-line strict
 
@@ -44507,7 +44507,7 @@ var ripple =
 
 	function parseAccountTxTransaction(tx) {
 	  var _tx = tx.tx_blob ? parseBinaryTransaction(tx) : tx;
-	  // rippled uses a different response format for 'account_tx' than 'tx'
+	  // stoxumd uses a different response format for 'account_tx' than 'tx'
 	  return parseTransaction(_.assign({}, _tx.tx, { meta: _tx.meta, validated: _tx.validated }));
 	}
 
@@ -44633,8 +44633,8 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;};var assert = __webpack_require__(306);
-	var coreTypes = __webpack_require__(565);var 
-	quality = 
+	var coreTypes = __webpack_require__(565);var
+	quality =
 
 
 
@@ -44678,13 +44678,13 @@ var ripple =
 	  return quality.decode(value).toString();}
 
 
-	module.exports = { 
-	  decode: decode, 
-	  encode: encode, 
-	  encodeForSigning: encodeForSigning, 
-	  encodeForSigningClaim: encodeForSigningClaim, 
-	  encodeForMultisigning: encodeForMultisigning, 
-	  encodeQuality: encodeQuality, 
+	module.exports = {
+	  decode: decode,
+	  encode: encode,
+	  encodeForSigning: encodeForSigning,
+	  encodeForSigningClaim: encodeForSigningClaim,
+	  encodeForMultisigning: encodeForMultisigning,
+	  encodeQuality: encodeQuality,
 	  decodeQuality: decodeQuality };
 
 /***/ },
@@ -44692,27 +44692,27 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var _ = __webpack_require__(300);
-	var enums = __webpack_require__(566);var 
+	var enums = __webpack_require__(566);var
 	Field = enums.Field;
 	var types = __webpack_require__(570);
-	var binary = __webpack_require__(592);var _require = 
+	var binary = __webpack_require__(592);var _require =
 	__webpack_require__(609);var ShaMap = _require.ShaMap;
 	var ledgerHashes = __webpack_require__(610);
 	var hashes = __webpack_require__(595);
 	var quality = __webpack_require__(611);
-	var signing = __webpack_require__(612);var _require2 = 
+	var signing = __webpack_require__(612);var _require2 =
 	__webpack_require__(593);var HashPrefix = _require2.HashPrefix;
 
 
-	module.exports = _.assign({ 
-	  hashes: _.assign({}, hashes, ledgerHashes), 
-	  binary: binary, 
-	  enums: enums, 
-	  signing: signing, 
-	  quality: quality, 
-	  Field: Field, 
-	  HashPrefix: HashPrefix, 
-	  ShaMap: ShaMap }, 
+	module.exports = _.assign({
+	  hashes: _.assign({}, hashes, ledgerHashes),
+	  binary: binary,
+	  enums: enums,
+	  signing: signing,
+	  quality: quality,
+	  Field: Field,
+	  HashPrefix: HashPrefix,
+	  ShaMap: ShaMap },
 
 	types);
 
@@ -44721,7 +44721,7 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var _slicedToArray = function () {function sliceIterator(arr, i) {var _arr = [];var _n = true;var _d = false;var _e = undefined;try {for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {_arr.push(_s.value);if (i && _arr.length === i) break;}} catch (err) {_d = true;_e = err;} finally {try {if (!_n && _i["return"]) _i["return"]();} finally {if (_d) throw _e;}}return _arr;}return function (arr, i) {if (Array.isArray(arr)) {return arr;} else if (Symbol.iterator in Object(arr)) {return sliceIterator(arr, i);} else {throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();var assert = __webpack_require__(306);
-	var _ = __webpack_require__(300);var _require = 
+	var _ = __webpack_require__(300);var _require =
 	__webpack_require__(567);var parseBytes = _require.parseBytes;var serializeUIntN = _require.serializeUIntN;
 	var makeClass = __webpack_require__(568);
 	var enums = __webpack_require__(569);
@@ -44737,27 +44737,27 @@ var ripple =
 
 
 
-	var EnumType = makeClass({ 
+	var EnumType = makeClass({
 	  EnumType: function EnumType(definition) {
 	    _.assign(this, definition);
 	    // At minimum
 	    assert(this.bytes instanceof Uint8Array);
 	    assert(typeof this.ordinal === 'number');
-	    assert(typeof this.name === 'string');}, 
+	    assert(typeof this.name === 'string');},
 
 	  toString: function toString() {
-	    return this.name;}, 
+	    return this.name;},
 
 	  toJSON: function toJSON() {
-	    return this.name;}, 
+	    return this.name;},
 
 	  toBytesSink: function toBytesSink(sink) {
-	    sink.put(this.bytes);}, 
+	    sink.put(this.bytes);},
 
-	  statics: { 
-	    ordinalByteWidth: 1, 
+	  statics: {
+	    ordinalByteWidth: 1,
 	    fromParser: function fromParser(parser) {
-	      return this.from(parser.readUIntN(this.ordinalByteWidth));}, 
+	      return this.from(parser.readUIntN(this.ordinalByteWidth));},
 
 	    from: function from(val) {
 	      var ret = val instanceof this ? val : this[val];
@@ -44765,13 +44765,13 @@ var ripple =
 	        throw new Error(
 	        val + ' is not a valid name or ordinal for ' + this.enumName);}
 
-	      return ret;}, 
+	      return ret;},
 
 	    valuesByName: function valuesByName() {var _this = this;
 	      return _.transform(this.initVals, function (result, ordinal, name) {
 	        var bytes = serializeUIntN(ordinal, _this.ordinalByteWidth);
 	        var type = new _this({ name: name, ordinal: ordinal, bytes: bytes });
-	        result[name] = type;});}, 
+	        result[name] = type;});},
 
 
 	    init: function init() {
@@ -44784,8 +44784,8 @@ var ripple =
 
 
 	function makeEnum(name, definition) {
-	  return makeClass({ 
-	    inherits: EnumType, 
+	  return makeClass({
+	    inherits: EnumType,
 	    statics: _.assign(definition, { enumName: name }) });}
 
 
@@ -44794,26 +44794,26 @@ var ripple =
 	  to[name] = makeEnum(name, definition);}
 
 
-	var Enums = transformWith(makeEnums, { 
-	  Type: { 
-	    initVals: enums.TYPES }, 
+	var Enums = transformWith(makeEnums, {
+	  Type: {
+	    initVals: enums.TYPES },
 
-	  LedgerEntryType: { 
-	    initVals: enums.LEDGER_ENTRY_TYPES, ordinalByteWidth: 2 }, 
+	  LedgerEntryType: {
+	    initVals: enums.LEDGER_ENTRY_TYPES, ordinalByteWidth: 2 },
 
-	  TransactionType: { 
-	    initVals: enums.TRANSACTION_TYPES, ordinalByteWidth: 2 }, 
+	  TransactionType: {
+	    initVals: enums.TRANSACTION_TYPES, ordinalByteWidth: 2 },
 
-	  TransactionResult: { 
+	  TransactionResult: {
 	    initVals: enums.TRANSACTION_RESULTS, ordinalByteWidth: 1 } });
 
 
 
-	Enums.Field = makeClass({ 
-	  inherits: EnumType, 
-	  statics: { 
-	    enumName: 'Field', 
-	    initVals: enums.FIELDS, 
+	Enums.Field = makeClass({
+	  inherits: EnumType,
+	  statics: {
+	    enumName: 'Field',
+	    initVals: enums.FIELDS,
 	    valuesByName: function valuesByName() {var _this2 = this;
 	      var fields = _.map(this.initVals, function (_ref) {var _ref2 = _slicedToArray(_ref, 2);var name = _ref2[0];var definition = _ref2[1];
 	        var type = Enums.Type[definition.type];
@@ -44822,7 +44822,7 @@ var ripple =
 	        var extra = { ordinal: ordinal, name: name, type: type, bytes: bytes };
 	        return new _this2(_.assign(definition, extra));});
 
-	      return _.keyBy(fields, 'name');}, 
+	      return _.keyBy(fields, 'name');},
 
 	    header: function header(type, nth) {
 	      var name = nth;
@@ -44830,12 +44830,12 @@ var ripple =
 	      var push = header.push.bind(header);
 	      if (type < 16) {
 	        if (name < 16) {
-	          push(type << 4 | name);} else 
+	          push(type << 4 | name);} else
 	        {
-	          push(type << 4, name);}} else 
+	          push(type << 4, name);}} else
 
 	      if (name < 16) {
-	        push(name, type);} else 
+	        push(name, type);} else
 	      {
 	        push(0, type, name);}
 
@@ -44906,9 +44906,9 @@ var ripple =
 	    if (start === 1) {
 	      _res[0] = byteForHex(val[0]);}
 
-	    return _res;} else 
+	    return _res;} else
 	  if (val instanceof Output) {
-	    return val;} else 
+	    return val;} else
 	  if (Output === Uint8Array) {
 	    return new Output(val);}
 
@@ -44956,11 +44956,11 @@ var ripple =
 	  return res;}
 
 
-	module.exports = { 
-	  parseBytes: parseBytes, 
-	  bytesToHex: bytesToHex, 
-	  slice: slice, 
-	  compareBytes: compareBytes, 
+	module.exports = {
+	  parseBytes: parseBytes,
+	  bytesToHex: bytesToHex,
+	  slice: slice,
+	  compareBytes: compareBytes,
 	  serializeUIntN: serializeUIntN };
 
 /***/ },
@@ -45084,7 +45084,7 @@ var ripple =
 			"SignerList": 83,
 			"Offer": 111,
 			"AccountRoot": 97,
-			"RippleState": 114,
+			"StoxumState": 114,
 			"FeeSettings": 115,
 			"Escrow": 117,
 			"DirectoryNode": 100,
@@ -45865,7 +45865,7 @@ var ripple =
 				}
 			],
 			[
-				"RippleEscrow",
+				"StoxumEscrow",
 				{
 					"nth": 17,
 					"isVLEncoded": false,
@@ -46548,13 +46548,13 @@ var ripple =
 			"temDST_IS_SRC": -279,
 			"terRETRY": -99,
 			"temINVALID_FLAG": -276,
-			"temBAD_SEND_XRP_LIMIT": -288,
+			"temBAD_SEND_STM_LIMIT": -288,
 			"terNO_LINE": -94,
 			"tefBAD_AUTH": -196,
 			"temBAD_EXPIRATION": -295,
 			"tecNO_ISSUER": 133,
-			"temBAD_SEND_XRP_NO_DIRECT": -286,
-			"temBAD_SEND_XRP_PATHS": -284,
+			"temBAD_SEND_STM_NO_DIRECT": -286,
+			"temBAD_SEND_STM_PATHS": -284,
 			"tefBAD_LEDGER": -195,
 			"tefNO_AUTH_REQUIRED": -190,
 			"tecINSUF_RESERVE_LINE": 122,
@@ -46564,7 +46564,7 @@ var ripple =
 			"tecNO_ALTERNATIVE_KEY": 130,
 			"tecNO_ENTRY": 140,
 			"terLAST": -91,
-			"terNO_RIPPLE": -90,
+			"terNO_STOXUM": -90,
 			"tecNO_PERMISSION": 139,
 			"tecNEED_MASTER_KEY": 142,
 			"temBAD_FEE": -294,
@@ -46589,13 +46589,13 @@ var ripple =
 			"temBAD_AUTH_MASTER": -297,
 			"temBAD_LIMIT": -292,
 			"temBAD_ISSUER": -293,
-			"tecNO_DST_INSUF_XRP": 125,
+			"tecNO_DST_INSUF_STM": 125,
 			"tecPATH_PARTIAL": 101,
 			"telBAD_PUBLIC_KEY": -396,
 			"tefBAD_ADD_AUTH": -197,
 			"tecDST_TAG_NEEDED": 143,
 			"temBAD_OFFER": -291,
-			"temBAD_SEND_XRP_PARTIAL": -285,
+			"temBAD_SEND_STM_PARTIAL": -285,
 			"temDST_NEEDED": -278,
 			"tefALREADY": -198,
 			"tecUNFUNDED": 129,
@@ -46611,12 +46611,12 @@ var ripple =
 			"tefEXCEPTION": -192,
 			"tecDIR_FULL": 121,
 			"tecUNFUNDED_OFFER": 103,
-			"temRIPPLE_EMPTY": -273,
+			"temSTOXUM_EMPTY": -273,
 			"telINSUF_FEE_P": -394,
 			"temBAD_SEQUENCE": -283,
 			"tefMAX_LEDGER": -186,
 			"terFUNDS_SPENT": -98,
-			"temBAD_SEND_XRP_MAX": -287,
+			"temBAD_SEND_STM_MAX": -287,
 			"telFAILED_PROCESSING": -395,
 			"terINSUF_FEE_B": -97,
 			"tecCLAIM": 100,
@@ -46659,39 +46659,39 @@ var ripple =
 /* 570 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var enums = __webpack_require__(566);var 
-	Field = enums.Field;var _require = 
-	__webpack_require__(571);var AccountID = _require.AccountID;var _require2 = 
-	__webpack_require__(576);var Amount = _require2.Amount;var _require3 = 
-	__webpack_require__(582);var Blob = _require3.Blob;var _require4 = 
-	__webpack_require__(579);var Currency = _require4.Currency;var _require5 = 
-	__webpack_require__(583);var Hash128 = _require5.Hash128;var _require6 = 
-	__webpack_require__(572);var Hash160 = _require6.Hash160;var _require7 = 
-	__webpack_require__(584);var Hash256 = _require7.Hash256;var _require8 = 
-	__webpack_require__(585);var PathSet = _require8.PathSet;var _require9 = 
-	__webpack_require__(586);var STArray = _require9.STArray;var _require10 = 
-	__webpack_require__(587);var STObject = _require10.STObject;var _require11 = 
-	__webpack_require__(588);var UInt16 = _require11.UInt16;var _require12 = 
-	__webpack_require__(589);var UInt32 = _require12.UInt32;var _require13 = 
-	__webpack_require__(580);var UInt64 = _require13.UInt64;var _require14 = 
-	__webpack_require__(590);var UInt8 = _require14.UInt8;var _require15 = 
+	'use strict';var enums = __webpack_require__(566);var
+	Field = enums.Field;var _require =
+	__webpack_require__(571);var AccountID = _require.AccountID;var _require2 =
+	__webpack_require__(576);var Amount = _require2.Amount;var _require3 =
+	__webpack_require__(582);var Blob = _require3.Blob;var _require4 =
+	__webpack_require__(579);var Currency = _require4.Currency;var _require5 =
+	__webpack_require__(583);var Hash128 = _require5.Hash128;var _require6 =
+	__webpack_require__(572);var Hash160 = _require6.Hash160;var _require7 =
+	__webpack_require__(584);var Hash256 = _require7.Hash256;var _require8 =
+	__webpack_require__(585);var PathSet = _require8.PathSet;var _require9 =
+	__webpack_require__(586);var STArray = _require9.STArray;var _require10 =
+	__webpack_require__(587);var STObject = _require10.STObject;var _require11 =
+	__webpack_require__(588);var UInt16 = _require11.UInt16;var _require12 =
+	__webpack_require__(589);var UInt32 = _require12.UInt32;var _require13 =
+	__webpack_require__(580);var UInt64 = _require13.UInt64;var _require14 =
+	__webpack_require__(590);var UInt8 = _require14.UInt8;var _require15 =
 	__webpack_require__(591);var Vector256 = _require15.Vector256;
 
-	var coreTypes = { 
-	  AccountID: AccountID, 
-	  Amount: Amount, 
-	  Blob: Blob, 
-	  Currency: Currency, 
-	  Hash128: Hash128, 
-	  Hash160: Hash160, 
-	  Hash256: Hash256, 
-	  PathSet: PathSet, 
-	  STArray: STArray, 
-	  STObject: STObject, 
-	  UInt8: UInt8, 
-	  UInt16: UInt16, 
-	  UInt32: UInt32, 
-	  UInt64: UInt64, 
+	var coreTypes = {
+	  AccountID: AccountID,
+	  Amount: Amount,
+	  Blob: Blob,
+	  Currency: Currency,
+	  Hash128: Hash128,
+	  Hash160: Hash160,
+	  Hash256: Hash256,
+	  PathSet: PathSet,
+	  STArray: STArray,
+	  STObject: STObject,
+	  UInt8: UInt8,
+	  UInt16: UInt16,
+	  UInt32: UInt32,
+	  UInt64: UInt64,
 	  Vector256: Vector256 };
 
 
@@ -46709,61 +46709,61 @@ var ripple =
 /* 571 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(390);var decodeAccountID = _require.decodeAccountID;var encodeAccountID = _require.encodeAccountID;var _require2 = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(390);var decodeAccountID = _require.decodeAccountID;var encodeAccountID = _require.encodeAccountID;var _require2 =
 	__webpack_require__(572);var Hash160 = _require2.Hash160;
 
-	var AccountID = makeClass({ 
+	var AccountID = makeClass({
 	  AccountID: function AccountID(bytes) {
-	    Hash160.call(this, bytes);}, 
+	    Hash160.call(this, bytes);},
 
-	  inherits: Hash160, 
-	  statics: { 
+	  inherits: Hash160,
+	  statics: {
 	    from: function from(value) {
-	      return value instanceof this ? value : 
-	      /^r/.test(value) ? this.fromBase58(value) : 
-	      new this(value);}, 
+	      return value instanceof this ? value :
+	      /^r/.test(value) ? this.fromBase58(value) :
+	      new this(value);},
 
-	    cache: {}, 
+	    cache: {},
 	    fromCache: function fromCache(base58) {
 	      var cached = this.cache[base58];
 	      if (!cached) {
 	        cached = this.cache[base58] = this.fromBase58(base58);}
 
-	      return cached;}, 
+	      return cached;},
 
 	    fromBase58: function fromBase58(value) {
 	      var acc = new this(decodeAccountID(value));
 	      acc._toBase58 = value;
-	      return acc;} }, 
+	      return acc;} },
 
 
 	  toJSON: function toJSON() {
-	    return this.toBase58();}, 
+	    return this.toBase58();},
 
-	  cached: { 
+	  cached: {
 	    toBase58: function toBase58() {
 	      return encodeAccountID(this._bytes);} } });
 
 
 
 
-	module.exports = { 
+	module.exports = {
 	  AccountID: AccountID };
 
 /***/ },
 /* 572 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
 	__webpack_require__(573);var Hash = _require.Hash;
 
-	var Hash160 = makeClass({ 
-	  inherits: Hash, 
+	var Hash160 = makeClass({
+	  inherits: Hash,
 	  statics: { width: 20 } });
 
 
-	module.exports = { 
+	module.exports = {
 	  Hash160: Hash160 };
 
 /***/ },
@@ -46771,41 +46771,41 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var assert = __webpack_require__(306);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(574);var Comparable = _require.Comparable;var SerializedType = _require.SerializedType;var _require2 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(574);var Comparable = _require.Comparable;var SerializedType = _require.SerializedType;var _require2 =
 	__webpack_require__(567);var compareBytes = _require2.compareBytes;var parseBytes = _require2.parseBytes;
 
-	var Hash = makeClass({ 
+	var Hash = makeClass({
 	  Hash: function Hash(bytes) {
 	    var width = this.constructor.width;
-	    this._bytes = bytes ? parseBytes(bytes, Uint8Array) : 
+	    this._bytes = bytes ? parseBytes(bytes, Uint8Array) :
 	    new Uint8Array(width);
-	    assert.equal(this._bytes.length, width);}, 
+	    assert.equal(this._bytes.length, width);},
 
-	  mixins: [Comparable, SerializedType], 
-	  statics: { 
-	    width: NaN, 
+	  mixins: [Comparable, SerializedType],
+	  statics: {
+	    width: NaN,
 	    from: function from(value) {
 	      if (value instanceof this) {
 	        return value;}
 
-	      return new this(parseBytes(value));}, 
+	      return new this(parseBytes(value));},
 
 	    fromParser: function fromParser(parser, hint) {
-	      return new this(parser.read(hint || this.width));} }, 
+	      return new this(parser.read(hint || this.width));} },
 
 
 	  compareTo: function compareTo(other) {
-	    return compareBytes(this._bytes, this.constructor.from(other)._bytes);}, 
+	    return compareBytes(this._bytes, this.constructor.from(other)._bytes);},
 
 	  toString: function toString() {
-	    return this.toHex();}, 
+	    return this.toHex();},
 
 	  nibblet: function nibblet(depth) {
 	    var byte_ix = depth > 0 ? depth / 2 | 0 : 0;
 	    var b = this._bytes[byte_ix];
 	    if (depth % 2 === 0) {
-	      b = (b & 0xF0) >>> 4;} else 
+	      b = (b & 0xF0) >>> 4;} else
 	    {
 	      b = b & 0x0F;}
 
@@ -46813,40 +46813,40 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  Hash: Hash };
 
 /***/ },
 /* 574 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var _require = __webpack_require__(567);var bytesToHex = _require.bytesToHex;var slice = _require.slice;var _require2 = 
+	'use strict';var _require = __webpack_require__(567);var bytesToHex = _require.bytesToHex;var slice = _require.slice;var _require2 =
 	__webpack_require__(575);var BytesList = _require2.BytesList;
 
-	var Comparable = { 
+	var Comparable = {
 	  lt: function lt(other) {
-	    return this.compareTo(other) < 0;}, 
+	    return this.compareTo(other) < 0;},
 
 	  eq: function eq(other) {
-	    return this.compareTo(other) === 0;}, 
+	    return this.compareTo(other) === 0;},
 
 	  gt: function gt(other) {
-	    return this.compareTo(other) > 0;}, 
+	    return this.compareTo(other) > 0;},
 
 	  gte: function gte(other) {
-	    return this.compareTo(other) > -1;}, 
+	    return this.compareTo(other) > -1;},
 
 	  lte: function lte(other) {
 	    return this.compareTo(other) < 1;} };
 
 
 
-	var SerializedType = { 
+	var SerializedType = {
 	  toBytesSink: function toBytesSink(sink) {
-	    sink.put(this._bytes);}, 
+	    sink.put(this._bytes);},
 
 	  toHex: function toHex() {
-	    return bytesToHex(this.toBytes());}, 
+	    return bytesToHex(this.toBytes());},
 
 	  toBytes: function toBytes() {
 	    if (this._bytes) {
@@ -46854,10 +46854,10 @@ var ripple =
 
 	    var bl = new BytesList();
 	    this.toBytesSink(bl);
-	    return bl.toBytes();}, 
+	    return bl.toBytes();},
 
 	  toJSON: function toJSON() {
-	    return this.toHex();}, 
+	    return this.toHex();},
 
 	  toString: function toString() {
 	    return this.toHex();} };
@@ -46865,7 +46865,7 @@ var ripple =
 
 
 	function ensureArrayLikeIs(Type, arrayLike) {
-	  return { 
+	  return {
 	    withChildren: function withChildren(Child) {
 	      if (arrayLike instanceof Type) {
 	        return arrayLike;}
@@ -46879,41 +46879,41 @@ var ripple =
 
 
 
-	module.exports = { 
-	  ensureArrayLikeIs: ensureArrayLikeIs, 
-	  SerializedType: SerializedType, 
+	module.exports = {
+	  ensureArrayLikeIs: ensureArrayLikeIs,
+	  SerializedType: SerializedType,
 	  Comparable: Comparable };
 
 /***/ },
 /* 575 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var assert = __webpack_require__(306);var _require = 
+	'use strict';var assert = __webpack_require__(306);var _require =
 	__webpack_require__(567);var parseBytes = _require.parseBytes;var bytesToHex = _require.bytesToHex;
-	var makeClass = __webpack_require__(568);var _require2 = 
+	var makeClass = __webpack_require__(568);var _require2 =
 	__webpack_require__(566);var Type = _require2.Type;var Field = _require2.Field;
 
-	var BytesSink = { 
+	var BytesSink = {
 	  put: function put() /* bytesSequence */{
 	    // any hex string or any object with a `length` and where 0 <= [ix] <= 255
 	  } };
 
 
-	var BytesList = makeClass({ 
-	  implementing: BytesSink, 
+	var BytesList = makeClass({
+	  implementing: BytesSink,
 	  BytesList: function BytesList() {
 	    this.arrays = [];
-	    this.length = 0;}, 
+	    this.length = 0;},
 
 	  put: function put(bytesArg) {
 	    var bytes = parseBytes(bytesArg, Uint8Array);
 	    this.length += bytes.length;
 	    this.arrays.push(bytes);
-	    return this;}, 
+	    return this;},
 
 	  toBytesSink: function toBytesSink(sink) {
 	    this.arrays.forEach(function (arr) {
-	      sink.put(arr);});}, 
+	      sink.put(arr);});},
 
 
 	  toBytes: function toBytes() {
@@ -46923,40 +46923,40 @@ var ripple =
 	      concatenated.set(arr, pointer);
 	      pointer += arr.length;});
 
-	    return concatenated;}, 
+	    return concatenated;},
 
 	  toHex: function toHex() {
 	    return bytesToHex(this.toBytes());} });
 
 
 
-	var BinarySerializer = makeClass({ 
+	var BinarySerializer = makeClass({
 	  BinarySerializer: function BinarySerializer(sink) {
-	    this.sink = sink;}, 
+	    this.sink = sink;},
 
 	  write: function write(value) {
-	    value.toBytesSink(this.sink);}, 
+	    value.toBytesSink(this.sink);},
 
 	  put: function put(bytes) {
-	    this.sink.put(bytes);}, 
+	    this.sink.put(bytes);},
 
 	  writeType: function writeType(type, value) {
-	    this.write(type.from(value));}, 
+	    this.write(type.from(value));},
 
 	  writeBytesList: function writeBytesList(bl) {
-	    bl.toBytesSink(this.sink);}, 
+	    bl.toBytesSink(this.sink);},
 
 	  encodeVL: function encodeVL(len) {
 	    var length = len;
 	    var lenBytes = new Uint8Array(4);
 	    if (length <= 192) {
 	      lenBytes[0] = length;
-	      return lenBytes.subarray(0, 1);} else 
+	      return lenBytes.subarray(0, 1);} else
 	    if (length <= 12480) {
 	      length -= 193;
 	      lenBytes[0] = 193 + (length >>> 8);
 	      lenBytes[1] = length & 0xff;
-	      return lenBytes.subarray(0, 2);} else 
+	      return lenBytes.subarray(0, 2);} else
 	    if (length <= 918744) {
 	      length -= 12481;
 	      lenBytes[0] = 241 + (length >>> 16);
@@ -46964,7 +46964,7 @@ var ripple =
 	      lenBytes[2] = length & 0xff;
 	      return lenBytes.subarray(0, 3);}
 
-	    throw new Error('Overflow error');}, 
+	    throw new Error('Overflow error');},
 
 	  writeFieldAndValue: function writeFieldAndValue(field, _value) {
 	    var sink = this.sink;
@@ -46973,13 +46973,13 @@ var ripple =
 	    sink.put(field.bytes);
 
 	    if (field.isVLEncoded) {
-	      this.writeLengthEncoded(value);} else 
+	      this.writeLengthEncoded(value);} else
 	    {
 	      value.toBytesSink(sink);
 	      if (field.type === Type.STObject) {
-	        sink.put(Field.ObjectEndMarker.bytes);} else 
+	        sink.put(Field.ObjectEndMarker.bytes);} else
 	      if (field.type === Type.STArray) {
-	        sink.put(Field.ArrayEndMarker.bytes);}}}, 
+	        sink.put(Field.ArrayEndMarker.bytes);}}},
 
 
 
@@ -46991,8 +46991,8 @@ var ripple =
 
 
 
-	module.exports = { 
-	  BytesList: BytesList, 
+	module.exports = {
+	  BytesList: BytesList,
 	  BinarySerializer: BinarySerializer };
 
 /***/ },
@@ -47003,11 +47003,11 @@ var ripple =
 	var assert = __webpack_require__(306);
 	var BN = __webpack_require__(577);
 	var Decimal = __webpack_require__(578);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(574);var SerializedType = _require.SerializedType;var _require2 = 
-	__webpack_require__(567);var bytesToHex = _require2.bytesToHex;var _require3 = 
-	__webpack_require__(579);var Currency = _require3.Currency;var _require4 = 
-	__webpack_require__(571);var AccountID = _require4.AccountID;var _require5 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(574);var SerializedType = _require.SerializedType;var _require2 =
+	__webpack_require__(567);var bytesToHex = _require2.bytesToHex;var _require3 =
+	__webpack_require__(579);var Currency = _require3.Currency;var _require4 =
+	__webpack_require__(571);var AccountID = _require4.AccountID;var _require5 =
 	__webpack_require__(580);var UInt64 = _require5.UInt64;
 
 	var MIN_IOU_EXPONENT = -96;
@@ -47017,31 +47017,31 @@ var ripple =
 	var MAX_IOU_MANTISSA = '9999' + '9999' + '9999' + '9999'; // ..
 	var MAX_IOU = new Decimal(MAX_IOU_MANTISSA + 'e' + MAX_IOU_EXPONENT);
 	var MIN_IOU = new Decimal(MIN_IOU_MANTISSA + 'e' + MIN_IOU_EXPONENT);
-	var DROPS_PER_XRP = new Decimal('1e6');
+	var DROPS_PER_STM = new Decimal('1e6');
 	var MAX_NETWORK_DROPS = new Decimal('1e17');
-	var MIN_XRP = new Decimal('1e-6');
-	var MAX_XRP = MAX_NETWORK_DROPS.dividedBy(DROPS_PER_XRP);
+	var MIN_STM = new Decimal('1e-6');
+	var MAX_STM = MAX_NETWORK_DROPS.dividedBy(DROPS_PER_STM);
 
 	// Never use exponential form
-	Decimal.config({ 
-	  toExpPos: MAX_IOU_EXPONENT + MAX_IOU_PRECISION, 
+	Decimal.config({
+	  toExpPos: MAX_IOU_EXPONENT + MAX_IOU_PRECISION,
 	  toExpNeg: MIN_IOU_EXPONENT - MAX_IOU_PRECISION });
 
 
-	var AMOUNT_PARAMETERS_DESCRIPTION = '\nNative values must be described in drops, a million of which equal one XRP.\nThis must be an integer number, with the absolute value not exceeding ' + 
+	var AMOUNT_PARAMETERS_DESCRIPTION = '\nNative values must be described in drops, a million of which equal one STM.\nThis must be an integer number, with the absolute value not exceeding ' +
 
 
-	MAX_NETWORK_DROPS + '\n\nIOU values must have a maximum precision of ' + 
+	MAX_NETWORK_DROPS + '\n\nIOU values must have a maximum precision of ' +
 
-	MAX_IOU_PRECISION + ' significant digits. They are serialized as\na canonicalised mantissa and exponent. \n\nThe valid range for a mantissa is between ' + 
-
-
-	MIN_IOU_MANTISSA + ' and ' + 
-	MAX_IOU_MANTISSA + '\nThe exponent must be >= ' + 
-	MIN_IOU_EXPONENT + ' and <= ' + MAX_IOU_EXPONENT + '\n\nThus the largest serializable IOU value is:\n' + 
+	MAX_IOU_PRECISION + ' significant digits. They are serialized as\na canonicalised mantissa and exponent. \n\nThe valid range for a mantissa is between ' +
 
 
-	MAX_IOU.toString() + '\n\nAnd the smallest:\n' + 
+	MIN_IOU_MANTISSA + ' and ' +
+	MAX_IOU_MANTISSA + '\nThe exponent must be >= ' +
+	MIN_IOU_EXPONENT + ' and <= ' + MAX_IOU_EXPONENT + '\n\nThus the largest serializable IOU value is:\n' +
+
+
+	MAX_IOU.toString() + '\n\nAnd the smallest:\n' +
 
 
 	MIN_IOU.toString() + '\n';
@@ -47052,35 +47052,35 @@ var ripple =
 
 
 	function raiseIllegalAmountError(value) {
-	  throw new Error(value.toString() + ' is an illegal amount\n' + 
+	  throw new Error(value.toString() + ' is an illegal amount\n' +
 	  AMOUNT_PARAMETERS_DESCRIPTION);}
 
 
-	var parsers = { 
+	var parsers = {
 	  string: function string(str) {
 	    if (!str.match(/\d+/)) {
 	      raiseIllegalAmountError(str);}
 
-	    return [new Decimal(str).dividedBy(DROPS_PER_XRP), Currency.XRP];}, 
+	    return [new Decimal(str).dividedBy(DROPS_PER_STM), Currency.STM];},
 
 	  object: function object(_object) {
 	    assert(isDefined(_object.currency), 'currency must be defined');
 	    assert(isDefined(_object.issuer), 'issuer must be defined');
-	    return [new Decimal(_object.value), 
-	    Currency.from(_object.currency), 
+	    return [new Decimal(_object.value),
+	    Currency.from(_object.currency),
 	    AccountID.from(_object.issuer)];} };
 
 
 
-	var Amount = makeClass({ 
+	var Amount = makeClass({
 	  Amount: function Amount(value, currency, issuer) {
 	    this.value = value || new Decimal('0');
-	    this.currency = currency || Currency.XRP;
+	    this.currency = currency || Currency.STM;
 	    this.issuer = issuer || null;
-	    this.assertValueIsValid();}, 
+	    this.assertValueIsValid();},
 
-	  mixins: SerializedType, 
-	  statics: { 
+	  mixins: SerializedType,
+	  statics: {
 	    from: function from(value) {
 	      if (value instanceof this) {
 	        return value;}
@@ -47089,7 +47089,7 @@ var ripple =
 	      if (parser) {
 	        return new (Function.prototype.bind.apply(this, [null].concat(_toConsumableArray(parser(value)))))();}
 
-	      throw new Error('unsupported value: ' + value);}, 
+	      throw new Error('unsupported value: ' + value);},
 
 	    fromParser: function fromParser(parser) {
 	      var mantissa = parser.read(8);
@@ -47114,8 +47114,8 @@ var ripple =
 
 	      mantissa[0] &= 0x3F;
 	      var drops = new Decimal(sign + '0x' + bytesToHex(mantissa));
-	      var xrpValue = drops.dividedBy(DROPS_PER_XRP);
-	      return new this(xrpValue, Currency.XRP);} }, 
+	      var stmValue = drops.dividedBy(DROPS_PER_STM);
+	      return new this(stmValue, Currency.STM);} },
 
 
 	  assertValueIsValid: function assertValueIsValid() {
@@ -47123,37 +47123,37 @@ var ripple =
 	    if (!this.isZero()) {
 	      if (this.isNative()) {
 	        var abs = this.value.abs();
-	        if (abs.lt(MIN_XRP) || abs.gt(MAX_XRP)) {
-	          // value is in XRP scale, but show the value in canonical json form
-	          raiseIllegalAmountError(this.value.times(DROPS_PER_XRP));}} else 
+	        if (abs.lt(MIN_STM) || abs.gt(MAX_STM)) {
+	          // value is in STM scale, but show the value in canonical json form
+	          raiseIllegalAmountError(this.value.times(DROPS_PER_STM));}} else
 
 	      {
 	        var p = this.value.precision();
 	        var e = this.exponent();
-	        if (p > MAX_IOU_PRECISION || 
-	        e > MAX_IOU_EXPONENT || 
+	        if (p > MAX_IOU_PRECISION ||
+	        e > MAX_IOU_EXPONENT ||
 	        e < MIN_IOU_EXPONENT) {
-	          raiseIllegalAmountError(this.value);}}}}, 
+	          raiseIllegalAmountError(this.value);}}}},
 
 
 
 
 	  isNative: function isNative() {
-	    return this.currency.isNative();}, 
+	    return this.currency.isNative();},
 
 	  mantissa: function mantissa() {
 	    return new UInt64(
-	    new BN(this.value.times('1e' + -this.exponent()).abs().toString()));}, 
+	    new BN(this.value.times('1e' + -this.exponent()).abs().toString()));},
 
 	  isZero: function isZero() {
-	    return this.value.isZero();}, 
+	    return this.value.isZero();},
 
 	  exponent: function exponent() {
-	    return this.isNative() ? -6 : this.value.e - 15;}, 
+	    return this.isNative() ? -6 : this.value.e - 15;},
 
 	  valueString: function valueString() {
-	    return (this.isNative() ? this.value.times(DROPS_PER_XRP) : this.value).
-	    toString();}, 
+	    return (this.isNative() ? this.value.times(DROPS_PER_STM) : this.value).
+	    toString();},
 
 	  toBytesSink: function toBytesSink(sink) {
 	    var isNative = this.isNative();
@@ -47162,7 +47162,7 @@ var ripple =
 
 	    if (isNative) {
 	      mantissa[0] |= notNegative ? 0x40 : 0;
-	      sink.put(mantissa);} else 
+	      sink.put(mantissa);} else
 	    {
 	      mantissa[0] |= 0x80;
 	      if (!this.isZero()) {
@@ -47176,7 +47176,7 @@ var ripple =
 
 	      sink.put(mantissa);
 	      this.currency.toBytesSink(sink);
-	      this.issuer.toBytesSink(sink);}}, 
+	      this.issuer.toBytesSink(sink);}},
 
 
 	  toJSON: function toJSON() {
@@ -47184,15 +47184,15 @@ var ripple =
 	    if (this.isNative()) {
 	      return valueString;}
 
-	    return { 
-	      value: valueString, 
-	      currency: this.currency.toJSON(), 
+	    return {
+	      value: valueString,
+	      currency: this.currency.toJSON(),
 	      issuer: this.issuer.toJSON() };} });
 
 
 
 
-	module.exports = { 
+	module.exports = {
 	  Amount: Amount };
 
 /***/ },
@@ -55661,15 +55661,15 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var _ = __webpack_require__(300);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(567);var slice = _require.slice;var _require2 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(567);var slice = _require.slice;var _require2 =
 	__webpack_require__(572);var Hash160 = _require2.Hash160;
 	var ISO_REGEX = /^[A-Z0-9]{3}$/;
 	var HEX_REGEX = /^[A-F0-9]{40}$/;
 
 	function isoToBytes(iso) {
 	  var bytes = new Uint8Array(20);
-	  if (iso !== 'XRP') {
+	  if (iso !== 'STM') {
 	    var isoBytes = iso.split('').map(function (c) {return c.charCodeAt(0);});
 	    bytes.set(isoBytes, 12);}
 
@@ -55706,20 +55706,20 @@ var ripple =
 
 
 	var $uper = Hash160.prototype;
-	var Currency = makeClass({ 
-	  inherits: Hash160, 
-	  getters: ['isNative', 'iso'], 
-	  statics: { 
+	var Currency = makeClass({
+	  inherits: Hash160,
+	  getters: ['isNative', 'iso'],
+	  statics: {
 	    init: function init() {
-	      this.XRP = new this(new Uint8Array(20));}, 
+	      this.STM = new this(new Uint8Array(20));},
 
 	    from: function from(val) {
-	      return val instanceof this ? val : new this(bytesFromRepr(val));} }, 
+	      return val instanceof this ? val : new this(bytesFromRepr(val));} },
 
 
 	  Currency: function Currency(bytes) {
 	    Hash160.call(this, bytes);
-	    this.classify();}, 
+	    this.classify();},
 
 	  classify: function classify() {
 	    // We only have a non null iso() property available if the currency can be
@@ -55737,9 +55737,9 @@ var ripple =
 	        break;}}
 
 
-	    var lossLessISO = onlyISO && iso !== 'XRP' && ISO_REGEX.test(iso);
+	    var lossLessISO = onlyISO && iso !== 'STM' && ISO_REGEX.test(iso);
 	    this._isNative = onlyISO && _.isEqual(code, [0, 0, 0]);
-	    this._iso = this._isNative ? 'XRP' : lossLessISO ? iso : null;}, 
+	    this._iso = this._isNative ? 'STM' : lossLessISO ? iso : null;},
 
 	  toJSON: function toJSON() {
 	    if (this.iso()) {
@@ -55749,7 +55749,7 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  Currency: Currency };
 
 /***/ },
@@ -55758,25 +55758,25 @@ var ripple =
 
 	'use strict';var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;};var assert = __webpack_require__(306);
 	var BN = __webpack_require__(577);
-	var makeClass = __webpack_require__(568);var _require = 
+	var makeClass = __webpack_require__(568);var _require =
 
-	__webpack_require__(567);var bytesToHex = _require.bytesToHex;var parseBytes = _require.parseBytes;var serializeUIntN = _require.serializeUIntN;var _require2 = 
+	__webpack_require__(567);var bytesToHex = _require.bytesToHex;var parseBytes = _require.parseBytes;var serializeUIntN = _require.serializeUIntN;var _require2 =
 	__webpack_require__(581);var UInt = _require2.UInt;
 
 	var HEX_REGEX = /^[A-F0-9]{16}$/;
 
-	var UInt64 = makeClass({ 
-	  inherits: UInt, 
-	  statics: { width: 8 }, 
+	var UInt64 = makeClass({
+	  inherits: UInt,
+	  statics: { width: 8 },
 	  UInt64: function UInt64() {var arg = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 	    var argType = typeof arg === 'undefined' ? 'undefined' : _typeof(arg);
 	    if (argType === 'number') {
 	      assert(arg >= 0);
 	      this._bytes = new Uint8Array(8);
-	      this._bytes.set(serializeUIntN(arg, 4), 4);} else 
+	      this._bytes.set(serializeUIntN(arg, 4), 4);} else
 	    if (arg instanceof BN) {
 	      this._bytes = parseBytes(arg.toArray('be', 8), Uint8Array);
-	      this._toBN = arg;} else 
+	      this._toBN = arg;} else
 	    {
 	      if (argType === 'string') {
 	        if (!HEX_REGEX.test(arg)) {
@@ -55785,17 +55785,17 @@ var ripple =
 
 	      this._bytes = parseBytes(arg, Uint8Array);}
 
-	    assert(this._bytes.length === 8);}, 
+	    assert(this._bytes.length === 8);},
 
 	  toJSON: function toJSON() {
-	    return bytesToHex(this._bytes);}, 
+	    return bytesToHex(this._bytes);},
 
 	  valueOf: function valueOf() {
-	    return this.toBN();}, 
+	    return this.toBN();},
 
-	  cached: { 
+	  cached: {
 	    toBN: function toBN() {
-	      return new BN(this._bytes);} }, 
+	      return new BN(this._bytes);} },
 
 
 	  toBytes: function toBytes() {
@@ -55803,7 +55803,7 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  UInt64: UInt64 };
 
 /***/ },
@@ -55812,8 +55812,8 @@ var ripple =
 
 	'use strict';var assert = __webpack_require__(306);
 	var BN = __webpack_require__(577);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(574);var Comparable = _require.Comparable;var SerializedType = _require.SerializedType;var _require2 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(574);var Comparable = _require.Comparable;var SerializedType = _require.SerializedType;var _require2 =
 	__webpack_require__(567);var serializeUIntN = _require2.serializeUIntN;
 	var MAX_VALUES = [0, 255, 65535, 16777215, 4294967295];
 
@@ -55821,76 +55821,76 @@ var ripple =
 	  return a < b ? -1 : a === b ? 0 : 1;}
 
 
-	var UInt = makeClass({ 
-	  mixins: [Comparable, SerializedType], 
+	var UInt = makeClass({
+	  mixins: [Comparable, SerializedType],
 	  UInt: function UInt() {var val = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 	    var max = MAX_VALUES[this.constructor.width];
 	    if (val < 0 || !(val <= max)) {
 	      throw new Error(val + ' not in range 0 <= $val <= ' + max);}
 
-	    this.val = val;}, 
+	    this.val = val;},
 
-	  statics: { 
-	    width: 0, 
+	  statics: {
+	    width: 0,
 	    fromParser: function fromParser(parser) {
-	      var val = this.width > 4 ? parser.read(this.width) : 
+	      var val = this.width > 4 ? parser.read(this.width) :
 	      parser.readUIntN(this.width);
-	      return new this(val);}, 
+	      return new this(val);},
 
 	    from: function from(val) {
-	      return val instanceof this ? val : new this(val);} }, 
+	      return val instanceof this ? val : new this(val);} },
 
 
 	  toJSON: function toJSON() {
-	    return this.val;}, 
+	    return this.val;},
 
 	  valueOf: function valueOf() {
-	    return this.val;}, 
+	    return this.val;},
 
 	  compareTo: function compareTo(other) {
 	    var thisValue = this.valueOf();
 	    var otherValue = other.valueOf();
 	    if (thisValue instanceof BN) {
-	      return otherValue instanceof BN ? 
-	      thisValue.cmp(otherValue) : 
-	      thisValue.cmpn(otherValue);} else 
+	      return otherValue instanceof BN ?
+	      thisValue.cmp(otherValue) :
+	      thisValue.cmpn(otherValue);} else
 	    if (otherValue instanceof BN) {
 	      return -other.compareTo(this);}
 
 	    assert(typeof otherValue === 'number');
-	    return signum(thisValue, otherValue);}, 
+	    return signum(thisValue, otherValue);},
 
 	  toBytesSink: function toBytesSink(sink) {
-	    sink.put(this.toBytes());}, 
+	    sink.put(this.toBytes());},
 
 	  toBytes: function toBytes() {
 	    return serializeUIntN(this.val, this.constructor.width);} });
 
 
 
-	module.exports = { 
+	module.exports = {
 	  UInt: UInt };
 
 /***/ },
 /* 582 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(567);var parseBytes = _require.parseBytes;var _require2 = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(567);var parseBytes = _require.parseBytes;var _require2 =
 	__webpack_require__(574);var SerializedType = _require2.SerializedType;
 
-	var Blob = makeClass({ 
-	  mixins: SerializedType, 
+	var Blob = makeClass({
+	  mixins: SerializedType,
 	  Blob: function Blob(bytes) {
 	    if (bytes) {
-	      this._bytes = parseBytes(bytes, Uint8Array);} else 
+	      this._bytes = parseBytes(bytes, Uint8Array);} else
 	    {
-	      this._bytes = new Uint8Array(0);}}, 
+	      this._bytes = new Uint8Array(0);}},
 
 
-	  statics: { 
+	  statics: {
 	    fromParser: function fromParser(parser, hint) {
-	      return new this(parser.read(hint));}, 
+	      return new this(parser.read(hint));},
 
 	    from: function from(value) {
 	      if (value instanceof this) {
@@ -55901,42 +55901,42 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  Blob: Blob };
 
 /***/ },
 /* 583 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
 	__webpack_require__(573);var Hash = _require.Hash;
 
-	var Hash128 = makeClass({ 
-	  inherits: Hash, 
+	var Hash128 = makeClass({
+	  inherits: Hash,
 	  statics: { width: 16 } });
 
 
-	module.exports = { 
+	module.exports = {
 	  Hash128: Hash128 };
 
 /***/ },
 /* 584 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
 	__webpack_require__(573);var Hash = _require.Hash;
 
-	var Hash256 = makeClass({ 
-	  inherits: Hash, 
-	  statics: { 
-	    width: 32, 
+	var Hash256 = makeClass({
+	  inherits: Hash,
+	  statics: {
+	    width: 32,
 	    init: function init() {
 	      this.ZERO_256 = new this(new Uint8Array(this.width));} } });
 
 
 
 
-	module.exports = { 
+	module.exports = {
 	  Hash256: Hash256 };
 
 /***/ },
@@ -55945,9 +55945,9 @@ var ripple =
 
 	'use strict'; /* eslint-disable no-unused-expressions */
 
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(574);var SerializedType = _require.SerializedType;var ensureArrayLikeIs = _require.ensureArrayLikeIs;var _require2 = 
-	__webpack_require__(579);var Currency = _require2.Currency;var _require3 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(574);var SerializedType = _require.SerializedType;var ensureArrayLikeIs = _require.ensureArrayLikeIs;var _require2 =
+	__webpack_require__(579);var Currency = _require2.Currency;var _require3 =
 	__webpack_require__(571);var AccountID = _require3.AccountID;
 
 	var PATHSET_END_BYTE = 0x00;
@@ -55956,8 +55956,8 @@ var ripple =
 	var TYPE_CURRENCY = 0x10;
 	var TYPE_ISSUER = 0x20;
 
-	var Hop = makeClass({ 
-	  statics: { 
+	var Hop = makeClass({
+	  statics: {
 	    from: function from(value) {
 	      if (value instanceof this) {
 	        return value;}
@@ -55966,14 +55966,14 @@ var ripple =
 	      value.issuer && (hop.issuer = AccountID.from(value.issuer));
 	      value.account && (hop.account = AccountID.from(value.account));
 	      value.currency && (hop.currency = Currency.from(value.currency));
-	      return hop;}, 
+	      return hop;},
 
 	    parse: function parse(parser, type) {
 	      var hop = new Hop();
 	      type & TYPE_ACCOUNT && (hop.account = AccountID.fromParser(parser));
 	      type & TYPE_CURRENCY && (hop.currency = Currency.fromParser(parser));
 	      type & TYPE_ISSUER && (hop.issuer = AccountID.fromParser(parser));
-	      return hop;} }, 
+	      return hop;} },
 
 
 	  toJSON: function toJSON() {
@@ -55982,7 +55982,7 @@ var ripple =
 	    type & TYPE_ACCOUNT && (ret.account = this.account.toJSON());
 	    type & TYPE_ISSUER && (ret.issuer = this.issuer.toJSON());
 	    type & TYPE_CURRENCY && (ret.currency = this.currency.toJSON());
-	    return ret;}, 
+	    return ret;},
 
 	  type: function type() {
 	    var type = 0;
@@ -55993,11 +55993,11 @@ var ripple =
 
 
 
-	var Path = makeClass({ 
-	  inherits: Array, 
-	  statics: { 
+	var Path = makeClass({
+	  inherits: Array,
+	  statics: {
 	    from: function from(value) {
-	      return ensureArrayLikeIs(Path, value).withChildren(Hop);} }, 
+	      return ensureArrayLikeIs(Path, value).withChildren(Hop);} },
 
 
 	  toJSON: function toJSON() {
@@ -56005,12 +56005,12 @@ var ripple =
 
 
 
-	var PathSet = makeClass({ 
-	  mixins: SerializedType, 
-	  inherits: Array, 
-	  statics: { 
+	var PathSet = makeClass({
+	  mixins: SerializedType,
+	  inherits: Array,
+	  statics: {
 	    from: function from(value) {
-	      return ensureArrayLikeIs(PathSet, value).withChildren(Path);}, 
+	      return ensureArrayLikeIs(PathSet, value).withChildren(Path);},
 
 	    fromParser: function fromParser(parser) {
 	      var pathSet = new this();
@@ -56030,11 +56030,11 @@ var ripple =
 
 	        path.push(Hop.parse(parser, type));}
 
-	      return pathSet;} }, 
+	      return pathSet;} },
 
 
 	  toJSON: function toJSON() {
-	    return this.map(function (k) {return k.toJSON();});}, 
+	    return this.map(function (k) {return k.toJSON();});},
 
 	  toBytesSink: function toBytesSink(sink) {
 	    var n = 0;
@@ -56053,23 +56053,23 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  PathSet: PathSet };
 
 /***/ },
 /* 586 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(574);var ensureArrayLikeIs = _require.ensureArrayLikeIs;var SerializedType = _require.SerializedType;var _require2 = 
-	__webpack_require__(566);var Field = _require2.Field;var _require3 = 
-	__webpack_require__(587);var STObject = _require3.STObject;var 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(574);var ensureArrayLikeIs = _require.ensureArrayLikeIs;var SerializedType = _require.SerializedType;var _require2 =
+	__webpack_require__(566);var Field = _require2.Field;var _require3 =
+	__webpack_require__(587);var STObject = _require3.STObject;var
 	ArrayEndMarker = Field.ArrayEndMarker;
 
-	var STArray = makeClass({ 
-	  mixins: SerializedType, 
-	  inherits: Array, 
-	  statics: { 
+	var STArray = makeClass({
+	  mixins: SerializedType,
+	  inherits: Array,
+	  statics: {
 	    fromParser: function fromParser(parser) {
 	      var array = new STArray();
 	      while (!parser.end()) {
@@ -56081,21 +56081,21 @@ var ripple =
 	        outer[field] = parser.readFieldValue(field);
 	        array.push(outer);}
 
-	      return array;}, 
+	      return array;},
 
 	    from: function from(value) {
-	      return ensureArrayLikeIs(STArray, value).withChildren(STObject);} }, 
+	      return ensureArrayLikeIs(STArray, value).withChildren(STObject);} },
 
 
 	  toJSON: function toJSON() {
-	    return this.map(function (v) {return v.toJSON();});}, 
+	    return this.map(function (v) {return v.toJSON();});},
 
 	  toBytesSink: function toBytesSink(sink) {
 	    this.forEach(function (so) {return so.toBytesSink(sink);});} });
 
 
 
-	module.exports = { 
+	module.exports = {
 	  STArray: STArray };
 
 /***/ },
@@ -56103,15 +56103,15 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {return typeof obj;} : function (obj) {return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj;};var _ = __webpack_require__(300);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(566);var Field = _require.Field;var _require2 = 
-	__webpack_require__(575);var BinarySerializer = _require2.BinarySerializer;var 
-	ObjectEndMarker = Field.ObjectEndMarker;var _require3 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(566);var Field = _require.Field;var _require2 =
+	__webpack_require__(575);var BinarySerializer = _require2.BinarySerializer;var
+	ObjectEndMarker = Field.ObjectEndMarker;var _require3 =
 	__webpack_require__(574);var SerializedType = _require3.SerializedType;
 
-	var STObject = makeClass({ 
-	  mixins: SerializedType, 
-	  statics: { 
+	var STObject = makeClass({
+	  mixins: SerializedType,
+	  statics: {
 	    fromParser: function fromParser(parser, hint) {
 	      var end = typeof hint === 'number' ? parser.pos() + hint : null;
 	      var so = new this();
@@ -56122,7 +56122,7 @@ var ripple =
 
 	        so[field] = parser.readFieldValue(field);}
 
-	      return so;}, 
+	      return so;},
 
 	    from: function from(value) {
 	      if (value instanceof this) {
@@ -56132,24 +56132,24 @@ var ripple =
 	        return _.transform(value, function (so, val, key) {
 	          var field = Field[key];
 	          if (field) {
-	            so[field] = field.associatedType.from(val);} else 
+	            so[field] = field.associatedType.from(val);} else
 	          {
-	            so[key] = val;}}, 
+	            so[key] = val;}},
 
 	        new this());}
 
-	      throw new Error(value + ' is unsupported');} }, 
+	      throw new Error(value + ' is unsupported');} },
 
 
 	  fieldKeys: function fieldKeys() {
-	    return Object.keys(this).map(function (k) {return Field[k];}).filter(Boolean);}, 
+	    return Object.keys(this).map(function (k) {return Field[k];}).filter(Boolean);},
 
 	  toJSON: function toJSON() {
 	    // Otherwise seemingly result will have same prototype as `this`
 	    var accumulator = {}; // of only `own` properties
 	    return _.transform(this, function (result, value, key) {
-	      result[key] = value && value.toJSON ? value.toJSON() : value;}, 
-	    accumulator);}, 
+	      result[key] = value && value.toJSON ? value.toJSON() : value;},
+	    accumulator);},
 
 	  toBytesSink: function toBytesSink(sink) {var _this = this;var filter = arguments.length <= 1 || arguments[1] === undefined ? function () {return true;} : arguments[1];
 	    var serializer = new BinarySerializer(sink);
@@ -56165,66 +56165,66 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  STObject: STObject };
 
 /***/ },
 /* 588 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
 	__webpack_require__(581);var UInt = _require.UInt;
 
-	var UInt16 = makeClass({ 
-	  inherits: UInt, 
+	var UInt16 = makeClass({
+	  inherits: UInt,
 	  statics: { width: 2 } });
 
 
-	module.exports = { 
+	module.exports = {
 	  UInt16: UInt16 };
 
 /***/ },
 /* 589 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
 	__webpack_require__(581);var UInt = _require.UInt;
 
-	var UInt32 = makeClass({ 
-	  inherits: UInt, 
+	var UInt32 = makeClass({
+	  inherits: UInt,
 	  statics: { width: 4 } });
 
 
-	module.exports = { 
+	module.exports = {
 	  UInt32: UInt32 };
 
 /***/ },
 /* 590 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
 	__webpack_require__(581);var UInt = _require.UInt;
 
-	var UInt8 = makeClass({ 
-	  inherits: UInt, 
+	var UInt8 = makeClass({
+	  inherits: UInt,
 	  statics: { width: 1 } });
 
 
-	module.exports = { 
+	module.exports = {
 	  UInt8: UInt8 };
 
 /***/ },
 /* 591 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(584);var Hash256 = _require.Hash256;var _require2 = 
+	'use strict';var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(584);var Hash256 = _require.Hash256;var _require2 =
 	__webpack_require__(574);var ensureArrayLikeIs = _require2.ensureArrayLikeIs;var SerializedType = _require2.SerializedType;
 
-	var Vector256 = makeClass({ 
-	  mixins: SerializedType, 
-	  inherits: Array, 
-	  statics: { 
+	var Vector256 = makeClass({
+	  mixins: SerializedType,
+	  inherits: Array,
+	  statics: {
 	    fromParser: function fromParser(parser, hint) {
 	      var vector256 = new this();
 	      var bytes = hint !== null ? hint : parser.size() - parser.pos();
@@ -56232,21 +56232,21 @@ var ripple =
 	      for (var i = 0; i < hashes; i++) {
 	        vector256.push(Hash256.fromParser(parser));}
 
-	      return vector256;}, 
+	      return vector256;},
 
 	    from: function from(value) {
-	      return ensureArrayLikeIs(Vector256, value).withChildren(Hash256);} }, 
+	      return ensureArrayLikeIs(Vector256, value).withChildren(Hash256);} },
 
 
 	  toBytesSink: function toBytesSink(sink) {
-	    this.forEach(function (h) {return h.toBytesSink(sink);});}, 
+	    this.forEach(function (h) {return h.toBytesSink(sink);});},
 
 	  toJSON: function toJSON() {
 	    return this.map(function (hash) {return hash.toJSON();});} });
 
 
 
-	module.exports = { 
+	module.exports = {
 	  Vector256: Vector256 };
 
 /***/ },
@@ -56256,11 +56256,11 @@ var ripple =
 	'use strict'; /* eslint-disable func-style */
 
 	var BN = __webpack_require__(577);
-	var types = __webpack_require__(570);var _require = 
-	__webpack_require__(593);var HashPrefix = _require.HashPrefix;var _require2 = 
-	__webpack_require__(594);var BinaryParser = _require2.BinaryParser;var _require3 = 
-	__webpack_require__(575);var BinarySerializer = _require3.BinarySerializer;var BytesList = _require3.BytesList;var _require4 = 
-	__webpack_require__(567);var bytesToHex = _require4.bytesToHex;var slice = _require4.slice;var parseBytes = _require4.parseBytes;var _require5 = 
+	var types = __webpack_require__(570);var _require =
+	__webpack_require__(593);var HashPrefix = _require.HashPrefix;var _require2 =
+	__webpack_require__(594);var BinaryParser = _require2.BinaryParser;var _require3 =
+	__webpack_require__(575);var BinarySerializer = _require3.BinarySerializer;var BytesList = _require3.BytesList;var _require4 =
+	__webpack_require__(567);var bytesToHex = _require4.bytesToHex;var slice = _require4.slice;var parseBytes = _require4.parseBytes;var _require5 =
 
 	__webpack_require__(595);var sha512Half = _require5.sha512Half;var transactionID = _require5.transactionID;
 
@@ -56268,7 +56268,7 @@ var ripple =
 	var readJSON = function readJSON(parser) {return parser.readType(types.STObject).toJSON();};
 	var binaryToJSON = function binaryToJSON(bytes) {return readJSON(makeParser(bytes));};
 
-	function serializeObject(object) {var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];var 
+	function serializeObject(object) {var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];var
 	  prefix = opts.prefix;var suffix = opts.suffix;var _opts$signingFieldsOn = opts.signingFieldsOnly;var signingFieldsOnly = _opts$signingFieldsOn === undefined ? false : _opts$signingFieldsOn;
 	  var bytesList = new BytesList();
 	  if (prefix) {
@@ -56305,21 +56305,21 @@ var ripple =
 	  return serializeObject(tx, { prefix: prefix, suffix: suffix, signingFieldsOnly: true });}
 
 
-	module.exports = { 
-	  BinaryParser: BinaryParser, 
-	  BinarySerializer: BinarySerializer, 
-	  BytesList: BytesList, 
-	  makeParser: makeParser, 
-	  serializeObject: serializeObject, 
-	  readJSON: readJSON, 
-	  bytesToHex: bytesToHex, 
-	  parseBytes: parseBytes, 
-	  multiSigningData: multiSigningData, 
-	  signingData: signingData, 
-	  signingClaimData: signingClaimData, 
-	  binaryToJSON: binaryToJSON, 
-	  sha512Half: sha512Half, 
-	  transactionID: transactionID, 
+	module.exports = {
+	  BinaryParser: BinaryParser,
+	  BinarySerializer: BinarySerializer,
+	  BytesList: BytesList,
+	  makeParser: makeParser,
+	  serializeObject: serializeObject,
+	  readJSON: readJSON,
+	  bytesToHex: bytesToHex,
+	  parseBytes: parseBytes,
+	  multiSigningData: multiSigningData,
+	  signingData: signingData,
+	  signingClaimData: signingClaimData,
+	  binaryToJSON: binaryToJSON,
+	  sha512Half: sha512Half,
+	  transactionID: transactionID,
 	  slice: slice };
 
 /***/ },
@@ -56332,29 +56332,29 @@ var ripple =
 	  return serializeUIntN(uint32, 4);}
 
 
-	var HashPrefix = { 
-	  transactionID: bytes(0x54584E00), 
+	var HashPrefix = {
+	  transactionID: bytes(0x54584E00),
 	  // transaction plus metadata
-	  transaction: bytes(0x534E4400), 
+	  transaction: bytes(0x534E4400),
 	  // account state
-	  accountStateEntry: bytes(0x4D4C4E00), 
+	  accountStateEntry: bytes(0x4D4C4E00),
 	  // inner node in tree
-	  innerNode: bytes(0x4D494E00), 
+	  innerNode: bytes(0x4D494E00),
 	  // ledger master data for signing
-	  ledgerHeader: bytes(0x4C575200), 
+	  ledgerHeader: bytes(0x4C575200),
 	  // inner transaction to sign
-	  transactionSig: bytes(0x53545800), 
+	  transactionSig: bytes(0x53545800),
 	  // inner transaction to sign
-	  transactionMultiSig: bytes(0x534D5400), 
+	  transactionMultiSig: bytes(0x534D5400),
 	  // validation for signing
-	  validation: bytes(0x56414C00), 
+	  validation: bytes(0x56414C00),
 	  // proposal for signing
-	  proposal: bytes(0x50525000), 
+	  proposal: bytes(0x50525000),
 	  // payment channel claim
 	  paymentChannelClaim: bytes(0x434C4D00) };
 
 
-	module.exports = { 
+	module.exports = {
 	  HashPrefix: HashPrefix };
 
 /***/ },
@@ -56362,80 +56362,80 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var assert = __webpack_require__(306);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(566);var Field = _require.Field;var _require2 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(566);var Field = _require.Field;var _require2 =
 	__webpack_require__(567);var slice = _require2.slice;var parseBytes = _require2.parseBytes;
 
-	var BinaryParser = makeClass({ 
+	var BinaryParser = makeClass({
 	  BinaryParser: function BinaryParser(buf) {
 	    this._buf = parseBytes(buf, Uint8Array);
 	    this._length = this._buf.length;
-	    this._cursor = 0;}, 
+	    this._cursor = 0;},
 
 	  skip: function skip(n) {
-	    this._cursor += n;}, 
+	    this._cursor += n;},
 
 	  read: function read(n) {var to = arguments.length <= 1 || arguments[1] === undefined ? Uint8Array : arguments[1];
 	    var start = this._cursor;
 	    var end = this._cursor + n;
 	    assert(end <= this._buf.length);
 	    this._cursor = end;
-	    return slice(this._buf, start, end, to);}, 
+	    return slice(this._buf, start, end, to);},
 
 	  readUIntN: function readUIntN(n) {
-	    return this.read(n, Array).reduce(function (a, b) {return a << 8 | b;}) >>> 0;}, 
+	    return this.read(n, Array).reduce(function (a, b) {return a << 8 | b;}) >>> 0;},
 
 	  readUInt8: function readUInt8() {
-	    return this._buf[this._cursor++];}, 
+	    return this._buf[this._cursor++];},
 
 	  readUInt16: function readUInt16() {
-	    return this.readUIntN(2);}, 
+	    return this.readUIntN(2);},
 
 	  readUInt32: function readUInt32() {
-	    return this.readUIntN(4);}, 
+	    return this.readUIntN(4);},
 
 	  pos: function pos() {
-	    return this._cursor;}, 
+	    return this._cursor;},
 
 	  size: function size() {
-	    return this._buf.length;}, 
+	    return this._buf.length;},
 
 	  end: function end(customEnd) {
 	    var cursor = this.pos();
-	    return cursor >= this._length || customEnd !== null && 
-	    cursor >= customEnd;}, 
+	    return cursor >= this._length || customEnd !== null &&
+	    cursor >= customEnd;},
 
 	  readVL: function readVL() {
-	    return this.read(this.readVLLength());}, 
+	    return this.read(this.readVLLength());},
 
 	  readVLLength: function readVLLength() {
 	    var b1 = this.readUInt8();
 	    if (b1 <= 192) {
-	      return b1;} else 
+	      return b1;} else
 	    if (b1 <= 240) {
 	      var b2 = this.readUInt8();
-	      return 193 + (b1 - 193) * 256 + b2;} else 
+	      return 193 + (b1 - 193) * 256 + b2;} else
 	    if (b1 <= 254) {
 	      var _b = this.readUInt8();
 	      var b3 = this.readUInt8();
 	      return 12481 + (b1 - 241) * 65536 + _b * 256 + b3;}
 
-	    throw new Error('Invalid varint length indicator');}, 
+	    throw new Error('Invalid varint length indicator');},
 
 	  readFieldOrdinal: function readFieldOrdinal() {
 	    var tagByte = this.readUInt8();
 	    var type = (tagByte & 0xF0) >>> 4 || this.readUInt8();
 	    var nth = tagByte & 0x0F || this.readUInt8();
-	    return type << 16 | nth;}, 
+	    return type << 16 | nth;},
 
 	  readField: function readField() {
-	    return Field.from(this.readFieldOrdinal());}, 
+	    return Field.from(this.readFieldOrdinal());},
 
 	  readType: function readType(type) {
-	    return type.fromParser(this);}, 
+	    return type.fromParser(this);},
 
 	  typeForField: function typeForField(field) {
-	    return field.associatedType;}, 
+	    return field.associatedType;},
 
 	  readFieldValue: function readFieldValue(field) {
 	    var kls = this.typeForField(field);
@@ -56445,10 +56445,10 @@ var ripple =
 	    var sizeHint = field.isVLEncoded ? this.readVLLength() : null;
 	    var value = kls.fromParser(this, sizeHint);
 	    if (value === undefined) {
-	      throw new Error('fromParser for (' + 
+	      throw new Error('fromParser for (' +
 	      field.name + ', ' + field.type.name + ') -> undefined ');}
 
-	    return value;}, 
+	    return value;},
 
 	  readFieldAndValue: function readFieldAndValue() {
 	    var field = this.readField();
@@ -56457,35 +56457,35 @@ var ripple =
 
 
 
-	module.exports = { 
+	module.exports = {
 	  BinaryParser: BinaryParser };
 
 /***/ },
 /* 595 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(593);var HashPrefix = _require.HashPrefix;var _require2 = 
-	__webpack_require__(570);var Hash256 = _require2.Hash256;var _require3 = 
+	/* WEBPACK VAR INJECTION */(function(Buffer) {'use strict';var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(593);var HashPrefix = _require.HashPrefix;var _require2 =
+	__webpack_require__(570);var Hash256 = _require2.Hash256;var _require3 =
 	__webpack_require__(567);var parseBytes = _require3.parseBytes;
 	var createHash = __webpack_require__(596);
 
-	var Sha512Half = makeClass({ 
+	var Sha512Half = makeClass({
 	  Sha512Half: function Sha512Half() {
-	    this.hash = createHash('sha512');}, 
+	    this.hash = createHash('sha512');},
 
-	  statics: { 
+	  statics: {
 	    put: function put(bytes) {
-	      return new this().put(bytes);} }, 
+	      return new this().put(bytes);} },
 
 
 	  put: function put(bytes) {
 	    this.hash.update(parseBytes(bytes, Buffer));
-	    return this;}, 
+	    return this;},
 
 	  finish256: function finish256() {
 	    var bytes = this.hash.digest();
-	    return bytes.slice(0, 32);}, 
+	    return bytes.slice(0, 32);},
 
 	  finish: function finish() {
 	    return new Hash256(this.finish256());} });
@@ -56502,9 +56502,9 @@ var ripple =
 	  return new Hash256(sha512Half(HashPrefix.transactionID, serialized));}
 
 
-	module.exports = { 
-	  Sha512Half: Sha512Half, 
-	  sha512Half: sha512Half, 
+	module.exports = {
+	  Sha512Half: Sha512Half,
+	  sha512Half: sha512Half,
 	  transactionID: transactionID };
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(312).Buffer))
 
@@ -57918,18 +57918,18 @@ var ripple =
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';var assert = __webpack_require__(306);
-	var makeClass = __webpack_require__(568);var _require = 
-	__webpack_require__(570);var Hash256 = _require.Hash256;var _require2 = 
-	__webpack_require__(593);var HashPrefix = _require2.HashPrefix;var _require3 = 
+	var makeClass = __webpack_require__(568);var _require =
+	__webpack_require__(570);var Hash256 = _require.Hash256;var _require2 =
+	__webpack_require__(593);var HashPrefix = _require2.HashPrefix;var _require3 =
 	__webpack_require__(595);var Hasher = _require3.Sha512Half;
 
-	var ShaMapNode = makeClass({ 
-	  virtuals: { 
-	    hashPrefix: function hashPrefix() {}, 
-	    isLeaf: function isLeaf() {}, 
-	    isInner: function isInner() {} }, 
+	var ShaMapNode = makeClass({
+	  virtuals: {
+	    hashPrefix: function hashPrefix() {},
+	    isLeaf: function isLeaf() {},
+	    isInner: function isInner() {} },
 
-	  cached: { 
+	  cached: {
 	    hash: function hash() {
 	      var hasher = Hasher.put(this.hashPrefix());
 	      this.toBytesSink(hasher);
@@ -57938,21 +57938,21 @@ var ripple =
 
 
 
-	var ShaMapLeaf = makeClass({ 
-	  inherits: ShaMapNode, 
+	var ShaMapLeaf = makeClass({
+	  inherits: ShaMapNode,
 	  ShaMapLeaf: function ShaMapLeaf(index, item) {
 	    ShaMapNode.call(this);
 	    this.index = index;
-	    this.item = item;}, 
+	    this.item = item;},
 
 	  isLeaf: function isLeaf() {
-	    return true;}, 
+	    return true;},
 
 	  isInner: function isInner() {
-	    return false;}, 
+	    return false;},
 
 	  hashPrefix: function hashPrefix() {
-	    return this.item.hashPrefix();}, 
+	    return this.item.hashPrefix();},
 
 	  toBytesSink: function toBytesSink(sink) {
 	    this.item.toBytesSink(sink);
@@ -57962,41 +57962,41 @@ var ripple =
 
 	var $uper = ShaMapNode.prototype;
 
-	var ShaMapInner = makeClass({ 
-	  inherits: ShaMapNode, 
+	var ShaMapInner = makeClass({
+	  inherits: ShaMapNode,
 	  ShaMapInner: function ShaMapInner() {var depth = arguments.length <= 0 || arguments[0] === undefined ? 0 : arguments[0];
 	    ShaMapNode.call(this);
 	    this.depth = depth;
 	    this.slotBits = 0;
-	    this.branches = Array(16);}, 
+	    this.branches = Array(16);},
 
 	  isInner: function isInner() {
-	    return true;}, 
+	    return true;},
 
 	  isLeaf: function isLeaf() {
-	    return false;}, 
+	    return false;},
 
 	  hashPrefix: function hashPrefix() {
-	    return HashPrefix.innerNode;}, 
+	    return HashPrefix.innerNode;},
 
 	  setBranch: function setBranch(slot, branch) {
 	    this.slotBits = this.slotBits | 1 << slot;
-	    this.branches[slot] = branch;}, 
+	    this.branches[slot] = branch;},
 
 	  empty: function empty() {
-	    return this.slotBits === 0;}, 
+	    return this.slotBits === 0;},
 
 	  hash: function hash() {
 	    if (this.empty()) {
 	      return Hash256.ZERO_256;}
 
-	    return $uper.hash.call(this);}, 
+	    return $uper.hash.call(this);},
 
 	  toBytesSink: function toBytesSink(sink) {
 	    for (var i = 0; i < this.branches.length; i++) {
 	      var branch = this.branches[i];
 	      var hash = branch ? branch.hash() : Hash256.ZERO_256;
-	      hash.toBytesSink(sink);}}, 
+	      hash.toBytesSink(sink);}},
 
 
 	  addItem: function addItem(index, item, leaf) {
@@ -58004,25 +58004,25 @@ var ripple =
 	    var nibble = index.nibblet(this.depth);
 	    var existing = this.branches[nibble];
 	    if (!existing) {
-	      this.setBranch(nibble, leaf || new ShaMapLeaf(index, item));} else 
+	      this.setBranch(nibble, leaf || new ShaMapLeaf(index, item));} else
 	    if (existing.isLeaf()) {
 	      var newInner = new ShaMapInner(this.depth + 1);
 	      newInner.addItem(existing.index, null, existing);
 	      newInner.addItem(index, item, leaf);
-	      this.setBranch(nibble, newInner);} else 
+	      this.setBranch(nibble, newInner);} else
 	    if (existing.isInner()) {
-	      existing.addItem(index, item, leaf);} else 
+	      existing.addItem(index, item, leaf);} else
 	    {
 	      assert(false);}} });
 
 
 
 
-	var ShaMap = makeClass({ 
+	var ShaMap = makeClass({
 	  inherits: ShaMapInner });
 
 
-	module.exports = { 
+	module.exports = {
 	  ShaMap: ShaMap };
 
 /***/ },
@@ -58032,11 +58032,11 @@ var ripple =
 	'use strict';function _toConsumableArray(arr) {if (Array.isArray(arr)) {for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {arr2[i] = arr[i];}return arr2;} else {return Array.from(arr);}}var _ = __webpack_require__(300);
 	var BN = __webpack_require__(577);
 	var assert = __webpack_require__(306);
-	var types = __webpack_require__(570);var 
-	STObject = types.STObject;var Hash256 = types.Hash256;var _require = 
-	__webpack_require__(609);var ShaMap = _require.ShaMap;var _require2 = 
-	__webpack_require__(593);var HashPrefix = _require2.HashPrefix;var _require3 = 
-	__webpack_require__(595);var Sha512Half = _require3.Sha512Half;var _require4 = 
+	var types = __webpack_require__(570);var
+	STObject = types.STObject;var Hash256 = types.Hash256;var _require =
+	__webpack_require__(609);var ShaMap = _require.ShaMap;var _require2 =
+	__webpack_require__(593);var HashPrefix = _require2.HashPrefix;var _require3 =
+	__webpack_require__(595);var Sha512Half = _require3.Sha512Half;var _require4 =
 	__webpack_require__(592);var BinarySerializer = _require4.BinarySerializer;var serializeObject = _require4.serializeObject;
 
 	function computeHash(itemizer, itemsJson) {
@@ -58048,9 +58048,9 @@ var ripple =
 	function transactionItem(json) {
 	  assert(json.hash);
 	  var index = Hash256.from(json.hash);
-	  var item = { 
+	  var item = {
 	    hashPrefix: function hashPrefix() {
-	      return HashPrefix.transaction;}, 
+	      return HashPrefix.transaction;},
 
 	    toBytesSink: function toBytesSink(sink) {
 	      var serializer = new BinarySerializer(sink);
@@ -58064,9 +58064,9 @@ var ripple =
 	function entryItem(json) {
 	  var index = Hash256.from(json.index);
 	  var bytes = serializeObject(json);
-	  var item = { 
+	  var item = {
 	    hashPrefix: function hashPrefix() {
-	      return HashPrefix.accountStateEntry;}, 
+	      return HashPrefix.accountStateEntry;},
 
 	    toBytesSink: function toBytesSink(sink) {
 	      sink.put(bytes);} };
@@ -58096,28 +58096,28 @@ var ripple =
 	  return hash.finish();}
 
 
-	module.exports = { 
-	  accountStateHash: accountStateHash, 
-	  transactionTreeHash: transactionTreeHash, 
+	module.exports = {
+	  accountStateHash: accountStateHash,
+	  transactionTreeHash: transactionTreeHash,
 	  ledgerHash: ledgerHash };
 
 /***/ },
 /* 611 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';var Decimal = __webpack_require__(578);var _require = 
-	__webpack_require__(567);var bytesToHex = _require.bytesToHex;var slice = _require.slice;var parseBytes = _require.parseBytes;var _require2 = 
+	'use strict';var Decimal = __webpack_require__(578);var _require =
+	__webpack_require__(567);var bytesToHex = _require.bytesToHex;var slice = _require.slice;var parseBytes = _require.parseBytes;var _require2 =
 	__webpack_require__(570);var UInt64 = _require2.UInt64;
 	var BN = __webpack_require__(577);
 
-	module.exports = { 
+	module.exports = {
 	  encode: function encode(arg) {
 	    var quality = arg instanceof Decimal ? arg : new Decimal(arg);
 	    var exponent = quality.e - 15;
 	    var qualityString = quality.times('1e' + -exponent).abs().toString();
 	    var bytes = new UInt64(new BN(qualityString)).toBytes();
 	    bytes[0] = exponent + 100;
-	    return bytes;}, 
+	    return bytes;},
 
 	  decode: function decode(arg) {
 	    var bytes = slice(parseBytes(arg), -8);
@@ -58131,11 +58131,11 @@ var ripple =
 
 	'use strict'; /* eslint-disable func-style */
 
-	var _ = __webpack_require__(300);var _require = 
+	var _ = __webpack_require__(300);var _require =
 	__webpack_require__(570);var AccountID = _require.AccountID;
-	var binary = __webpack_require__(592);var 
+	var binary = __webpack_require__(592);var
 
-	serializeObject = 
+	serializeObject =
 
 
 
@@ -58166,10 +58166,10 @@ var ripple =
 	  setCanonicalSignatureFlag(tx_json);
 	  var signerID = signingAccount || keyPair.id();
 	  var signature = keyPair.sign(multiSigningData(tx_json, signerID));
-	  var signer = { 
-	    Signer: { 
-	      SigningPubKey: toHex(keyPair.publicBytes()), 
-	      TxnSignature: toHex(signature), 
+	  var signer = {
+	    Signer: {
+	      SigningPubKey: toHex(keyPair.publicBytes()),
+	      TxnSignature: toHex(signature),
 	      Account: signerID } };
 
 
@@ -58191,8 +58191,8 @@ var ripple =
 	  return serializedBundle(tx_json);}
 
 
-	module.exports = { 
-	  signFor: signFor, 
+	module.exports = {
+	  signFor: signFor,
 	  sign: sign };
 
 /***/ },
@@ -58305,7 +58305,7 @@ var ripple =
 	  var lowAddressHex = swap ? address2Hex : address1Hex;
 	  var highAddressHex = swap ? address1Hex : address2Hex;
 
-	  var prefix = ledgerSpaceHex('rippleState');
+	  var prefix = ledgerSpaceHex('stoxumState');
 	  return hash(prefix + lowAddressHex + highAddressHex +
 	              currencyToHex(currency));
 	}
@@ -58335,7 +58335,7 @@ var ripple =
 	  return shamap.hash();
 	}
 
-	// see rippled Ledger::updateHash()
+	// see stoxumd Ledger::updateHash()
 	function computeLedgerHash(ledgerHeader) {
 	  var prefix = hashprefixes.HASH_LEDGER.toString(16).toUpperCase();
 	  return hash(prefix +
@@ -58738,7 +58738,7 @@ var ripple =
 	'use strict';
 	var createHash = __webpack_require__(596);
 
-	// For a hash function, rippled uses SHA-512 and then truncates the result
+	// For a hash function, stoxumd uses SHA-512 and then truncates the result
 	// to the first 256 bytes. This algorithm, informally called SHA-512Half,
 	// provides an output that has comparable security to SHA-256, but runs
 	// faster on 64-bit processors.
@@ -58754,11 +58754,11 @@ var ripple =
 /* 617 */
 /***/ function(module, exports) {
 
-	
+
 	/**
-	 * Ripple ledger namespace prefixes.
+	 * Stoxum ledger namespace prefixes.
 	 *
-	 * The Ripple ledger is a key-value store. In order to avoid name collisions,
+	 * The Stoxum ledger is a key-value store. In order to avoid name collisions,
 	 * names are partitioned into namespaces.
 	 *
 	 * Each namespace is just a single character prefix.
@@ -58767,7 +58767,7 @@ var ripple =
 	  account        : 'a',
 	  dirNode        : 'd',
 	  generatorMap   : 'g',
-	  rippleState    : 'r',
+	  stoxumState    : 'r',
 	  offer          : 'o',  // Entry for an offer.
 	  ownerDir       : 'O',  // Directory of things owned by an account.
 	  bookDir        : 'B',  // Directory of order books.
@@ -58785,7 +58785,7 @@ var ripple =
 /* 618 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -58838,12 +58838,12 @@ var ripple =
 /* 619 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(542);
 
-	// rippled 'account_lines' returns a different format for
+	// Stoxumd 'account_lines' returns a different format for
 	// trustlines than 'tx'
 	function parseAccountTrustline(trustline) {
 	  var specification = utils.removeUndefined({
@@ -58852,14 +58852,14 @@ var ripple =
 	    counterparty: trustline.account,
 	    qualityIn: utils.parseQuality(trustline.quality_in) || undefined,
 	    qualityOut: utils.parseQuality(trustline.quality_out) || undefined,
-	    ripplingDisabled: trustline.no_ripple || undefined,
+	    ripplingDisabled: trustline.no_stoxum || undefined,
 	    frozen: trustline.freeze || undefined,
 	    authorized: trustline.authorized || undefined
 	  });
-	  // rippled doesn't provide the counterparty's qualities
+	  // Stoxumd doesn't provide the counterparty's qualities
 	  var counterparty = utils.removeUndefined({
 	    limit: trustline.limit_peer,
-	    ripplingDisabled: trustline.no_ripple_peer || undefined,
+	    ripplingDisabled: trustline.no_stoxum_peer || undefined,
 	    frozen: trustline.freeze_peer || undefined,
 	    authorized: trustline.peer_authorized || undefined
 	  });
@@ -58875,7 +58875,7 @@ var ripple =
 /* 620 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(540);
@@ -58892,12 +58892,12 @@ var ripple =
 
 	function formatBalances(options, balances) {
 	  var result = balances.trustlines.map(getTrustlineBalanceAmount);
-	  if (!(options.counterparty || options.currency && options.currency !== 'XRP')) {
-	    var xrpBalance = {
-	      currency: 'XRP',
-	      value: balances.xrp
+	  if (!(options.counterparty || options.currency && options.currency !== 'STM')) {
+	    var stmBalance = {
+	      currency: 'STM',
+	      value: balances.stm
 	    };
-	    result.unshift(xrpBalance);
+	    result.unshift(stmBalance);
 	  }
 	  if (options.limit && result.length > options.limit) {
 	    var toRemove = result.length - options.limit;
@@ -58921,9 +58921,9 @@ var ripple =
 	  validate.getTrustlines({ address: address, options: options });
 
 	  return Promise.all([getLedgerVersionHelper(this.connection, options.ledgerVersion).then(function (ledgerVersion) {
-	    return utils.getXRPBalance(_this.connection, address, ledgerVersion);
+	    return utils.getSTMBalance(_this.connection, address, ledgerVersion);
 	  }), this.getTrustlines(address, options)]).then(function (results) {
-	    return formatBalances(options, { xrp: results[0], trustlines: results[1] });
+	    return formatBalances(options, { stm: results[0], trustlines: results[1] });
 	  });
 	}
 
@@ -58933,7 +58933,7 @@ var ripple =
 /* 621 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -58995,7 +58995,7 @@ var ripple =
 /* 622 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -59006,7 +59006,7 @@ var ripple =
 	var parsePathfind = __webpack_require__(623);
 	var _utils$common = utils.common,
 	    validate = _utils$common.validate,
-	    toRippledAmount = _utils$common.toRippledAmount;
+	    toStoxumdAmount = _utils$common.toStoxumdAmount;
 
 	var NotFoundError = utils.common.errors.NotFoundError;
 	var ValidationError = utils.common.errors.ValidationError;
@@ -59022,29 +59022,29 @@ var ripple =
 	function requestPathFind(connection, pathfind) {
 	  var destinationAmount = _.assign({ value: -1 }, pathfind.destination.amount);
 	  var request = {
-	    command: 'ripple_path_find',
+	    command: 'stoxum_path_find',
 	    source_account: pathfind.source.address,
 	    destination_account: pathfind.destination.address,
-	    destination_amount: toRippledAmount(destinationAmount)
+	    destination_amount: toStoxumdAmount(destinationAmount)
 	  };
 	  if (_typeof(request.destination_amount) === 'object' && !request.destination_amount.issuer) {
 	    // Convert blank issuer to sender's address
-	    // (Ripple convention for 'any issuer')
-	    // https://ripple.com/build/transactions/
+	    // (Stoxum convention for 'any issuer')
+	    // https://stoxum.com/build/transactions/
 	    //     #special-issuer-values-for-sendmax-and-amount
-	    // https://ripple.com/build/ripple-rest/#counterparties-in-payments
+	    // https://stoxum.com/build/stoxum-rest/#counterparties-in-payments
 	    request.destination_amount.issuer = request.destination_account;
 	  }
 	  if (pathfind.source.currencies && pathfind.source.currencies.length > 0) {
 	    request.source_currencies = pathfind.source.currencies.map(function (amount) {
-	      return _.omit(toRippledAmount(amount), 'value');
+	      return _.omit(toStoxumdAmount(amount), 'value');
 	    });
 	  }
 	  if (pathfind.source.amount) {
 	    if (pathfind.destination.amount.value !== undefined) {
 	      throw new ValidationError('Cannot specify both source.amount' + ' and destination.amount.value in getPaths');
 	    }
-	    request.send_max = toRippledAmount(pathfind.source.amount);
+	    request.send_max = toStoxumdAmount(pathfind.source.amount);
 	    if (request.send_max.currency && !request.send_max.issuer) {
 	      request.send_max.issuer = pathfind.source.address;
 	    }
@@ -59055,10 +59055,10 @@ var ripple =
 	  });
 	}
 
-	function addDirectXrpPath(paths, xrpBalance) {
-	  // Add XRP "path" only if the source acct has enough XRP to make the payment
+	function addDirectStmPath(paths, stmBalance) {
+	  // Add STM "path" only if the source acct has enough STM to make the payment
 	  var destinationAmount = paths.destination_amount;
-	  if (new BigNumber(xrpBalance).greaterThanOrEqualTo(destinationAmount)) {
+	  if (new BigNumber(stmBalance).greaterThanOrEqualTo(destinationAmount)) {
 	    paths.alternatives.unshift({
 	      paths_computed: [],
 	      source_amount: paths.destination_amount
@@ -59067,17 +59067,17 @@ var ripple =
 	  return paths;
 	}
 
-	function isRippledIOUAmount(amount) {
-	  // rippled XRP amounts are specified as decimal strings
-	  return (typeof amount === 'undefined' ? 'undefined' : _typeof(amount)) === 'object' && amount.currency && amount.currency !== 'XRP';
+	function isStoxumdIOUAmount(amount) {
+	  // Stoxumd STM amounts are specified as decimal strings
+	  return (typeof amount === 'undefined' ? 'undefined' : _typeof(amount)) === 'object' && amount.currency && amount.currency !== 'STM';
 	}
 
-	function conditionallyAddDirectXRPPath(connection, address, paths) {
-	  if (isRippledIOUAmount(paths.destination_amount) || !_.includes(paths.destination_currencies, 'XRP')) {
+	function conditionallyAddDirectSTMPath(connection, address, paths) {
+	  if (isStoxumdIOUAmount(paths.destination_amount) || !_.includes(paths.destination_currencies, 'STM')) {
 	    return Promise.resolve(paths);
 	  }
-	  return utils.getXRPBalance(connection, address, undefined).then(function (xrpBalance) {
-	    return addDirectXrpPath(paths, xrpBalance);
+	  return utils.getSTMBalance(connection, address, undefined).then(function (stmBalance) {
+	    return addDirectStmPath(paths, stmBalance);
 	  });
 	}
 
@@ -59110,7 +59110,7 @@ var ripple =
 
 	  var address = pathfind.source.address;
 	  return requestPathFind(this.connection, pathfind).then(function (paths) {
-	    return conditionallyAddDirectXRPPath(_this.connection, address, paths);
+	    return conditionallyAddDirectSTMPath(_this.connection, address, paths);
 	  }).then(function (paths) {
 	    return filterSourceFundsLowPaths(pathfind, paths);
 	  }).then(function (paths) {
@@ -59124,7 +59124,7 @@ var ripple =
 /* 623 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59176,7 +59176,7 @@ var ripple =
 /* 624 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59224,7 +59224,7 @@ var ripple =
 /* 625 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(542);
@@ -59232,13 +59232,13 @@ var ripple =
 	var parseAmount = __webpack_require__(548);
 	var BigNumber = __webpack_require__(304);
 
-	// TODO: remove this function once rippled provides quality directly
+	// TODO: remove this function once stoxumd provides quality directly
 	function computeQuality(takerGets, takerPays) {
 	  var quotient = new BigNumber(takerPays.value).dividedBy(takerGets.value);
 	  return quotient.toDigits(16, BigNumber.ROUND_HALF_UP).toString();
 	}
 
-	// rippled 'account_offers' returns a different format for orders than 'tx'
+	// stoxumd 'account_offers' returns a different format for orders than 'tx'
 	// the flags are also different
 	function parseAccountOrder(address, order) {
 	  var direction = (order.flags & flags.Sell) === 0 ? 'buy' : 'sell';
@@ -59254,11 +59254,11 @@ var ripple =
 	    quantity: quantity,
 	    totalPrice: totalPrice,
 	    passive: (order.flags & flags.Passive) !== 0 || undefined,
-	    // rippled currently does not provide "expiration" in account_offers
+	    // stoxumd currently does not provide "expiration" in account_offers
 	    expirationTime: utils.parseTimestamp(order.expiration)
 	  });
 
-	  var makerExchangeRate = order.quality ? utils.adjustQualityForXRP(order.quality.toString(), takerGetsAmount.currency, takerPaysAmount.currency) : computeQuality(takerGetsAmount, takerPaysAmount);
+	  var makerExchangeRate = order.quality ? utils.adjustQualityForSTM(order.quality.toString(), takerGetsAmount.currency, takerPaysAmount.currency) : computeQuality(takerGetsAmount, takerPaysAmount);
 	  var properties = {
 	    maker: address,
 	    sequence: order.seq,
@@ -59286,8 +59286,8 @@ var ripple =
 	  HighReserve: 0x00020000,
 	  LowAuth: 0x00040000,
 	  HighAuth: 0x00080000,
-	  LowNoRipple: 0x00100000,
-	  HighNoRipple: 0x00200000,
+	  LowNoStoxum: 0x00100000,
+	  HighNoStoxum: 0x00200000,
 	  LowFreeze: 0x00400000,
 	  HighFreeze: 0x00800000
 	};
@@ -59301,7 +59301,7 @@ var ripple =
 /* 627 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59387,7 +59387,7 @@ var ripple =
 /* 628 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59415,7 +59415,7 @@ var ripple =
 	  var properties = {
 	    maker: order.Account,
 	    sequence: order.Sequence,
-	    makerExchangeRate: utils.adjustQualityForXRP(order.quality, takerGetsAmount.currency, takerPaysAmount.currency)
+	    makerExchangeRate: utils.adjustQualityForSTM(order.quality, takerGetsAmount.currency, takerPaysAmount.currency)
 	  };
 
 	  var takerGetsFunded = order.taker_gets_funded ? parseAmount(order.taker_gets_funded) : undefined;
@@ -59434,7 +59434,7 @@ var ripple =
 /* 629 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59481,7 +59481,7 @@ var ripple =
 /* 630 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 
 	'use strict'; // eslint-disable-line strict
 
@@ -59495,7 +59495,7 @@ var ripple =
 	  var data = response.account_data;
 	  return removeUndefined({
 	    sequence: data.Sequence,
-	    xrpBalance: utils.common.dropsToXrp(data.Balance),
+	    stmBalance: utils.common.dropsToStm(data.Balance),
 	    ownerCount: data.OwnerCount,
 	    previousInitiatedTransactionID: data.AccountTxnID,
 	    previousAffectingTransactionID: data.PreviousTxnID,
@@ -59523,7 +59523,7 @@ var ripple =
 /* 631 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59562,7 +59562,7 @@ var ripple =
 /* 632 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59571,8 +59571,8 @@ var ripple =
 	function parsePaymentChannel(data) {
 	  return utils.removeUndefined({
 	    account: data.Account,
-	    amount: utils.dropsToXrp(data.Amount),
-	    balance: utils.dropsToXrp(data.Balance),
+	    amount: utils.dropsToStm(data.Amount),
+	    balance: utils.dropsToStm(data.Balance),
 	    destination: data.Destination,
 	    publicKey: data.PublicKey,
 	    settleDelay: data.SettleDelay,
@@ -59591,33 +59591,33 @@ var ripple =
 /* 633 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
 	var utils = __webpack_require__(634);
 	var validate = utils.common.validate;
-	var toRippledAmount = utils.common.toRippledAmount;
+	var toStoxumdAmount = utils.common.toStoxumdAmount;
 	var paymentFlags = utils.common.txFlags.Payment;
 	var ValidationError = utils.common.errors.ValidationError;
 
 
-	function isXRPToXRPPayment(payment) {
+	function isSTMToSTMPayment(payment) {
 	  var sourceCurrency = _.get(payment, 'source.maxAmount.currency', _.get(payment, 'source.amount.currency'));
 	  var destinationCurrency = _.get(payment, 'destination.amount.currency', _.get(payment, 'destination.minAmount.currency'));
-	  return sourceCurrency === 'XRP' && destinationCurrency === 'XRP';
+	  return sourceCurrency === 'STM' && destinationCurrency === 'STM';
 	}
 
 	function isIOUWithoutCounterparty(amount) {
-	  return amount && amount.currency !== 'XRP' && amount.counterparty === undefined;
+	  return amount && amount.currency !== 'STM' && amount.counterparty === undefined;
 	}
 
 	function applyAnyCounterpartyEncoding(payment) {
 	  // Convert blank counterparty to sender or receiver's address
-	  //   (Ripple convention for 'any counterparty')
-	  // https://ripple.com/build/transactions/
+	  //   (Stoxum convention for 'any counterparty')
+	  // https://stoxum.com/build/transactions/
 	  //    #special-issuer-values-for-sendmax-and-amount
-	  // https://ripple.com/build/ripple-rest/#counterparties-in-payments
+	  // https://stoxum.com/build/stoxum-rest/#counterparties-in-payments
 	  _.forEach([payment.source, payment.destination], function (adjustment) {
 	    _.forEach(['amount', 'minAmount', 'maxAmount'], function (key) {
 	      if (isIOUWithoutCounterparty(adjustment[key])) {
@@ -59628,9 +59628,9 @@ var ripple =
 	}
 
 	function createMaximalAmount(amount) {
-	  var maxXRPValue = '100000000000';
+	  var maxSTMValue = '100000000000';
 	  var maxIOUValue = '9999999999999999e80';
-	  var maxValue = amount.currency === 'XRP' ? maxXRPValue : maxIOUValue;
+	  var maxValue = amount.currency === 'STM' ? maxSTMValue : maxIOUValue;
 	  return _.assign({}, amount, { value: maxValue });
 	}
 
@@ -59646,19 +59646,19 @@ var ripple =
 	    throw new ValidationError('payment must specify either (source.maxAmount ' + 'and destination.amount) or (source.amount and destination.minAmount)');
 	  }
 
-	  // when using destination.minAmount, rippled still requires that we set
+	  // when using destination.minAmount, stoxumd still requires that we set
 	  // a destination amount in addition to DeliverMin. the destination amount
 	  // is interpreted as the maximum amount to send. we want to be sure to
 	  // send the whole source amount, so we set the destination amount to the
 	  // maximum possible amount. otherwise it's possible that the destination
 	  // cap could be hit before the source cap.
-	  var amount = payment.destination.minAmount && !isXRPToXRPPayment(payment) ? createMaximalAmount(payment.destination.minAmount) : payment.destination.amount || payment.destination.minAmount;
+	  var amount = payment.destination.minAmount && !isSTMToSTMPayment(payment) ? createMaximalAmount(payment.destination.minAmount) : payment.destination.amount || payment.destination.minAmount;
 
 	  var txJSON = {
 	    TransactionType: 'Payment',
 	    Account: payment.source.address,
 	    Destination: payment.destination.address,
-	    Amount: toRippledAmount(amount),
+	    Amount: toStoxumdAmount(amount),
 	    Flags: 0
 	  };
 
@@ -59674,32 +59674,32 @@ var ripple =
 	  if (payment.memos !== undefined) {
 	    txJSON.Memos = _.map(payment.memos, utils.convertMemo);
 	  }
-	  if (payment.noDirectRipple === true) {
-	    txJSON.Flags |= paymentFlags.NoRippleDirect;
+	  if (payment.noDirectStoxum === true) {
+	    txJSON.Flags |= paymentFlags.NoStoxumDirect;
 	  }
 	  if (payment.limitQuality === true) {
 	    txJSON.Flags |= paymentFlags.LimitQuality;
 	  }
-	  if (!isXRPToXRPPayment(payment)) {
-	    // Don't set SendMax for XRP->XRP payment
+	  if (!isSTMToSTMPayment(payment)) {
+	    // Don't set SendMax for STM->STM payment
 	    // temREDUNDANT_SEND_MAX removed in:
-	    // https://github.com/ripple/rippled/commit/
+	    // https://github.com/stoxum/stoxumd/commit/
 	    //  c522ffa6db2648f1d8a987843e7feabf1a0b7de8/
 	    if (payment.allowPartialPayment === true || payment.destination.minAmount !== undefined) {
 	      txJSON.Flags |= paymentFlags.PartialPayment;
 	    }
 
-	    txJSON.SendMax = toRippledAmount(payment.source.maxAmount || payment.source.amount);
+	    txJSON.SendMax = toStoxumdAmount(payment.source.maxAmount || payment.source.amount);
 
 	    if (payment.destination.minAmount !== undefined) {
-	      txJSON.DeliverMin = toRippledAmount(payment.destination.minAmount);
+	      txJSON.DeliverMin = toStoxumdAmount(payment.destination.minAmount);
 	    }
 
 	    if (payment.paths !== undefined) {
 	      txJSON.Paths = JSON.parse(payment.paths);
 	    }
 	  } else if (payment.allowPartialPayment === true) {
-	    throw new ValidationError('XRP to XRP payments cannot be partial payments');
+	    throw new ValidationError('STM to STM payments cannot be partial payments');
 	  }
 
 	  return txJSON;
@@ -59730,7 +59730,7 @@ var ripple =
 
 	function formatPrepareResponse(txJSON) {
 	  var instructions = {
-	    fee: common.dropsToXrp(txJSON.Fee),
+	    fee: common.dropsToStm(txJSON.Fee),
 	    sequence: txJSON.Sequence,
 	    maxLedgerVersion: txJSON.LastLedgerSequence === undefined ? null : txJSON.LastLedgerSequence
 	  };
@@ -59777,16 +59777,16 @@ var ripple =
 	  function prepareFee() {
 	    var multiplier = instructions.signersCount === undefined ? 1 : instructions.signersCount + 1;
 	    if (instructions.fee !== undefined) {
-	      txJSON.Fee = scaleValue(common.xrpToDrops(instructions.fee), multiplier);
+	      txJSON.Fee = scaleValue(common.stmToDrops(instructions.fee), multiplier);
 	      return Promise.resolve(txJSON);
 	    }
 	    var cushion = api._feeCushion;
 	    return common.serverInfo.getFee(api.connection, cushion).then(function (fee) {
 	      return api.connection.getFeeRef().then(function (feeRef) {
 	        var extraFee = txJSON.TransactionType !== 'EscrowFinish' || txJSON.Fulfillment === undefined ? 0 : cushion * feeRef * (32 + Math.floor(new Buffer(txJSON.Fulfillment, 'hex').length / 16));
-	        var feeDrops = common.xrpToDrops(fee);
+	        var feeDrops = common.stmToDrops(fee);
 	        if (instructions.maxFee !== undefined) {
-	          var maxFeeDrops = common.xrpToDrops(instructions.maxFee);
+	          var maxFeeDrops = common.stmToDrops(instructions.maxFee);
 	          var normalFee = scaleValue(feeDrops, multiplier, extraFee);
 	          txJSON.Fee = BigNumber.min(normalFee, maxFeeDrops).toString();
 	        } else {
@@ -59843,7 +59843,7 @@ var ripple =
 /* 635 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59880,7 +59880,7 @@ var ripple =
 	    txJSON.Flags |= trustlineFlags.SetAuth;
 	  }
 	  if (trustline.ripplingDisabled !== undefined) {
-	    txJSON.Flags |= trustline.ripplingDisabled ? trustlineFlags.NoRipple : trustlineFlags.ClearNoRipple;
+	    txJSON.Flags |= trustline.ripplingDisabled ? trustlineFlags.NoStoxum : trustlineFlags.ClearNoStoxum;
 	  }
 	  if (trustline.frozen !== undefined) {
 	    txJSON.Flags |= trustline.frozen ? trustlineFlags.SetFreeze : trustlineFlags.ClearFreeze;
@@ -59905,7 +59905,7 @@ var ripple =
 /* 636 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59913,12 +59913,12 @@ var ripple =
 	var offerFlags = utils.common.txFlags.OfferCreate;
 	var _utils$common = utils.common,
 	    validate = _utils$common.validate,
-	    iso8601ToRippleTime = _utils$common.iso8601ToRippleTime;
+	    iso8601ToStoxumTime = _utils$common.iso8601ToStoxumTime;
 
 
 	function createOrderTransaction(account, order) {
-	  var takerPays = utils.common.toRippledAmount(order.direction === 'buy' ? order.quantity : order.totalPrice);
-	  var takerGets = utils.common.toRippledAmount(order.direction === 'buy' ? order.totalPrice : order.quantity);
+	  var takerPays = utils.common.toStoxumdAmount(order.direction === 'buy' ? order.quantity : order.totalPrice);
+	  var takerGets = utils.common.toStoxumdAmount(order.direction === 'buy' ? order.totalPrice : order.quantity);
 
 	  var txJSON = {
 	    TransactionType: 'OfferCreate',
@@ -59940,7 +59940,7 @@ var ripple =
 	    txJSON.Flags |= offerFlags.FillOrKill;
 	  }
 	  if (order.expirationTime !== undefined) {
-	    txJSON.Expiration = iso8601ToRippleTime(order.expirationTime);
+	    txJSON.Expiration = iso8601ToStoxumTime(order.expirationTime);
 	  }
 	  if (order.orderToReplace !== undefined) {
 	    txJSON.OfferSequence = order.orderToReplace;
@@ -59965,7 +59965,7 @@ var ripple =
 /* 637 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -59999,15 +59999,15 @@ var ripple =
 /* 638 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
 	var utils = __webpack_require__(634);
 	var _utils$common = utils.common,
 	    validate = _utils$common.validate,
-	    iso8601ToRippleTime = _utils$common.iso8601ToRippleTime,
-	    xrpToDrops = _utils$common.xrpToDrops;
+	    iso8601ToStoxumTime = _utils$common.iso8601ToStoxumTime,
+	    stmToDrops = _utils$common.stmToDrops;
 
 	var ValidationError = utils.common.errors.ValidationError;
 
@@ -60017,17 +60017,17 @@ var ripple =
 	    TransactionType: 'EscrowCreate',
 	    Account: account,
 	    Destination: payment.destination,
-	    Amount: xrpToDrops(payment.amount)
+	    Amount: stmToDrops(payment.amount)
 	  };
 
 	  if (payment.condition !== undefined) {
 	    txJSON.Condition = payment.condition;
 	  }
 	  if (payment.allowCancelAfter !== undefined) {
-	    txJSON.CancelAfter = iso8601ToRippleTime(payment.allowCancelAfter);
+	    txJSON.CancelAfter = iso8601ToStoxumTime(payment.allowCancelAfter);
 	  }
 	  if (payment.allowExecuteAfter !== undefined) {
-	    txJSON.FinishAfter = iso8601ToRippleTime(payment.allowExecuteAfter);
+	    txJSON.FinishAfter = iso8601ToStoxumTime(payment.allowExecuteAfter);
 	  }
 	  if (payment.sourceTag !== undefined) {
 	    txJSON.SourceTag = payment.sourceTag;
@@ -60058,7 +60058,7 @@ var ripple =
 /* 639 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -60104,7 +60104,7 @@ var ripple =
 /* 640 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -60139,28 +60139,28 @@ var ripple =
 /* 641 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(634);
 	var _utils$common = utils.common,
 	    validate = _utils$common.validate,
-	    iso8601ToRippleTime = _utils$common.iso8601ToRippleTime,
-	    xrpToDrops = _utils$common.xrpToDrops;
+	    iso8601ToStoxumTime = _utils$common.iso8601ToStoxumTime,
+	    stmToDrops = _utils$common.stmToDrops;
 
 
 	function createPaymentChannelCreateTransaction(account, paymentChannel) {
 	  var txJSON = {
 	    Account: account,
 	    TransactionType: 'PaymentChannelCreate',
-	    Amount: xrpToDrops(paymentChannel.amount),
+	    Amount: stmToDrops(paymentChannel.amount),
 	    Destination: paymentChannel.destination,
 	    SettleDelay: paymentChannel.settleDelay,
 	    PublicKey: paymentChannel.publicKey.toUpperCase()
 	  };
 
 	  if (paymentChannel.cancelAfter !== undefined) {
-	    txJSON.CancelAfter = iso8601ToRippleTime(paymentChannel.cancelAfter);
+	    txJSON.CancelAfter = iso8601ToStoxumTime(paymentChannel.cancelAfter);
 	  }
 	  if (paymentChannel.sourceTag !== undefined) {
 	    txJSON.SourceTag = paymentChannel.sourceTag;
@@ -60186,14 +60186,14 @@ var ripple =
 /* 642 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(634);
 	var _utils$common = utils.common,
 	    validate = _utils$common.validate,
-	    iso8601ToRippleTime = _utils$common.iso8601ToRippleTime,
-	    xrpToDrops = _utils$common.xrpToDrops;
+	    iso8601ToStoxumTime = _utils$common.iso8601ToStoxumTime,
+	    stmToDrops = _utils$common.stmToDrops;
 
 
 	function createPaymentChannelFundTransaction(account, fund) {
@@ -60201,11 +60201,11 @@ var ripple =
 	    Account: account,
 	    TransactionType: 'PaymentChannelFund',
 	    Channel: fund.channel,
-	    Amount: xrpToDrops(fund.amount)
+	    Amount: stmToDrops(fund.amount)
 	  };
 
 	  if (fund.expiration !== undefined) {
-	    txJSON.Expiration = iso8601ToRippleTime(fund.expiration);
+	    txJSON.Expiration = iso8601ToStoxumTime(fund.expiration);
 	  }
 
 	  return txJSON;
@@ -60225,7 +60225,7 @@ var ripple =
 /* 643 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(634);
@@ -60233,7 +60233,7 @@ var ripple =
 	var claimFlags = utils.common.txFlags.PaymentChannelClaim;
 	var _utils$common = utils.common,
 	    validate = _utils$common.validate,
-	    xrpToDrops = _utils$common.xrpToDrops;
+	    stmToDrops = _utils$common.stmToDrops;
 
 
 	function createPaymentChannelClaimTransaction(account, claim) {
@@ -60245,10 +60245,10 @@ var ripple =
 	  };
 
 	  if (claim.balance !== undefined) {
-	    txJSON.Balance = xrpToDrops(claim.balance);
+	    txJSON.Balance = stmToDrops(claim.balance);
 	  }
 	  if (claim.amount !== undefined) {
-	    txJSON.Amount = xrpToDrops(claim.amount);
+	    txJSON.Amount = stmToDrops(claim.amount);
 	  }
 
 	  if (Boolean(claim.signature) !== Boolean(claim.publicKey)) {
@@ -60428,7 +60428,7 @@ var ripple =
 /* 645 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(634);
@@ -60536,7 +60536,7 @@ var ripple =
 /* 647 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -60560,7 +60560,7 @@ var ripple =
 	    resultMessage: response.engine_result_message
 	  };
 	  if (isImmediateRejection(response.engine_result)) {
-	    throw new utils.common.errors.RippledError('Submit failed', data);
+	    throw new utils.common.errors.StoxumdError('Submit failed', data);
 	  }
 	  return data;
 	}
@@ -60613,7 +60613,7 @@ var ripple =
 /* 649 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
@@ -60623,7 +60623,7 @@ var ripple =
 	function convertLedgerHeader(header) {
 	  return {
 	    account_hash: header.stateHash,
-	    close_time: common.iso8601ToRippleTime(header.closeTime),
+	    close_time: common.iso8601ToStoxumTime(header.closeTime),
 	    close_time_resolution: header.closeTimeResolution,
 	    close_flags: header.closeFlags,
 	    hash: header.ledgerHash,
@@ -60631,7 +60631,7 @@ var ripple =
 	    ledger_index: header.ledgerVersion.toString(),
 	    seqNum: header.ledgerVersion.toString(),
 	    parent_hash: header.parentLedgerHash,
-	    parent_close_time: common.iso8601ToRippleTime(header.parentCloseTime),
+	    parent_close_time: common.iso8601ToStoxumTime(header.parentCloseTime),
 	    total_coins: header.totalDrops,
 	    totalCoins: header.totalDrops,
 	    transaction_hash: header.transactionHash
@@ -60689,14 +60689,14 @@ var ripple =
 /* 650 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var common = __webpack_require__(302);
 	var keypairs = __webpack_require__(305);
 	var binary = __webpack_require__(564);
 	var validate = common.validate,
-	    xrpToDrops = common.xrpToDrops;
+	    stmToDrops = common.stmToDrops;
 
 
 	function signPaymentChannelClaim(channel, amount, privateKey) {
@@ -60704,7 +60704,7 @@ var ripple =
 
 	  var signingData = binary.encodeForSigningClaim({
 	    channel: channel,
-	    amount: xrpToDrops(amount)
+	    amount: stmToDrops(amount)
 	  });
 	  return keypairs.sign(signingData, privateKey);
 	}
@@ -60715,14 +60715,14 @@ var ripple =
 /* 651 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var common = __webpack_require__(302);
 	var keypairs = __webpack_require__(305);
 	var binary = __webpack_require__(564);
 	var validate = common.validate,
-	    xrpToDrops = common.xrpToDrops;
+	    stmToDrops = common.stmToDrops;
 
 
 	function verifyPaymentChannelClaim(channel, amount, signature, publicKey) {
@@ -60730,7 +60730,7 @@ var ripple =
 
 	  var signingData = binary.encodeForSigningClaim({
 	    channel: channel,
-	    amount: xrpToDrops(amount)
+	    amount: stmToDrops(amount)
 	  });
 	  return keypairs.verify(signingData, signature, publicKey);
 	}
@@ -60741,7 +60741,7 @@ var ripple =
 /* 652 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var utils = __webpack_require__(540);
@@ -60774,14 +60774,14 @@ var ripple =
 /* 653 */
 /***/ function(module, exports, __webpack_require__) {
 
-	
+
 	'use strict'; // eslint-disable-line strict
 
 	var _ = __webpack_require__(300);
 
 	var _require = __webpack_require__(542),
 	    removeUndefined = _require.removeUndefined,
-	    rippleTimeToISO8601 = _require.rippleTimeToISO8601;
+	    stoxumTimeToISO8601 = _require.stoxumTimeToISO8601;
 
 	var parseTransaction = __webpack_require__(541);
 
@@ -60825,13 +60825,13 @@ var ripple =
 	  var ledgerVersion = parseInt(ledger.ledger_index || ledger.seqNum, 10);
 	  return removeUndefined(_.assign({
 	    stateHash: ledger.account_hash,
-	    closeTime: rippleTimeToISO8601(ledger.close_time),
+	    closeTime: stoxumTimeToISO8601(ledger.close_time),
 	    closeTimeResolution: ledger.close_time_resolution,
 	    closeFlags: ledger.close_flags,
 	    ledgerHash: ledger.hash || ledger.ledger_hash,
 	    ledgerVersion: ledgerVersion,
 	    parentLedgerHash: ledger.parent_hash,
-	    parentCloseTime: rippleTimeToISO8601(ledger.parent_close_time),
+	    parentCloseTime: stoxumTimeToISO8601(ledger.parent_close_time),
 	    totalDrops: ledger.total_coins || ledger.totalCoins,
 	    transactionHash: ledger.transaction_hash
 	  }, parseTransactions(ledger.transactions, ledgerVersion), parseState(ledger.accountState)));
@@ -60854,20 +60854,20 @@ var ripple =
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var _ = __webpack_require__(300);
-	var RippleAPI = __webpack_require__(1).RippleAPI;
+	var StoxumAPI = __webpack_require__(1).StoxumAPI;
 
-	var RippleAPIBroadcast = function (_RippleAPI) {
-	  _inherits(RippleAPIBroadcast, _RippleAPI);
+	var StoxumAPIBroadcast = function (_StoxumAPI) {
+	  _inherits(StoxumAPIBroadcast, _StoxumAPI);
 
-	  function RippleAPIBroadcast(servers, options) {
-	    _classCallCheck(this, RippleAPIBroadcast);
+	  function StoxumAPIBroadcast(servers, options) {
+	    _classCallCheck(this, StoxumAPIBroadcast);
 
-	    var _this = _possibleConstructorReturn(this, (RippleAPIBroadcast.__proto__ || Object.getPrototypeOf(RippleAPIBroadcast)).call(this, options));
+	    var _this = _possibleConstructorReturn(this, (StoxumAPIBroadcast.__proto__ || Object.getPrototypeOf(StoxumAPIBroadcast)).call(this, options));
 
 	    _this.ledgerVersion = 0;
 
 	    var apis = servers.map(function (server) {
-	      return new RippleAPI(_.assign({}, options, { server: server }));
+	      return new StoxumAPI(_.assign({}, options, { server: server }));
 	    });
 
 	    // exposed for testing
@@ -60916,7 +60916,7 @@ var ripple =
 	    return _this;
 	  }
 
-	  _createClass(RippleAPIBroadcast, [{
+	  _createClass(StoxumAPIBroadcast, [{
 	    key: 'onLedgerEvent',
 	    value: function onLedgerEvent(ledger) {
 	      if (ledger.ledgerVersion > this.ledgerVersion) {
@@ -60928,9 +60928,9 @@ var ripple =
 	    key: 'getMethodNames',
 	    value: function getMethodNames() {
 	      var methodNames = [];
-	      for (var name in RippleAPI.prototype) {
-	        if (RippleAPI.prototype.hasOwnProperty(name)) {
-	          if (typeof RippleAPI.prototype[name] === 'function') {
+	      for (var name in StoxumAPI.prototype) {
+	        if (StoxumAPI.prototype.hasOwnProperty(name)) {
+	          if (typeof StoxumAPI.prototype[name] === 'function') {
 	            methodNames.push(name);
 	          }
 	        }
@@ -60939,11 +60939,11 @@ var ripple =
 	    }
 	  }]);
 
-	  return RippleAPIBroadcast;
-	}(RippleAPI);
+	  return StoxumAPIBroadcast;
+	}(StoxumAPI);
 
 	module.exports = {
-	  RippleAPIBroadcast: RippleAPIBroadcast
+	  StoxumAPIBroadcast: StoxumAPIBroadcast
 	};
 
 /***/ }

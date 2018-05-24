@@ -7,7 +7,7 @@
 'use strict'
 
 if (!LOADER_PNG) {
-  var LOADER_PNG = 'assets/images/rippleThrobber.png'
+  var LOADER_PNG = 'assets/images/stoxumThrobber.png'
 }
 
 function PriceChart(options) {
@@ -80,14 +80,14 @@ function PriceChart(options) {
     return tzAbbr
   }
 
-  // format an amount if ripple-lib is present
-  function rippleAmount(amount, currency) {
-    if (typeof ripple === 'undefined' || !ripple.Amount) {
+  // format an amount if stoxum-lib is present
+  function stoxumAmount(amount, currency) {
+    if (typeof stoxum === 'undefined' || !stoxum.Amount) {
       return amount
     }
 
-    return ripple.Amount.from_human(amount + ' ' + currency)
-      .to_human({max_sig_digits: 6})
+    return stoxum.Amount.from_human(amount + ' ' + currency)
+      .to_human({ max_sig_digits: 6 })
   }
 
 
@@ -129,7 +129,7 @@ function PriceChart(options) {
     var x = d3.mouse(this)[0] / z
     var tx = Math.max(0, Math.min(options.width + options.margin.left, x))
 
-    var i = d3.bisect(lineData.map(function(d) {
+    var i = d3.bisect(lineData.map(function (d) {
       return d.startTime
     }), xScale.invert(tx - options.margin.left))
     var d = lineData[i]
@@ -166,8 +166,8 @@ function PriceChart(options) {
         .attr('transform', 'translate(' + xScale(d.startTime) + ')')
       focus.transition().duration(50)
         .attr('transform', 'translate(' +
-              xScale(d.startTime) + ',' +
-              priceScale(d.close) + ')')
+          xScale(d.startTime) + ',' +
+          priceScale(d.close) + ')')
       horizontal.transition().duration(50)
         .attr('x1', xScale(d.startTime))
         .attr('x2', options.width)
@@ -234,11 +234,11 @@ function PriceChart(options) {
 
     svg.enter().append('svg')
       .attr('width', options.width +
-            options.margin.left +
-            options.margin.right)
+        options.margin.left +
+        options.margin.right)
       .attr('height', options.height +
-            options.margin.top +
-            options.margin.bottom)
+        options.margin.top +
+        options.margin.bottom)
 
     svg.append('defs').append('clipPath')
       .attr('id', 'clip')
@@ -250,8 +250,8 @@ function PriceChart(options) {
 
     gEnter = svg.append('g')
       .attr('transform', 'translate(' +
-            options.margin.left + ',' +
-            options.margin.top + ')')
+        options.margin.left + ',' +
+        options.margin.top + ')')
 
     gEnter.append('rect')
       .attr('class', 'background')
@@ -347,7 +347,7 @@ function PriceChart(options) {
 
     // aiming for around 100-200 here
     var num = (moment(endTime).unix() - moment(startTime).unix()) /
-        intervalSeconds
+      intervalSeconds
     var candleWidth = options.width / (num * 1.5)
 
     if (candleWidth < 3) {
@@ -364,20 +364,20 @@ function PriceChart(options) {
     gEnter.select('.axis.volume').select('text')
       .text('Volume (' + baseCurrency + ')')
 
-    svg.datum(lineData, function(d) {
+    svg.datum(lineData, function (d) {
       return d.startTime
     })
-    .on('mousemove', showDetails)
-    .on('touchmove', showDetails)
-    .on('touchstart', showDetails)
-    .on('touchend', showDetails)
+      .on('mousemove', showDetails)
+      .on('touchmove', showDetails)
+      .on('touchstart', showDetails)
+      .on('touchend', showDetails)
 
     // Update the x-scale.
     xScale
       .domain([
         startTime,
         moment.utc(endTime)
-        .add(num / 35 * intervalSeconds, 'seconds')
+          .add(num / 35 * intervalSeconds, 'seconds')
       ])
       .range([0, options.width])
 
@@ -385,7 +385,7 @@ function PriceChart(options) {
     volumeScale
       .domain([
         0,
-        d3.max(lineData, function(d) {
+        d3.max(lineData, function (d) {
           return d.baseVolume
         }) * 2
       ])
@@ -398,10 +398,10 @@ function PriceChart(options) {
       // update the price scale
       priceScale
         .domain([
-          d3.min(lineData, function(d) {
+          d3.min(lineData, function (d) {
             return Math.min(d.close)
           }) * 0.975,
-          d3.max(lineData, function(d) {
+          d3.max(lineData, function (d) {
             return Math.max(d.close)
           }) * 1.025
         ])
@@ -413,10 +413,10 @@ function PriceChart(options) {
 
       priceScale
         .domain([
-          d3.min(lineData, function(d) {
+          d3.min(lineData, function (d) {
             return Math.min(d.open, d.close, d.high, d.low)
           }) * 0.975,
-          d3.max(lineData, function(d) {
+          d3.max(lineData, function (d) {
             return Math.max(d.open, d.close, d.high, d.low)
           }) * 1.025
         ])
@@ -425,16 +425,16 @@ function PriceChart(options) {
 
 
     var line = d3.svg.line()
-      .x(function(d) {
+      .x(function (d) {
         return xScale(d.startTime)
       })
-      .y(function(d) {
+      .y(function (d) {
         return priceScale(d.close)
       })
 
     // add the price line
     gEnter.select('.line')
-      .datum(lineData, function(d) {
+      .datum(lineData, function (d) {
         return d.startTime
       })
       .transition().duration(duration)
@@ -443,20 +443,20 @@ function PriceChart(options) {
 
     // add the candlesticks.
     var candle = gEnter.select('.candlesticks').selectAll('g')
-      .data(lineData, function(d) {
+      .data(lineData, function (d) {
         return d.startTime
       })
 
-     /*
-         * Candlestick rules:
-         * previous.close < current.close = up/green
-         * previous.close > current.close = down/red
-         * current.close<current.open = filled
-         * current.close>current.open = hollow
-     */
+    /*
+        * Candlestick rules:
+        * previous.close < current.close = up/green
+        * previous.close > current.close = down/red
+        * current.close<current.open = filled
+        * current.close>current.open = hollow
+    */
 
     var candleEnter = candle.enter().append('g')
-      .attr('transform', function(d) {
+      .attr('transform', function (d) {
         return 'translate(' + xScale(d.startTime) + ')'
       })
 
@@ -465,7 +465,7 @@ function PriceChart(options) {
     candleEnter.append('line').attr('class', 'low')
     candleEnter.append('rect')
 
-    var candleUpdate = candle.classed('up', function(d, i) {
+    var candleUpdate = candle.classed('up', function (d, i) {
       if (i > 0) {
         var prev = lineData[i - 1]
         return prev.close <= d.close
@@ -473,54 +473,54 @@ function PriceChart(options) {
 
       return d.open <= d.close // just for the first, accurate most of the time
     })
-    .classed('filled', function(d) {
-      return d.close <= d.open
-    })
-    .transition().duration(duration)
-    .attr('transform', function(d) {
-      return 'translate(' + xScale(d.startTime) + ')'
-    })
+      .classed('filled', function (d) {
+        return d.close <= d.open
+      })
+      .transition().duration(duration)
+      .attr('transform', function (d) {
+        return 'translate(' + xScale(d.startTime) + ')'
+      })
 
     candleUpdate.select('.extent')
-      .attr('y1', function(d) {
+      .attr('y1', function (d) {
         return priceScale(d.low)
       })
-      .attr('y2', function(d) {
+      .attr('y2', function (d) {
         return priceScale(d.high)
       })
 
     candleUpdate.select('rect')
       .attr('x', -candleWidth / 2)
       .attr('width', candleWidth)
-      .attr('y', function(d) {
+      .attr('y', function (d) {
         return priceScale(Math.max(d.open, d.close))
       })
-      .attr('height', function(d) {
+      .attr('height', function (d) {
         return Math.abs(priceScale(d.open) - priceScale(d.close)) + 0.5
       })
 
     candleUpdate.select('.high')
       .attr('x1', -candleWidth / 4)
       .attr('x2', candleWidth / 4)
-      .attr('y1', function(d) {
+      .attr('y1', function (d) {
         return priceScale(d.high)
       })
-      .attr('y2', function(d) {
+      .attr('y2', function (d) {
         return priceScale(d.high)
       })
 
     candleUpdate.select('.low')
       .attr('x1', -candleWidth / 4)
       .attr('x2', candleWidth / 4)
-      .attr('y1', function(d) {
+      .attr('y1', function (d) {
         return priceScale(d.low)
       })
-      .attr('y2', function(d) {
+      .attr('y2', function (d) {
         return priceScale(d.low)
       })
 
     d3.transition(candle.exit())
-      .attr('transform', function(d) {
+      .attr('transform', function (d) {
         return 'translate(' + xScale(d.startTime) + ')'
       })
       .style('opacity', 1e-6).remove()
@@ -529,27 +529,27 @@ function PriceChart(options) {
     // add the volume bars
     var bars = gEnter.select('.volumeBars')
       .selectAll('rect')
-      .data(lineData, function(d) {
+      .data(lineData, function (d) {
         return d.startTime
       })
 
     bars.enter().append('rect')
 
-    bars.data(lineData, function(d) {
+    bars.data(lineData, function (d) {
       return d.startTime
     })
-    .transition().duration(duration)
-    .attr('x', function(d) {
-      return xScale(d.startTime) - candleWidth / 3
-    })
-    .attr('y', function(d) {
-      return volumeScale(d.baseVolume)
-    })
-    .attr('width', candleWidth / 1.2)
-    .attr('height', function(d) {
-      return options.height - volumeScale(d.baseVolume)
-    })
-    .style('fill', 'url(#gradient)')
+      .transition().duration(duration)
+      .attr('x', function (d) {
+        return xScale(d.startTime) - candleWidth / 3
+      })
+      .attr('y', function (d) {
+        return volumeScale(d.baseVolume)
+      })
+      .attr('width', candleWidth / 1.2)
+      .attr('height', function (d) {
+        return options.height - volumeScale(d.baseVolume)
+      })
+      .style('fill', 'url(#gradient)')
 
     bars.exit().remove()
 
@@ -637,22 +637,22 @@ function PriceChart(options) {
     }
 
     if (oldWidth !== options.width ||
-        oldHeight !== options.height) {
+      oldHeight !== options.height) {
 
       svg.attr('width', options.width +
-               options.margin.left +
-               options.margin.right)
-      .attr('height', options.height +
-            options.margin.top +
-            options.margin.bottom)
+        options.margin.left +
+        options.margin.right)
+        .attr('height', options.height +
+          options.margin.top +
+          options.margin.bottom)
 
       svg.select('rect')
         .attr('width', options.width)
         .attr('height', options.height)
 
       svg.select('rect.background')
-      .attr('width', options.width)
-      .attr('height', options.height)
+        .attr('width', options.width)
+        .attr('height', options.height)
 
       if (base && counter) {
         drawData(true)
@@ -728,7 +728,7 @@ function PriceChart(options) {
   }
 
 
-  // enable the live feed via ripple-lib
+  // enable the live feed via stoxum-lib
   function setLiveFeed() {
     var candle = {
       startTime: moment.utc(lastCandle),
@@ -789,30 +789,30 @@ function PriceChart(options) {
 
   } else {
     var padding = parseInt(details.style('padding-left'), 10) +
-        parseInt(details.style('padding-right'), 10)
+      parseInt(details.style('padding-right'), 10)
 
     details.style('width', (options.width - padding) + 'px')
       .style('right', 'auto')
 
     div.style('width', (options.width +
-                        options.margin.left +
-                        options.margin.right) +
-                        'px')
+      options.margin.left +
+      options.margin.right) +
+      'px')
 
     div.style('height', ((options.height || staticHeight) +
-                         options.margin.top +
-                         options.margin.bottom) +
-                         'px')
+      options.margin.top +
+      options.margin.bottom) +
+      'px')
   }
 
   drawChart() // have to do this here so that the details div is drawn
 
-  this.resizeChart = function() {
+  this.resizeChart = function () {
     resizeChart()
   }
 
   // fade to throber when loading historical data
-  this.fadeOut = function() {
+  this.fadeOut = function () {
     div.selectAll('svg').transition().duration(100).style('opacity', 0.5)
     svg.on('mousemove', null).on('touchmove', null)
     details.style('opacity', 0)
@@ -823,7 +823,7 @@ function PriceChart(options) {
   }
 
   // set to line or candlestick
-  this.setType = function(newType) {
+  this.setType = function (newType) {
     type = newType
     if (lineData.length) {
       drawData() // dont draw unless its been loaded
@@ -831,12 +831,12 @@ function PriceChart(options) {
   }
 
   // function for getting the raw data for csv output or whatever
-  this.getRawData = function() {
+  this.getRawData = function () {
     return lineData
   }
 
   // load historical from API
-  this.load = function(b, c, d) {
+  this.load = function (b, c, d) {
 
     if (!b) {
       setStatus('Base currency is required.')
@@ -915,7 +915,7 @@ function PriceChart(options) {
       descending: false,
       base: base,
       counter: counter
-    }, function(data) {
+    }, function (data) {
 
       // if we've got live data reported already, we need to merge
       // the first live data with the last historic candle
@@ -935,7 +935,7 @@ function PriceChart(options) {
         }
 
         candle.vwap = (candle.vwap * candle.baseVolume +
-                       first.vwap * first.baseVolume) / volume
+          first.vwap * first.baseVolume) / volume
         candle.baseVolume = volume
         candle.close = first.close
         candle.closeTime = first.closeTime
@@ -956,7 +956,7 @@ function PriceChart(options) {
       }
       drawData()
 
-    }, function(error) {
+    }, function (error) {
       if (self.onStateChange) {
         self.onStateChange('error')
       }
@@ -968,7 +968,7 @@ function PriceChart(options) {
   }
 
   // suspend the live feed
-  this.suspend = function() {
+  this.suspend = function () {
     if (liveFeed) {
       liveFeed.stopListener()
     }

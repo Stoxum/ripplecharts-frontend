@@ -28,20 +28,20 @@ function CapChart(options) {
     .tickFormat(d3.format('s'));
 
   var area = d3.svg.area()
-  .x(function(d) {
-    return xScale(d.date);
-  })
-  .y0(function(d) {
-    return yScale(d.y0);
-  })
-  .y1(function(d) {
-    return yScale(d.y0 + d.y);
-  });
+    .x(function (d) {
+      return xScale(d.date);
+    })
+    .y0(function (d) {
+      return yScale(d.y0);
+    })
+    .y1(function (d) {
+      return yScale(d.y0 + d.y);
+    });
 
   var stack = d3.layout.stack()
-  .values(function(d) {
-    return d.values;
-  });
+    .values(function (d) {
+      return d.values;
+    });
 
   var svg;
   var g;
@@ -111,8 +111,8 @@ function CapChart(options) {
 
   // get extents
   function getExtents(axis, data) {
-    var rows = data.map(function(d) {
-      return d3.extent(d.values, function(row) {
+    var rows = data.map(function (d) {
+      return d3.extent(d.values, function (row) {
         return axis === 'x' ? row.date : row.y;
       });
     });
@@ -120,11 +120,11 @@ function CapChart(options) {
     var max;
     var min;
 
-    min = d3.min(rows, function(d) {
+    min = d3.min(rows, function (d) {
       return d[0];
     });
 
-    max = d3.max(rows, function(d) {
+    max = d3.max(rows, function (d) {
       return d[1];
     });
 
@@ -259,7 +259,7 @@ function CapChart(options) {
 
       top = sections[sections.length - 1].values;
       date = xScale.invert(d3.mouse(this)[0] / zoom);
-      i = d3.bisect(top.map(function(d) {
+      i = d3.bisect(top.map(function (d) {
         return d.date;
       }), date);
 
@@ -290,15 +290,15 @@ function CapChart(options) {
       date = xScale.invert(d3.mouse(this)[0] / zoom);
       amt = yScale.invert(d3.mouse(this)[1] / zoom);
 
-      rows = lines.map(function(data, index) {
-        j = d3.bisectLeft(data.values.map(function(d) {
+      rows = lines.map(function (data, index) {
+        j = d3.bisectLeft(data.values.map(function (d) {
           return d.date;
         }), date);
 
         return [index, j, data.values[j] ? data.values[j].y : 0];
       });
 
-      rows.sort(function(a, b) {
+      rows.sort(function (a, b) {
         return a[2] - b[2];
       });
 
@@ -332,7 +332,7 @@ function CapChart(options) {
   function movingInGround(section) {
     var zoom = chart.style('zoom') || 1;
     var date = xScale.invert(d3.mouse(this)[0] / zoom);
-    var i = d3.bisect(section.values.map(function(d) {
+    var i = d3.bisect(section.values.map(function (d) {
       return d.date;
     }), date);
 
@@ -361,12 +361,12 @@ function CapChart(options) {
   function movingOnLine(line) {
     var zoom = chart.style('zoom') || 1;
     var date = xScale.invert(d3.mouse(this)[0] / zoom);
-    var i = d3.bisect(line.values.map(function(d) {
+    var i = d3.bisect(line.values.map(function (d) {
       return d.date;
     }), date);
 
     if (i && date < (line.values[i].date.unix() +
-                     line.values[i - 1].date.unix()) / 2) {
+      line.values[i - 1].date.unix()) / 2) {
       i--;
     }
 
@@ -408,7 +408,7 @@ function CapChart(options) {
       status = chart.append('div').attr('class', 'status');
       loader = chart.append('img')
         .attr('class', 'loader')
-        .attr('src', 'assets/images/rippleThrobber.png');
+        .attr('src', 'assets/images/stoxumThrobber.png');
     }
 
     svg.attr({
@@ -417,26 +417,26 @@ function CapChart(options) {
     });
 
     g.attr('transform', 'translate(' +
-           options.margin.left + ',' +
-           options.margin.top + ')');
+      options.margin.left + ',' +
+      options.margin.top + ')');
 
     g.attr('width', options.width)
-    .attr('height', options.height);
+      .attr('height', options.height);
 
     bg.attr('width', options.width)
-    .attr('height', options.height);
+      .attr('height', options.height);
 
 
     timeAxis.attr('transform', 'translate(' +
-                  options.margin.left + ',' +
-                  (options.height + options.margin.top) + ')');
+      options.margin.left + ',' +
+      (options.height + options.margin.top) + ')');
 
     amountAxis.attr('transform', 'translate(' +
-                    (options.width + options.margin.left) + ',' +
-                    options.margin.top + ')');
+      (options.width + options.margin.left) + ',' +
+      options.margin.top + ')');
 
     amountLabel.attr('transform', 'rotate(-90)').attr('y', -5)
-    .attr('x', -options.height * 0.85);
+      .attr('x', -options.height * 0.85);
 
     xScale.range([0, options.width]);
     yScale.range([options.height, 0]);
@@ -476,7 +476,7 @@ function CapChart(options) {
         return;
       }
 
-      color.domain(legend.map(function(d) {
+      color.domain(legend.map(function (d) {
         return d.address;
       }));
 
@@ -485,14 +485,14 @@ function CapChart(options) {
       if (data.length) {
         sections = stack(data);
 
-        xScale.domain(d3.extent(data[0].values, function(d) {
+        xScale.domain(d3.extent(data[0].values, function (d) {
           return d.date;
         }));
 
         yScale.domain([
           0,
-          d3.sum(data, function(d) {
-            return d3.max(d.values, function(v) {
+          d3.sum(data, function (d) {
+            return d3.max(d.values, function (v) {
               return v.y;
             });
           })
@@ -501,30 +501,30 @@ function CapChart(options) {
         var section = g.selectAll('g.section').data(sections);
 
         section.enter().append('g')
-        .attr('class', 'section')
-        .style('display', function(d) {
-          return d.hide ? 'none' : 'inherit';
-        });
+          .attr('class', 'section')
+          .style('display', function (d) {
+            return d.hide ? 'none' : 'inherit';
+          });
 
         section.exit().remove();
 
         var path = section.selectAll('path')
-        .data(function(d) {
-          return [d];
-        });
+          .data(function (d) {
+            return [d];
+          });
 
         path.enter().append('path')
           .on('mousemove', movingInGround);
 
         path.transition()
-        .attr({
-          class: 'area',
-          d: function(d) {
-            return area(d.values);
-          }
-        });
+          .attr({
+            class: 'area',
+            d: function (d) {
+              return area(d.values);
+            }
+          });
 
-        path.style('fill', function(d) {
+        path.style('fill', function (d) {
           return color(d.address);
         });
         path.exit().remove();
@@ -555,7 +555,7 @@ function CapChart(options) {
         return;
       }
 
-      color.domain(legend.map(function(d) {
+      color.domain(legend.map(function (d) {
         return d.address;
       }));
 
@@ -564,34 +564,34 @@ function CapChart(options) {
       xScale.domain(getExtents('x', lines));
       yScale.domain(getExtents('y', lines));
 
-      var line = g.selectAll('g.line').data(lines, function(d) {
+      var line = g.selectAll('g.line').data(lines, function (d) {
         return d.address || d.issuer || d.account;
       });
 
       line.enter().append('g').attr('class', 'line');
       line.exit().remove();
 
-      var p = line.selectAll('.l').data(function(d) {
+      var p = line.selectAll('.l').data(function (d) {
         return [d];
       });
 
       p.enter().append('path').attr('class', 'l')
-      .on('mouseover', movingOnLine);
+        .on('mouseover', movingOnLine);
 
-      p.transition().attr('d', function(d) {
+      p.transition().attr('d', function (d) {
         var l = d3.svg.line()
-        .x(function(row) {
-          return xScale(row.date);
-        })
-        .y(function(row) {
-          return yScale(row.y);
-        });
+          .x(function (row) {
+            return xScale(row.date);
+          })
+          .y(function (row) {
+            return yScale(row.y);
+          });
 
         return l(d.values);
       })
-      .style('stroke', function(d) {
-        return color(d.address || d.issuer);
-      });
+        .style('stroke', function (d) {
+          return color(d.address || d.issuer);
+        });
 
       p.exit().remove();
     }
@@ -615,7 +615,7 @@ function CapChart(options) {
       setStatus('invalid type: ' + self.dataType);
     }
 
-    legendDiv.style('display', self.currency === 'XRP' ? 'none' : 'block');
+    legendDiv.style('display', self.currency === 'STM' ? 'none' : 'block');
 
     var items = legendDiv.selectAll('.item').data(data);
     var enter = items.enter().append('div').attr('class', 'item');
@@ -623,33 +623,33 @@ function CapChart(options) {
     enter.append('h5').attr('class', 'gateway');
     enter.append('div').attr('class', 'issuer');
     enter.append('div').attr('class', 'amount');
-    enter.on('click', function(d) {
+    enter.on('click', function (d) {
       d.hide = !d.hide;
       drawData();
       drawLegend();
       d3.select(this).transition().style('opacity', d.hide ? 0.3 : 1);
     });
 
-    items.style('color', function(d) {
+    items.style('color', function (d) {
       return color(d.address);
     })
-    .style('opacity', function(d) {
-      return d.hide ? 0.3 : 1;
-    });
+      .style('opacity', function (d) {
+        return d.hide ? 0.3 : 1;
+      });
 
-    items.select('.gateway').html(function(d) {
+    items.select('.gateway').html(function (d) {
       return d.name;
     });
 
-    items.select('.issuer').html(function(d) {
+    items.select('.issuer').html(function (d) {
       return d.address;
     });
 
     if (self.dataType === 'Capitalization') {
       items.select('.amount')
-      .html(function(d) {
-        return d.amount + ' <small>' + self.currency + '</small';
-      });
+        .html(function (d) {
+          return d.amount + ' <small>' + self.currency + '</small';
+        });
 
     } else {
       items.select('.amount').html('');
@@ -696,7 +696,7 @@ function CapChart(options) {
       }
     }
 
-    timestamps.sort(function(a, b) {
+    timestamps.sort(function (a, b) {
       return a - b;
     });
 
@@ -744,7 +744,7 @@ function CapChart(options) {
       raw = tradeDataCache[currency][range.name].raw;
     }
 
-    legend = raw.map(function(d) {
+    legend = raw.map(function (d) {
       var amount;
       var address = d.address || d.issuer;
       if (d.values) {
@@ -789,20 +789,20 @@ function CapChart(options) {
       timeIncrement: range.interval,
       currency: c.currency,
       issuer: c.issuer
-    }, function(data) {
+    }, function (data) {
 
       if (!sendDataCache[currency]) {
         sendDataCache[currency] = {};
       }
 
       if (!sendDataCache[currency][range.name]) {
-        sendDataCache[currency][range.name] = {raw: []};
+        sendDataCache[currency][range.name] = { raw: [] };
       }
 
       sendDataCache[currency][range.name].raw.push({
         address: c.issuer,
         name: options.gateways.getName(c.issuer, c.currency),
-        results: data.payments.map(function(d) {
+        results: data.payments.map(function (d) {
           return [
             moment.utc(d.start).unix() * 1000,
             Number(d.total_amount)
@@ -818,14 +818,14 @@ function CapChart(options) {
 
         // may have been changed after loading started
         if (self.dataType === 'Payment Volume' &&
-        self.currency === currency &&
-        self.range === range.name) {
+          self.currency === currency &&
+          self.range === range.name) {
           drawData();
           drawLegend();
         }
       }
 
-    }, function(error) {
+    }, function (error) {
       setStatus(error.text ? error.text : 'Unable to load data');
     });
   }
@@ -833,17 +833,17 @@ function CapChart(options) {
   // load payment data
   function loadPaymentData(range) {
     if (sendDataCache[self.currency] &&
-        sendDataCache[self.currency][self.range]) {
+      sendDataCache[self.currency][self.range]) {
       isLoading = false;
       drawData();
       drawLegend();
       return;
     }
 
-    var issuers = self.currency === 'XRP' ?
-        [{currency: 'XRP'}] : options.gateways.getIssuers(self.currency, true);
+    var issuers = self.currency === 'STM' ?
+      [{ currency: 'STM' }] : options.gateways.getIssuers(self.currency, true);
 
-    issuers.forEach(function(d) {
+    issuers.forEach(function (d) {
       var issuer = {
         currency: self.currency,
         issuer: d.account
@@ -871,13 +871,13 @@ function CapChart(options) {
       timeMultiple: multiple,
       descending: false,
       base: base,
-      counter: {currency: 'XRP'}
-    }, function(data) {
+      counter: { currency: 'STM' }
+    }, function (data) {
 
       tradeDataCache[currency][range.name].raw.push({
         address: base.issuer,
         name: options.gateways.getName(base.issuer, base.currency),
-        results: data.map(function(d) {
+        results: data.map(function (d) {
           return [d.startTime.unix() * 1000, d.baseVolume];
         })
       });
@@ -890,14 +890,14 @@ function CapChart(options) {
 
         // may have been changed after loading started
         if ((self.dataType === 'Trade Volume' ||
-             self.dataType === '# of Trades') &&
+          self.dataType === '# of Trades') &&
           self.currency === currency &&
           self.range === range.name) {
           drawData();
           drawLegend();
         }
       }
-    }, function(error) {
+    }, function (error) {
       setStatus(error.text ? error.text : 'Unable to load data');
     });
   }
@@ -905,7 +905,7 @@ function CapChart(options) {
   // load trade data from offers exercised API for each issuer
   function loadTradeData(range) {
     if (tradeDataCache[self.currency] &&
-        tradeDataCache[self.currency][self.range]) {
+      tradeDataCache[self.currency][self.range]) {
       isLoading = false;
       drawData();
       drawLegend();
@@ -917,12 +917,12 @@ function CapChart(options) {
     }
 
     if (!tradeDataCache[self.currency][range.name]) {
-      tradeDataCache[self.currency][range.name] = {raw: []};
+      tradeDataCache[self.currency][range.name] = { raw: [] };
     }
 
     var issuers = options.gateways.getIssuers(self.currency, true);
 
-    issuers.forEach(function(d) {
+    issuers.forEach(function (d) {
       var issuer = {
         currency: self.currency,
         issuer: d.account
@@ -944,7 +944,7 @@ function CapChart(options) {
       capDataCache[currency][range.name].raw.push({
         address: data.issuer,
         name: options.gateways.getName(data.issuer, data.currency),
-        results: data.rows.map(function(d) {
+        results: data.rows.map(function (d) {
           return [
             moment.utc(d.date).unix() * 1000,
             Number(d.amount)
@@ -970,8 +970,8 @@ function CapChart(options) {
     }
 
     apiHandler.issuerCapitalization(params,
-                                    successResponse,
-                                    errorResponse);
+      successResponse,
+      errorResponse);
   }
 
   // load capitalization data from issuerCapitalization API
@@ -979,7 +979,7 @@ function CapChart(options) {
     var currency = self.currency;
 
     if (capDataCache[currency] &&
-        capDataCache[currency][range.name]) {
+      capDataCache[currency][range.name]) {
       isLoading = false;
       drawData();
       drawLegend();
@@ -999,7 +999,7 @@ function CapChart(options) {
     var issuers = options.gateways.getIssuers(currency, true);
     var end = moment.utc();
 
-    issuers.forEach(function(issuer) {
+    issuers.forEach(function (issuer) {
       var params = {
         currency: self.currency,
         issuer: issuer.account,
@@ -1069,39 +1069,39 @@ function CapChart(options) {
 
   // add data type dropdown
   dropdowns.append('div')
-  .attr('class', 'dropdowns dataType')
-  .append('select')
-  .selectAll('option')
-  .data(['Capitalization', 'Payment Volume', 'Trade Volume'])
-  .enter().append('option')
-  .html(function(d) {
-    return d;
-  })
-  .attr('selected', function(d) {
-    return d === self.dataType ? true : undefined;
-  });
+    .attr('class', 'dropdowns dataType')
+    .append('select')
+    .selectAll('option')
+    .data(['Capitalization', 'Payment Volume', 'Trade Volume'])
+    .enter().append('option')
+    .html(function (d) {
+      return d;
+    })
+    .attr('selected', function (d) {
+      return d === self.dataType ? true : undefined;
+    });
 
   dropdowns.select('.dataType select')
-  .on('change', function() {
-    self.dataType = this.value;
-    if (self.dataType === 'Payment Volume') {
-      dropdowns.select('.currency select')
-      .insert('option', ':first-child')
-      .attr('class', 'XRP')
-      .text('XRP');
+    .on('change', function () {
+      self.dataType = this.value;
+      if (self.dataType === 'Payment Volume') {
+        dropdowns.select('.currency select')
+          .insert('option', ':first-child')
+          .attr('class', 'STM')
+          .text('STM');
 
-    } else {
-      dropdowns.select('.currency .XRP').remove();
-    }
+      } else {
+        dropdowns.select('.currency .STM').remove();
+      }
 
-    if (self.currency === 'XRP') {
-      self.currency = 'USD';
-      dropdowns.select('.currency select').property('value', 'USD');
-    }
+      if (self.currency === 'STM') {
+        self.currency = 'USD';
+        dropdowns.select('.currency select').property('value', 'USD');
+      }
 
-    var d = controls.select('.interval .selected').datum();
-    loadData(d);
-  });
+      var d = controls.select('.interval .selected').datum();
+      loadData(d);
+    });
 
   // add currency dropdown
   var currencyList = options.gateways.getCurrencies();
@@ -1112,108 +1112,111 @@ function CapChart(options) {
   console.log(self);
 
   dropdowns.append('div')
-  .attr('class', 'dropdowns currency')
-  .append('select')
-  .selectAll('option')
-  .data(currencyList)
-  .enter().append('option')
-  .html(function(d) {
-    return d.currency;
-  })
-  .attr('selected', function(d) {
-    return d.currency === self.currency ? true : undefined;
-  });
+    .attr('class', 'dropdowns currency')
+    .append('select')
+    .selectAll('option')
+    .data(currencyList)
+    .enter().append('option')
+    .html(function (d) {
+      return d.currency;
+    })
+    .attr('selected', function (d) {
+      return d.currency === self.currency ? true : undefined;
+    });
 
   var selected = dropdowns
-  .select('.currency select')
-  .on('change', function() {
-    self.currency = selected.node().value;
-    var range = controls.select('.interval .selected').datum();
-    loadData(range);
-  });
+    .select('.currency select')
+    .on('change', function () {
+      self.currency = selected.node().value;
+      var range = controls.select('.interval .selected').datum();
+      loadData(range);
+    });
 
 
   // add chart type select
   var type = controls.append('div')
-  .attr('class', 'chartType selectList')
-  .selectAll('span')
-  .data(['line', 'stacked'])
-  .enter().append('span')
-  .classed('selected', function(d) {
-    return d === self.format;
-  })
-  .text(function(d) {
-    return d;
-  })
-  .on('click', function(d) {
-    d3.event.preventDefault();
-    type.classed('selected', function(s) {
-      return s === d;
-    });
-
-    self.format = d;
-    drawData();
-
-    var range = controls.select('.interval .selected').datum();
-    if (self.onchange) {
-      self.onchange({
-        dataType: self.dataType,
-        currency: self.currency,
-        format: self.format,
-        range: range.name
+    .attr('class', 'chartType selectList')
+    .selectAll('span')
+    .data(['line', 'stacked'])
+    .enter().append('span')
+    .classed('selected', function (d) {
+      return d === self.format;
+    })
+    .text(function (d) {
+      return d;
+    })
+    .on('click', function (d) {
+      d3.event.preventDefault();
+      type.classed('selected', function (s) {
+        return s === d;
       });
-    }
-  });
+
+      self.format = d;
+      drawData();
+
+      var range = controls.select('.interval .selected').datum();
+      if (self.onchange) {
+        self.onchange({
+          dataType: self.dataType,
+          currency: self.currency,
+          format: self.format,
+          range: range.name
+        });
+      }
+    });
 
   // add interval select
   var list = controls
-  .append('div')
-  .attr('class', 'interval selectList');
+    .append('div')
+    .attr('class', 'interval selectList');
 
   list.append('label').html('Range:');
   var interval = list.selectAll('span')
-  .data([
-    {
-      name: 'month',
-      interval: 'day',
-      offset: function(d) {
-        return d3.time.month.offset(d, -1);
-      }},
-    {
-      name: 'quarter',
-      interval: 'day',
-      offset: function(d) {
-        return d3.time.month.offset(d, -3);
-      }},
-    {
-      name: 'year',
-      interval: 'day',
-      offset: function(d) {
-        return d3.time.year.offset(d, -1);
-      }},
-    {
-      name: 'max',
-      interval: 'week',
-      offset: function() {
-        return moment.utc('2013-01-01');
+    .data([
+      {
+        name: 'month',
+        interval: 'day',
+        offset: function (d) {
+          return d3.time.month.offset(d, -1);
+        }
+      },
+      {
+        name: 'quarter',
+        interval: 'day',
+        offset: function (d) {
+          return d3.time.month.offset(d, -3);
+        }
+      },
+      {
+        name: 'year',
+        interval: 'day',
+        offset: function (d) {
+          return d3.time.year.offset(d, -1);
+        }
+      },
+      {
+        name: 'max',
+        interval: 'week',
+        offset: function () {
+          return moment.utc('2013-01-01');
+        }
       }
-    }
-  ])
-  .enter().append('span')
-  .classed('selected', function(d) {
-    return d.name === self.range;
-  })
-  .text(function(d) {
-    return d.name;
-  })
-  .on('click', function(range) {
-    d3.event.preventDefault();
-    interval.classed('selected', function(s) {
-      return range === s;
-    });
+    ])
+    .enter().append('span')
+    .classed('selected', function (d) {
+      return d.name === self.range;
+    })
+    .text(function (d) {
+      return d.name;
+    })
+    .on('click', function (range) {
+      d3.event.preventDefault();
+      interval.classed('selected', function (s) {
+        return range === s;
+      });
 
-    loadData(range);
-  });
+      loadData(range);
+    });
 
   function resizeChart() {
     var old = options.width;
@@ -1236,7 +1239,7 @@ function CapChart(options) {
     addResizeListener(wrap.node(), resizeChart);
   }
 
-  this.suspend = function() {};
+  this.suspend = function () { };
 
   drawChart();
   var range = controls.select('.interval .selected').datum();

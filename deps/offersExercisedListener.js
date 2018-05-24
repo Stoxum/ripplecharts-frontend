@@ -27,7 +27,7 @@
  *
  *  Available options include:
  *  {
- *    base: {currency: 'XRP'},
+ *    base: {currency: 'STM'},
  *    trade: {currency: 'USD', issuer: 'rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B'},
  *
  *    reduce: true/false, // optional, defaults to false if timeIncrement
@@ -92,7 +92,7 @@ function offersExercisedReduce(values, rereduce) {
       numTrades: 0
     }
 
-    values.forEach(function(trade) {
+    values.forEach(function (trade) {
       var time = trade[7] // unix timestamp
       var price = trade[2] // exchange rate
 
@@ -132,7 +132,7 @@ function offersExercisedReduce(values, rereduce) {
       stats.closeTime = moment.utc(stats.closeTime).unix()
     }
 
-    values.forEach(function(segment, index) {
+    values.forEach(function (segment, index) {
       // skip values[0]
       if (index === 0) {
         return
@@ -186,17 +186,17 @@ function offersExercisedReduce(values, rereduce) {
 function offersExercisedMap(doc, emit) {
   var unix = moment.utc(doc.close_time_timestamp).unix()
 
-  doc.transactions.forEach(function(tx) {
+  doc.transactions.forEach(function (tx) {
     if (tx.metaData.TransactionResult !== 'tesSUCCESS') {
       return
     }
 
     if (tx.TransactionType !== 'Payment' &&
-        tx.TransactionType !== 'OfferCreate') {
+      tx.TransactionType !== 'OfferCreate') {
       return
     }
 
-    tx.metaData.AffectedNodes.forEach(function(affNode) {
+    tx.metaData.AffectedNodes.forEach(function (affNode) {
       var node = affNode.ModifiedNode || affNode.DeletedNode
 
       if (!node || node.LedgerEntryType !== 'Offer') {
@@ -204,8 +204,8 @@ function offersExercisedMap(doc, emit) {
       }
 
       if (!node.PreviousFields ||
-          !node.PreviousFields.TakerPays ||
-          !node.PreviousFields.TakerGets) {
+        !node.PreviousFields.TakerPays ||
+        !node.PreviousFields.TakerGets) {
         return
       }
 
@@ -225,9 +225,9 @@ function offersExercisedMap(doc, emit) {
           node.FinalFields.TakerPays.value
 
       } else {
-        payCurr = ['XRP']
+        payCurr = ['STM']
         payAmnt = (node.PreviousFields.TakerPays -
-                   node.FinalFields.TakerPays) / 1000000.0
+          node.FinalFields.TakerPays) / 1000000.0
       }
 
       if (typeof node.PreviousFields.TakerGets === 'object') {
@@ -239,7 +239,7 @@ function offersExercisedMap(doc, emit) {
         getAmnt = node.PreviousFields.TakerGets.value -
           node.FinalFields.TakerGets.value
       } else {
-        getCurr = ['XRP']
+        getCurr = ['STM']
         getAmnt = (node.PreviousFields.TakerGets -
           node.FinalFields.TakerGets) / 1000000.0
       }
@@ -277,16 +277,16 @@ function createTxProcessor(viewOpts, resultHandler) {
     txContainer.transactions[0].metaData = txData.meta
 
     // use the map function to parse txContainer data
-    offersExercisedMap(txContainer, function(k, v) {
+    offersExercisedMap(txContainer, function (k, v) {
       var key = k
       var value = v
 
       if (viewOpts.counter) {
         // return if trade doesn't match either currency in the pair
         if ((viewOpts.counter.currency !== k[0][0] ||
-             viewOpts.counter.issuer !== k[0][1]) &&
-            (viewOpts.counter.currency !== k[1][0] ||
-             viewOpts.counter.issuer !== k[1][1])) {
+          viewOpts.counter.issuer !== k[0][1]) &&
+          (viewOpts.counter.currency !== k[1][0] ||
+            viewOpts.counter.issuer !== k[1][1])) {
           return
         }
       }
@@ -294,16 +294,16 @@ function createTxProcessor(viewOpts, resultHandler) {
       if (viewOpts.base) {
         // return if base doesn't match either currency in the pair
         if ((viewOpts.base.currency !== k[0][0] ||
-             viewOpts.base.issuer !== k[0][1]) &&
-            (viewOpts.base.currency !== k[1][0] ||
-             viewOpts.base.issuer !== k[1][1])) {
+          viewOpts.base.issuer !== k[0][1]) &&
+          (viewOpts.base.currency !== k[1][0] ||
+            viewOpts.base.issuer !== k[1][1])) {
           return
         }
       }
 
       // Flip the currencies if necessary
       if (viewOpts.base.currency === k[1][0] &&
-          viewOpts.base.issuer === k[1][1]) {
+        viewOpts.base.issuer === k[1][1]) {
         key = [k[1], k[0]]
         value = [
           v[1], // base amount
@@ -343,7 +343,7 @@ function OffersExercisedListener(opts, displayFn) {
   self.displayFn = displayFn
 
   // Wrapper to call the displayFn and update the openTime and closeTime
-  self.finishedInterval = function() {
+  self.finishedInterval = function () {
 
     // send to display
     self.displayFn(formatReduceResult(self.storedResults), true)
@@ -363,16 +363,16 @@ function OffersExercisedListener(opts, displayFn) {
  *  and resets the txProcessor and transaction listener
  */
 
-OffersExercisedListener.prototype.updateViewOpts = function(newOpts) {
+OffersExercisedListener.prototype.updateViewOpts = function (newOpts) {
   var self = this
 
   function setNext() {
-    self.interval = setInterval(function() {
+    self.interval = setInterval(function () {
       self.finishedInterval()
     },
-    moment.duration(self.viewOpts.timeMultiple,
-                    self.viewOpts.timeIncrement)
-    .asMilliseconds())
+      moment.duration(self.viewOpts.timeMultiple,
+        self.viewOpts.timeIncrement)
+        .asMilliseconds())
   }
 
   function subscribe() {
@@ -418,7 +418,7 @@ OffersExercisedListener.prototype.updateViewOpts = function(newOpts) {
     // otherwise, pass the displayFn directly to createTxProcessor()
     if (!self.viewOpts.timeIncrement) {
       self.txProcessor = createTxProcessor(self.viewOpts,
-                                               self.displayFn)
+        self.displayFn)
 
     } else {
 
@@ -427,7 +427,7 @@ OffersExercisedListener.prototype.updateViewOpts = function(newOpts) {
 
       // create regular listener
       self.txProcessor = createTxProcessor(self.viewOpts,
-        function(reducedTrade) {
+        function (reducedTrade) {
           self.storedResults = offersExercisedReduce([
             self.storedResults,
             reducedTrade
@@ -454,7 +454,7 @@ OffersExercisedListener.prototype.updateViewOpts = function(newOpts) {
       // If there is time left in the first timeIncrement, wait until that
       // is finished to start the interval
       if (remainder > 0) {
-        self.timeout = setTimeout(function() {
+        self.timeout = setTimeout(function () {
           self.finishedInterval()
           setNext(self)
 
@@ -472,22 +472,22 @@ OffersExercisedListener.prototype.updateViewOpts = function(newOpts) {
 
   function connect() {
     remote.connect()
-    .then(update)
-    .then(subscribe)
-    .catch(function(e) {
-      console.log(e)
-      if (e.name === 'DisconnectedError') {
-        console.log('attempting reconnect')
-        connect()
-      }
-    })
+      .then(update)
+      .then(subscribe)
+      .catch(function (e) {
+        console.log(e)
+        if (e.name === 'DisconnectedError') {
+          console.log('attempting reconnect')
+          connect()
+        }
+      })
   }
 
   connect()
 };
 
 
-OffersExercisedListener.prototype.resetStored = function(d, merge) {
+OffersExercisedListener.prototype.resetStored = function (d, merge) {
 
   function formatRow(row) {
     var open = row.openTime || row[9]
@@ -521,8 +521,8 @@ OffersExercisedListener.prototype.resetStored = function(d, merge) {
     moment.utc(this.storedResults.startTime) : null
 
   if (merge &&
-      this.storedResults &&
-      !start.diff(formattedRow.startTime)) {
+    this.storedResults &&
+    !start.diff(formattedRow.startTime)) {
     this.storedResults = offersExercisedReduce([
       this.storedResults,
       formattedRow
@@ -530,8 +530,8 @@ OffersExercisedListener.prototype.resetStored = function(d, merge) {
     // console.log('merged')
 
   } else if (merge &&
-             this.storedResults &&
-             start.diff(formattedRow.startTime) > 0) {
+    this.storedResults &&
+    start.diff(formattedRow.startTime) > 0) {
     // console.log('older')
 
   } else {
@@ -547,7 +547,7 @@ OffersExercisedListener.prototype.resetStored = function(d, merge) {
  */
 
 
-OffersExercisedListener.prototype.stopListener = function() {
+OffersExercisedListener.prototype.stopListener = function () {
 
   var self = this
   self.storedResults = {}
